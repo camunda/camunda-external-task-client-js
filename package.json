@@ -5,13 +5,14 @@
   "repository": "https://github.com/camunda/camunda-external-task-worker-js.git",
   "author": "Camunda Services GmbH",
   "license": "Apache License 2.0",
-  "scripts":{
+  "scripts": {
     "test": "jest"
   },
   "devDependencies": {
-    "jest": "22.4.2",
-    "eslint": "4.11.0",
-    "eslint-plugin-bpmn-io": "0.4.1"
+    "eslint": "^4.18.1",
+    "eslint-plugin-bpmn-io": "0.4.1",
+    "eslint-plugin-jest": "^21.12.2",
+    "jest": "22.4.2"
   },
   "dependencies": {
     "foreach": "2.0.5",
