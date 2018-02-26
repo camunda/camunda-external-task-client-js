@@ -36,7 +36,7 @@ test('throw error: work function wasn\'t passed', () => {
 
 test('overwrite default with custom worker config', () =>{
   const fooWorker = workers.registerWorker('bar2', customConfig, fooWork);
-  expect(fooWorker.workerOptions.lockDuration).toBe(customConfig.lockDuration);
+  expect(fooWorker.lockDuration).toBe(customConfig.lockDuration);
 });
 
 
