@@ -20,10 +20,10 @@ describe('TaskClient', () => {
       const expectedTaskId = 'foo';
 
       //when
-      taskClient.complete({ taskId: expectedTaskId });
+      taskClient.complete(expectedTaskId);
 
       //then
-      expect(completeSpy).toBeCalledWith({ taskId: expectedTaskId });
+      expect(completeSpy).toBeCalledWith(expectedTaskId);
     });
   });
 });

@@ -34,7 +34,7 @@ describe('EngineClient', () => {
     };
 
     // when
-    engineClient.complete({ taskId: expectedTaskId });
+    engineClient.complete(expectedTaskId);
 
     // then
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
