@@ -1,4 +1,4 @@
-const Workers = require('../lib/workers');
+const Workers = require('../lib/Workers');
 
 const customWorkersOptions = {
   path: 'http://localhost:8080/engine-rest/external-task',
@@ -43,4 +43,3 @@ test('overwrite default with custom worker config', () =>{
 // TODO:
 // Test regist / unregister a worker with fetch&lock mock.
 // unregister workers as soon as it is possible.
-
