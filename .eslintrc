@@ -1,17 +1,9 @@
 {
-    "extends": "plugin:bpmn-io/es5",
-    "plugins": ["jest"],
-      "rules": {
-        "jest/no-disabled-tests": "warn",
-        "jest/no-focused-tests": "error",
-        "jest/no-identical-title": "error",
-        "jest/prefer-to-have-length": "warn",
-        "jest/valid-expect": "error"
-      },
-    "parserOptions": {
-      "ecmaVersion": 6
-    },
-    "env": {
-        "node": true
-    }
+  "extends": [
+    "plugin:bpmn-io/es6"
+  ],
+  "env": {
+      "node": true,
+      "jest": true
   }
+}
