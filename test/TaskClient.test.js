@@ -1,11 +1,11 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 jest.mock('got');
 
-const { MISSING_TASK } = require('../lib/constants');
+const { MISSING_TASK, MISSING_ERROR_CODE } = require('../lib/constants');
 
 const TaskClient = require('../lib/TaskClient');
 
 const EngineClient = require('../lib/EngineClient');
-
 
 describe('TaskClient', () => {
   const engineClient = new EngineClient({ workerId: 'someWorker', path: 'some/path' });
@@ -47,4 +47,29 @@ describe('TaskClient', () => {
       expect(handleFailureSpy).toBeCalledWith(expectedTaskId, expectedPayload);
     });
   });
+
+  describe('handleBpmnError', () => {
+    test('should throw an error if no taskid is provided', () => {
+      expect(() => taskClient.handleBpmnError()).toThrowError(MISSING_TASK);
+    });
+    test('should throw an error if no error code is provided', () => {
+      expect( () => taskClient.handleBpmnError('fooId')).toThrow(MISSING_ERROR_CODE);
+    });
+    test('should call api handleBpmnError with povided task id and error code', () => {
+      //given
+      const handleBpmnErrorSpy = jest.spyOn(engineClient, 'handleBpmnError');
+      const expectedTaskId = 'foo';
+      const expectedErrorCode = 'foo123';
+
+      //when
+	    taskClient.handleBpmnError(expectedTaskId, expectedErrorCode);
+
+      //then
+      expect(handleBpmnErrorSpy).toBeCalledWith(expectedTaskId, expectedErrorCode);
+
+    });
+
+  });
+
 });
+
