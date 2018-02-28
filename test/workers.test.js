@@ -18,7 +18,13 @@ describe('workers', () => {
       expect(() => { new Workers();}).toThrow();
     });
 
-    const workers = new Workers(customWorkersOptions);
+    let workers, fooWork, customConfig;
+
+    beforeEach( () => {
+      workers = new Workers(customWorkersOptions);
+      fooWork = () => 'foobar';
+      customConfig = { lockDuration: 3000 };
+    });
 
     test('should overwrite default with custom workers config', () =>{
       expect(workers.options.workerId).toBe(customWorkersOptions.workerId);
@@ -27,25 +33,48 @@ describe('workers', () => {
       expect(workers.options.lockDuration).toBe(customWorkersOptions.lockDuration);
     });
 
-    // Register workers
-    const fooWork = () => 'foobar';
-    const customConfig = { lockDuration: 3000 };
+    test('should throw error if no work function is passed', () => {
+      expect(() => {workers.registerWorker('foo'); }).toThrow();
+    });
 
     test('should register worker without custom config ', () => {
-      const barWorker = workers.registerWorker('bar', fooWork);
-      expect(barWorker.handler).not.toBeUndefined();
+      // given
+      const fooWorker = workers.registerWorker('foo', fooWork);
+
+      // then
+      expect(fooWorker.handler).not.toBeUndefined();
     });
 
     test('should register worker with custom config ', () =>{
-      const fooWorker = workers.registerWorker('bar2', customConfig, fooWork);
+      // given
+      const fooWorker = workers.registerWorker('foo', customConfig, fooWork);
+
+      // then
       expect(fooWorker.lockDuration).toBe(customConfig.lockDuration);
     });
 
-    // REDO test description
-    test('should throw error if work function is not passed', () => {
+    test('should throw error if worker is already registered', () => {
+      // given
       workers.registerWorker('foo', fooWork);
+
+      // then
       expect(() => { workers.registerWorker('foo', fooWork); }).toThrow();
     });
+
+
+    test('should allow to unregister a worker from a topic', () => {
+      // given
+      const fooWorker = workers.registerWorker('foo', fooWork);
+
+      // when
+      fooWorker.unregister();
+
+      // then
+      expect(workers.workers['foo']).toBeUndefined();
+    });
+
+
+
   });
   describe('poll ', () => {
     jest.useFakeTimers();
