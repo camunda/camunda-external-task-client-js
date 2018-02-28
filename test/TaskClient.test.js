@@ -49,9 +49,6 @@ describe('TaskClient', () => {
   });
 
   describe('handleBpmnError', () => {
-    test('should throw an error if no taskid is provided', () => {
-      expect(() => taskClient.handleBpmnError()).toThrowError(MISSING_TASK);
-    });
     test('should throw an error if no error code is provided', () => {
       expect( () => taskClient.handleBpmnError('fooId')).toThrow(MISSING_ERROR_CODE);
     });
