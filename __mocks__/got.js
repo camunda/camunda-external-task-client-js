@@ -1,7 +1,7 @@
 const got = {};
 
-got.post = () => Promise.resolve({ body: null });
+got.post = () => Promise.resolve({ body: [] });
 
-got.get = () => Promise.resolve({ body: null });
+got.get = () => Promise.resolve({ body: [] });
 
 module.exports = got;
