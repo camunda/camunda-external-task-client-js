@@ -1,5 +1,8 @@
 const Workers = require('../lib/Workers');
 
+jest.mock('got');
+
+
 const customWorkersOptions = {
   path: 'http://localhost:XXXX/engine-rest/external-task',
   workerId: 'foobarId',
@@ -9,7 +12,7 @@ const customWorkersOptions = {
 };
 
 describe('workers', () => {
-  describe('registerWorker method', () => {
+  describe('registerWorker', () => {
 
     test('should throw error if api path wasn\'t passed as parameter', () => {
       expect(() => { new Workers();}).toThrow();
@@ -44,12 +47,48 @@ describe('workers', () => {
       expect(() => { workers.registerWorker('foo', fooWork); }).toThrow();
     });
   });
-  describe('poll method ', () => {
+  describe('poll ', () => {
     jest.useFakeTimers();
-    const workers = new Workers(customWorkersOptions);
-    test('should call itself again after timeout when no worker registered', () => {
-      expect(setTimeout)
-        .toHaveBeenLastCalledWith(workers.poll, customWorkersOptions.interval );
+    let pollSpy, workers, engineClient;
+    beforeEach(() => {
+      workers = new Workers(customWorkersOptions);
+      engineClient = workers.engineClient;
+      pollSpy = jest.spyOn(workers, 'poll');
     });
+
+    test('should call itself again after timeout when no worker registered', () => {
+      // when
+      jest.advanceTimersByTime(2*customWorkersOptions.interval);
+
+      // then
+      expect(pollSpy).toHaveBeenCalledTimes(1);
+    });
+
+    test('should not call itself again after timeout when there are registered workers', () => {
+      // given
+      workers.registerWorker('foo', () => {});
+
+      // when
+      jest.advanceTimersByTime(2*customWorkersOptions.interval);
+
+      // then
+      expect(pollSpy).toHaveBeenCalledTimes(0);
+    });
+
+    test('should fetchAndLock and then call itself again when there are registered workers', async() => {
+      // given
+      const fetchAndLockSpy = jest.spyOn(engineClient, 'fetchAndLock');
+      workers.registerWorker('foo', () => {});
+
+      // when
+      jest.advanceTimersByTime(2*customWorkersOptions.interval);
+
+      //then
+      expect(fetchAndLockSpy).toBeCalled();
+      await(engineClient.fetchAndLock({}));
+      jest.advanceTimersByTime(customWorkersOptions.interval);
+      expect(pollSpy).toHaveBeenCalledTimes(1);
+    });
+
   });
 });
