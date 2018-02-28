@@ -1,5 +1,7 @@
 const Workers = require('../lib/Workers');
 
+const { WRONG_INTERCEPTOR, MISSING_PATH, ALREADY_REGISTERED, MISSING_HANDLER } = require('../lib/constants');
+
 jest.mock('got');
 
 
@@ -12,10 +14,43 @@ const customWorkersOptions = {
 };
 
 describe('workers', () => {
+  describe('interceptors', () => {
+    it('should not add interceptors if they are not provided as a function or array of functions', () => {
+      // given
+      const options = Object.assign({}, customWorkersOptions, { interceptors: [] });
+
+      // then
+      expect(() => new Workers(options)).toThrowError(WRONG_INTERCEPTOR);
+    });
+
+    it('should add interceptors if they are provided as a function', () => {
+      // given
+      const foo = () => {};
+      const expectedInterceptors = [foo];
+      const options = Object.assign({}, customWorkersOptions, { interceptors: foo });
+      const workers = new Workers(options);
+
+      // then
+      expect(workers.engineClient.interceptors).toEqual(expectedInterceptors);
+    });
+
+    it('should add interceptors if they are provided as an array of functions', () => {
+      // given
+      const foo = () => {};
+      const expectedInterceptors = [foo];
+      const options = Object.assign({}, customWorkersOptions, { interceptors: [foo] });
+      const workers = new Workers(options);
+
+      // then
+      expect(workers.engineClient.interceptors).toEqual(expectedInterceptors);
+
+    });
+  });
+
   describe('registerWorker', () => {
 
     test('should throw error if api path wasn\'t passed as parameter', () => {
-      expect(() => { new Workers();}).toThrow();
+      expect(() => { new Workers();}).toThrowError(MISSING_PATH);
     });
 
     let workers, fooWork, customConfig;
@@ -33,9 +68,6 @@ describe('workers', () => {
       expect(workers.options.lockDuration).toBe(customWorkersOptions.lockDuration);
     });
 
-    test('should throw error if no work function is passed', () => {
-      expect(() => {workers.registerWorker('foo'); }).toThrow();
-    });
 
     test('should register worker without custom config ', () => {
       // given
@@ -53,12 +85,16 @@ describe('workers', () => {
       expect(fooWorker.lockDuration).toBe(customConfig.lockDuration);
     });
 
-    test('should throw error if worker is already registered', () => {
+    test('should throw error if try to register twice', () => {
       // given
       workers.registerWorker('foo', fooWork);
 
       // then
-      expect(() => { workers.registerWorker('foo', fooWork); }).toThrow();
+      expect(() => { workers.registerWorker('foo', fooWork); }).toThrowError(ALREADY_REGISTERED);
+    });
+
+    test('should throw error if work function is not passed', () => {
+      expect(() => { workers.registerWorker('foo2'); }).toThrowError(MISSING_HANDLER);
     });
 
 

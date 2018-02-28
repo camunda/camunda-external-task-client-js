@@ -5,8 +5,23 @@ const got = require('got');
 const EngineClient = require('../lib/EngineClient');
 
 describe('EngineClient', () => {
-  const engineClient = new EngineClient({ workerId: 'someWorker', path: 'some/path' });
-  const postSpy = jest.spyOn(got, 'post');
+  let engineClient, postSpy;
+  beforeEach(() => {
+    engineClient = new EngineClient({ workerId: 'someWorker', path: 'some/path' });
+    postSpy = jest.spyOn(engineClient, 'post');
+  });
+
+  test('post', () => {
+    //given
+    const expectedUrl = 'some/url';
+    const expectedPayload = { key: 'some value' };
+
+    //when
+    engineClient.post(expectedUrl, expectedPayload);
+
+    //then
+    expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
+  });
 
   test('fetchAndLock', () => {
     //given
@@ -58,4 +73,45 @@ describe('EngineClient', () => {
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
 
   });
+
+  describe('request', () => {
+    jest.mock('got', () => jest.fn());
+    it('should send request with given options', () => {
+      //given
+      const expectedUrl = 'some/url';
+      const expectedPayload = { key: 'some value' };
+
+      //when
+      engineClient.request(expectedUrl, expectedPayload);
+
+      //then
+      expect(got).toBeCalledWith(expectedUrl, expectedPayload);
+    });
+
+    it('should get request options from interceptors', () => {
+      //given
+      const expectedUrl = 'some/url';
+      const expectedInitialPayload = { key: 'some value' };
+      const someExpectedAddedPaylod = { someNewKey: 'some new value' };
+      const anotherExpectedAddedPaylod = { anotherNewKey: 'another new value' };
+      const someInterceptor = (config) => Object.assign({}, config, someExpectedAddedPaylod);
+      const anotherInterceptor = (config) => Object.assign({}, config, anotherExpectedAddedPaylod);
+      engineClient.interceptors = [someInterceptor, anotherInterceptor];
+      const expectedPayload = Object.assign(
+        {},
+        expectedInitialPayload,
+        someExpectedAddedPaylod,
+        anotherExpectedAddedPaylod
+      );
+
+
+      //when
+      engineClient.request(expectedUrl, expectedPayload);
+
+      //then
+      expect(got).toBeCalledWith(expectedUrl, expectedPayload);
+
+    });
+  });
+
 });
