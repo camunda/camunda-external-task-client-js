@@ -1,5 +1,7 @@
 jest.mock('got');
 
+const { MISSING_TASK } = require('../lib/constants');
+
 const TaskClient = require('../lib/TaskClient');
 
 const EngineClient = require('../lib/EngineClient');
@@ -11,7 +13,7 @@ describe('TaskClient', () => {
 
   describe('complete', () => {
     test('should throw an error if no taskid is provided', () => {
-      expect(() => taskClient.complete()).toThrow();
+      expect(() => taskClient.complete()).toThrowError(MISSING_TASK);
     });
 
     test('should call api complete with provided task id', () => {
@@ -24,6 +26,25 @@ describe('TaskClient', () => {
 
       //then
       expect(completeSpy).toBeCalledWith(expectedTaskId);
+    });
+  });
+
+  describe('handleFailure', () => {
+    test('should throw an error if no taskid is provided', () => {
+      expect(() => taskClient.handleFailure()).toThrowError(MISSING_TASK);
+    });
+
+    test('should call api handleFailure with provided task id', () => {
+      //given
+      const handleFailureSpy = jest.spyOn(engineClient, 'handleFailure');
+      const expectedTaskId = 'foo';
+      const expectedPayload = { errorMessage: 'some error message' };
+
+      //when
+      taskClient.handleFailure(expectedTaskId, expectedPayload);
+
+      //then
+      expect(handleFailureSpy).toBeCalledWith(expectedTaskId, expectedPayload);
     });
   });
 });

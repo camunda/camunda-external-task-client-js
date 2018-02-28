@@ -40,4 +40,22 @@ describe('EngineClient', () => {
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
 
   });
+
+  test('handleFailure', () => {
+    // given
+    const expectedTaskId = 'foo';
+    const expectedUrl = `${engineClient.path}/${expectedTaskId}/failure`;
+    const expectedRequestBody = { errorMessage: 'some error message' };
+    const expectedPayload = {
+      json: true,
+      body: Object.assign({}, expectedRequestBody, { workerId: engineClient.workerId })
+    };
+
+    // when
+    engineClient.handleFailure(expectedTaskId, expectedRequestBody);
+
+    // then
+    expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
+
+  });
 });
