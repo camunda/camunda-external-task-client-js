@@ -25,7 +25,7 @@ describe('EngineClient', () => {
 
   test('fetchAndLock', () => {
     //given
-    const expectedUrl = `${engineClient.path}/fetchAndLock`;
+    const expectedUrl = '/fetchAndLock';
     const expectedReqBody = { someKey: 'some value' };
     const expectedPayload = {
       json: true,
@@ -42,7 +42,7 @@ describe('EngineClient', () => {
   test('complete', () => {
     // given
     const expectedTaskId = 'foo';
-    const expectedUrl = `${engineClient.path}/${expectedTaskId}/complete`;
+    const expectedUrl = `/${expectedTaskId}/complete`;
     const expectedPayload = {
       json: true,
       body: { workerId: engineClient.workerId }
@@ -59,7 +59,7 @@ describe('EngineClient', () => {
   test('handleFailure', () => {
     // given
     const expectedTaskId = 'foo';
-    const expectedUrl = `${engineClient.path}/${expectedTaskId}/failure`;
+    const expectedUrl = `/${expectedTaskId}/failure`;
     const expectedRequestBody = { errorMessage: 'some error message' };
     const expectedPayload = {
       json: true,
@@ -77,7 +77,7 @@ describe('EngineClient', () => {
   test('handleBpmnError', () => {
     // given
     const expectedTaskId = 'foo';
-    const expectedUrl = `${engineClient.path}/${expectedTaskId}/bpmnError`;
+    const expectedUrl = `/${expectedTaskId}/bpmnError`;
     const expectedErrorCode =  'some error code';
     const expectedPayload = {
       json: true,
@@ -95,27 +95,30 @@ describe('EngineClient', () => {
   test('extendLockTime', () => {
     // given
     const expectedTaskId = 'foo';
-    const expectedUrl = `${engineClient.path}/${expectedTaskId}/extendLock`;
+    const expectedUrl = `/${expectedTaskId}/extendLock`;
     const expectedNewDuration = 100 ;
     const expectedPayload = { json: true, body: Object.assign({}, { newDuration: expectedNewDuration }, { workerId: engineClient.workerId }) };
-    // when
 
+    // when
     engineClient.handleExtendLock(expectedTaskId, expectedNewDuration);
 
     // then
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
-  });
 
+  });
 
   describe('request', () => {
     jest.mock('got', () => jest.fn());
     it('should send request with given options', () => {
       //given
-      const expectedUrl = 'some/url';
-      const expectedPayload = { key: 'some value' };
+
+      const method = 'POST';
+      const path = '/some/url';
+      const expectedUrl = `${engineClient.baseUrl}${path}`;
+      const expectedPayload = { method, key: 'some value' };
 
       //when
-      engineClient.request(expectedUrl, expectedPayload);
+      engineClient.request(method, path, expectedPayload);
 
       //then
       expect(got).toBeCalledWith(expectedUrl, expectedPayload);
@@ -123,7 +126,9 @@ describe('EngineClient', () => {
 
     it('should get request options from interceptors', () => {
       //given
-      const expectedUrl = 'some/url';
+      const method = 'POST';
+      const path = '/some/url';
+      const expectedUrl = `${engineClient.baseUrl}${path}`;
       const expectedInitialPayload = { key: 'some value' };
       const someExpectedAddedPaylod = { someNewKey: 'some new value' };
       const anotherExpectedAddedPaylod = { anotherNewKey: 'another new value' };
@@ -131,15 +136,14 @@ describe('EngineClient', () => {
       const anotherInterceptor = (config) => Object.assign({}, config, anotherExpectedAddedPaylod);
       engineClient.interceptors = [someInterceptor, anotherInterceptor];
       const expectedPayload = Object.assign(
-        {},
+        { method },
         expectedInitialPayload,
         someExpectedAddedPaylod,
         anotherExpectedAddedPaylod
       );
 
-
       //when
-      engineClient.request(expectedUrl, expectedPayload);
+      engineClient.request(method, path, expectedPayload);
 
       //then
       expect(got).toBeCalledWith(expectedUrl, expectedPayload);
