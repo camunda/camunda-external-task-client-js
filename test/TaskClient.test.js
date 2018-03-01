@@ -12,8 +12,12 @@ describe('TaskClient', () => {
   const taskClient = new TaskClient(engineClient);
 
   describe('complete', () => {
-    test('should throw an error if no taskid is provided', () => {
-      expect(() => taskClient.complete()).toThrowError(MISSING_TASK);
+    test('should throw an error if no taskid is provided', async() => {
+      try {
+        await taskClient.complete();
+      } catch (e) {
+        expect(e).toEqual(new Error(MISSING_TASK));
+      }
     });
 
     test('should call api complete with provided task id', () => {
@@ -42,8 +46,12 @@ describe('TaskClient', () => {
   });
 
   describe('handleFailure', () => {
-    test('should throw an error if no taskid is provided', () => {
-      expect(() => taskClient.handleFailure()).toThrowError(MISSING_TASK);
+    test('should throw an error if no taskid is provided', async() => {
+      try {
+        await taskClient.handleFailure();
+      } catch (e) {
+        expect(e).toEqual(new Error(MISSING_TASK));
+      }
     });
 
     test('should call api handleFailure with provided task id', () => {
@@ -74,12 +82,20 @@ describe('TaskClient', () => {
   });
 
   describe('handleBpmnError', () => {
-	  test('should throw an error if no taskid is provided', () => {
-		  expect(() => taskClient.handleBpmnError()).toThrowError(MISSING_TASK);
+	  test('should throw an error if no taskid is provided', async() => {
+      try {
+        await taskClient.handleBpmnError();
+      } catch (e) {
+        expect(e).toEqual(new Error(MISSING_TASK));
+      }
 	  });
 
-	  test('should throw an error if no error code is provided', () => {
-		  expect(() => taskClient.handleBpmnError('fooId')).toThrow(MISSING_ERROR_CODE);
+	  test('should throw an error if no error code is provided', async() => {
+      try {
+        await taskClient.handleBpmnError('fooId');
+      } catch (e) {
+        expect(e).toEqual(new Error(MISSING_ERROR_CODE));
+      }
 	  });
 
 	  test('should call api handleBpmnError with povided task id and error code', () => {
@@ -112,12 +128,20 @@ describe('TaskClient', () => {
   });
 
   describe('handleExtendLock', () => {
-	  test('should throw an error if no taskid is provided', () => {
-		  expect(() => taskClient.handleExtendLock()).toThrow(MISSING_TASK);
+	  test('should throw an error if no taskid is provided', async() => {
+      try {
+        await taskClient.handleExtendLock();
+      } catch (e) {
+        expect(e).toEqual(new Error(MISSING_TASK));
+      }
 	  });
 
-    test('should throw an error if no new lock duration is provided', () => {
-      expect(() => taskClient.handleExtendLock('fooId')).toThrow(MISSING_NEW_DURATION);
+    test('should throw an error if no new lock duration is provided', async() => {
+      try {
+        await taskClient.handleExtendLock('fooId');
+      } catch (e) {
+        expect(e).toEqual(new Error(MISSING_NEW_DURATION));
+      }
     });
 
 	  test('should call api handleExtendLock with povided task id and error code', () => {
