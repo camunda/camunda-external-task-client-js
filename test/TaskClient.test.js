@@ -1,7 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 jest.mock('got');
 
-const { MISSING_TASK, MISSING_ERROR_CODE, MISSING_NEW_DURATION } = require('../lib/constants');
+const { MISSING_TASK, MISSING_ERROR_CODE, MISSING_NEW_DURATION } = require('../lib/errors');
 
 const TaskClient = require('../lib/TaskClient');
 
