@@ -74,76 +74,76 @@ describe('EngineClient', () => {
 
   });
 
-	test('handleBpmnError', () => {
-		// given
-		const expectedTaskId = 'foo';
-		const expectedUrl = `${engineClient.path}/${expectedTaskId}/bpmnError`;
-		const expectedErrorCode =  'some error code';
-		const expectedPayload = {
-			json: true,
-			body: Object.assign({}, { errorCode: expectedErrorCode }, { workerId: engineClient.workerId })
-		};
+  test('handleBpmnError', () => {
+    // given
+    const expectedTaskId = 'foo';
+    const expectedUrl = `${engineClient.path}/${expectedTaskId}/bpmnError`;
+    const expectedErrorCode =  'some error code';
+    const expectedPayload = {
+      json: true,
+      body: Object.assign({}, { errorCode: expectedErrorCode }, { workerId: engineClient.workerId })
+    };
 
-		// when
-		engineClient.handleBpmnError(expectedTaskId, expectedErrorCode);
+    // when
+    engineClient.handleBpmnError(expectedTaskId, expectedErrorCode);
 
-		// then
-		expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
+    // then
+    expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
 
-	});
+  });
 
-	test('extendLockTime', () => {
-		// given
-		const expectedTaskId = 'foo';
-		const expectedUrl = `${engineClient.path}/${expectedTaskId}/extendLock`;
-		const expectedNewDuration = 100 ;
-		const expectedPayload = { json: true, body: Object.assign({}, { newDuration: expectedNewDuration }, { workerId: engineClient.workerId }) };
-		// when
+  test('extendLockTime', () => {
+    // given
+    const expectedTaskId = 'foo';
+    const expectedUrl = `${engineClient.path}/${expectedTaskId}/extendLock`;
+    const expectedNewDuration = 100 ;
+    const expectedPayload = { json: true, body: Object.assign({}, { newDuration: expectedNewDuration }, { workerId: engineClient.workerId }) };
+    // when
 
-		engineClient.handleExtendLock(expectedTaskId, expectedNewDuration);
+    engineClient.handleExtendLock(expectedTaskId, expectedNewDuration);
 
-		// then
-		expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
-	});
+    // then
+    expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
+  });
 
 
   describe('request', () => {
-	  jest.mock('got', () => jest.fn());
-	  it('should send request with given options', () => {
-		  //given
-		  const expectedUrl = 'some/url';
-		  const expectedPayload = {key: 'some value'};
+    jest.mock('got', () => jest.fn());
+    it('should send request with given options', () => {
+      //given
+      const expectedUrl = 'some/url';
+      const expectedPayload = { key: 'some value' };
 
-		  //when
-		  engineClient.request(expectedUrl, expectedPayload);
+      //when
+      engineClient.request(expectedUrl, expectedPayload);
 
-		  //then
-		  expect(got).toBeCalledWith(expectedUrl, expectedPayload);
-	  });
+      //then
+      expect(got).toBeCalledWith(expectedUrl, expectedPayload);
+    });
 
-	  it('should get request options from interceptors', () => {
-		  //given
-		  const expectedUrl = 'some/url';
-		  const expectedInitialPayload = {key: 'some value'};
-		  const someExpectedAddedPaylod = {someNewKey: 'some new value'};
-		  const anotherExpectedAddedPaylod = {anotherNewKey: 'another new value'};
-		  const someInterceptor = (config) => Object.assign({}, config, someExpectedAddedPaylod);
-		  const anotherInterceptor = (config) => Object.assign({}, config, anotherExpectedAddedPaylod);
-		  engineClient.interceptors = [someInterceptor, anotherInterceptor];
-		  const expectedPayload = Object.assign(
-			  {},
-			  expectedInitialPayload,
-			  someExpectedAddedPaylod,
-			  anotherExpectedAddedPaylod
-		  );
+    it('should get request options from interceptors', () => {
+      //given
+      const expectedUrl = 'some/url';
+      const expectedInitialPayload = { key: 'some value' };
+      const someExpectedAddedPaylod = { someNewKey: 'some new value' };
+      const anotherExpectedAddedPaylod = { anotherNewKey: 'another new value' };
+      const someInterceptor = (config) => Object.assign({}, config, someExpectedAddedPaylod);
+      const anotherInterceptor = (config) => Object.assign({}, config, anotherExpectedAddedPaylod);
+      engineClient.interceptors = [someInterceptor, anotherInterceptor];
+      const expectedPayload = Object.assign(
+        {},
+        expectedInitialPayload,
+        someExpectedAddedPaylod,
+        anotherExpectedAddedPaylod
+      );
 
 
-		  //when
-		  engineClient.request(expectedUrl, expectedPayload);
+      //when
+      engineClient.request(expectedUrl, expectedPayload);
 
-		  //then
-		  expect(got).toBeCalledWith(expectedUrl, expectedPayload);
+      //then
+      expect(got).toBeCalledWith(expectedUrl, expectedPayload);
 
-	  });
-  };
+    });
+  });
 });

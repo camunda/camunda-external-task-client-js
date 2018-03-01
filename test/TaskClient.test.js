@@ -77,7 +77,7 @@ describe('TaskClient', () => {
     test('should throw an error if no new lock duration is provided', () => {
       expect(() => taskClient.handleExtendLock('fooId')).toThrow(MISSING_NEW_DURATION);
     });
-	  test('should call api hadnleExtendLock with povided task id and error code', () => {
+	  test('should call api handleExtendLock with povided task id and error code', () => {
 		  //given
 		  const handleExtendLockSpy = jest.spyOn(engineClient, 'handleExtendLock');
       const expectedTaskId = 'foo';
