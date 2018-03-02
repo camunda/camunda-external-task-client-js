@@ -130,16 +130,16 @@ describe('EngineClient', () => {
       const path = '/some/url';
       const expectedUrl = `${engineClient.baseUrl}${path}`;
       const expectedInitialPayload = { key: 'some value' };
-      const someExpectedAddedPaylod = { someNewKey: 'some new value' };
-      const anotherExpectedAddedPaylod = { anotherNewKey: 'another new value' };
-      const someInterceptor = (config) => ({ ...config, ...someExpectedAddedPaylod });
-      const anotherInterceptor = (config) => ({ ...config, ...anotherExpectedAddedPaylod });
+      const someExpectedAddedPayload = { someNewKey: 'some new value' };
+      const anotherExpectedAddedPayload = { anotherNewKey: 'another new value' };
+      const someInterceptor = (config) => ({ ...config, ...someExpectedAddedPayload });
+      const anotherInterceptor = (config) => ({ ...config, ...anotherExpectedAddedPayload });
       engineClient.interceptors = [someInterceptor, anotherInterceptor];
       const expectedPayload = {
         method,
         ...expectedInitialPayload,
-        ...someExpectedAddedPaylod,
-        ...anotherExpectedAddedPaylod
+        ...someExpectedAddedPayload,
+        ...anotherExpectedAddedPayload
       };
 
       //when
