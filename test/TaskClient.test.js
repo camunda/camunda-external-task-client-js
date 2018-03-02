@@ -1,4 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
+const events = require('events');
 jest.mock('got');
 
 const { MISSING_TASK, MISSING_ERROR_CODE, MISSING_NEW_DURATION } = require('../lib/__internal/errors');
@@ -9,7 +10,7 @@ const EngineClient = require('../lib/__internal/EngineClient');
 
 describe('TaskClient', () => {
   const engineClient = new EngineClient({ workerId: 'someWorker', path: 'some/path' });
-  const taskClient = new TaskClient(engineClient);
+  const taskClient = new TaskClient(new events(), engineClient);
 
   describe('sanitizeTask', () => {
     test('should return task id when task id is passed', () => {
