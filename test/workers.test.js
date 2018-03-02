@@ -17,7 +17,7 @@ describe('workers', () => {
   describe('interceptors', () => {
     it('should not add interceptors if they are not provided as a function or array of functions', () => {
       // given
-      const options = Object.assign({}, customWorkersOptions, { interceptors: [] });
+      const options = { ...customWorkersOptions, interceptors: [] };
 
       // then
       expect(() => new Workers(options)).toThrowError(WRONG_INTERCEPTOR);
@@ -27,7 +27,7 @@ describe('workers', () => {
       // given
       const foo = () => {};
       const expectedInterceptors = [foo];
-      const options = Object.assign({}, customWorkersOptions, { interceptors: foo });
+      const options ={ ...customWorkersOptions, interceptors: foo };
       const workers = new Workers(options);
 
       // then
@@ -38,7 +38,7 @@ describe('workers', () => {
       // given
       const foo = () => {};
       const expectedInterceptors = [foo];
-      const options = Object.assign({}, customWorkersOptions, { interceptors: [foo] });
+      const options = { ...customWorkersOptions, interceptors: [foo] };
       const workers = new Workers(options);
 
       // then

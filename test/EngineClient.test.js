@@ -29,7 +29,7 @@ describe('EngineClient', () => {
     const expectedReqBody = { someKey: 'some value' };
     const expectedPayload = {
       json: true,
-      body: Object.assign({}, expectedReqBody, { workerId: engineClient.workerId })
+      body: { ...expectedReqBody, workerId: engineClient.workerId }
     };
 
     // when
@@ -63,7 +63,7 @@ describe('EngineClient', () => {
     const expectedRequestBody = { errorMessage: 'some error message' };
     const expectedPayload = {
       json: true,
-      body: Object.assign({}, expectedRequestBody, { workerId: engineClient.workerId })
+      body: { ...expectedRequestBody, workerId: engineClient.workerId }
     };
 
     // when
@@ -81,7 +81,7 @@ describe('EngineClient', () => {
     const expectedErrorCode =  'some error code';
     const expectedPayload = {
       json: true,
-      body: Object.assign({}, { errorCode: expectedErrorCode }, { workerId: engineClient.workerId })
+      body: { errorCode: expectedErrorCode, workerId: engineClient.workerId }
     };
 
     // when
@@ -97,7 +97,7 @@ describe('EngineClient', () => {
     const expectedTaskId = 'foo';
     const expectedUrl = `/${expectedTaskId}/extendLock`;
     const expectedNewDuration = 100 ;
-    const expectedPayload = { json: true, body: Object.assign({}, { newDuration: expectedNewDuration }, { workerId: engineClient.workerId }) };
+    const expectedPayload = { json: true, body: { newDuration: expectedNewDuration, workerId: engineClient.workerId } };
 
     // when
     engineClient.handleExtendLock(expectedTaskId, expectedNewDuration);
@@ -132,15 +132,15 @@ describe('EngineClient', () => {
       const expectedInitialPayload = { key: 'some value' };
       const someExpectedAddedPaylod = { someNewKey: 'some new value' };
       const anotherExpectedAddedPaylod = { anotherNewKey: 'another new value' };
-      const someInterceptor = (config) => Object.assign({}, config, someExpectedAddedPaylod);
-      const anotherInterceptor = (config) => Object.assign({}, config, anotherExpectedAddedPaylod);
+      const someInterceptor = (config) => ({ ...config, ...someExpectedAddedPaylod });
+      const anotherInterceptor = (config) => ({ ...config, ...anotherExpectedAddedPaylod });
       engineClient.interceptors = [someInterceptor, anotherInterceptor];
-      const expectedPayload = Object.assign(
-        { method },
-        expectedInitialPayload,
-        someExpectedAddedPaylod,
-        anotherExpectedAddedPaylod
-      );
+      const expectedPayload = {
+        method,
+        ...expectedInitialPayload,
+        ...someExpectedAddedPaylod,
+        ...anotherExpectedAddedPaylod
+      };
 
       //when
       engineClient.request(method, path, expectedPayload);
