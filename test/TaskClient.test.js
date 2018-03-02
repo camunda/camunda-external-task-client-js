@@ -1,15 +1,25 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 jest.mock('got');
 
-const { MISSING_TASK, MISSING_ERROR_CODE, MISSING_NEW_DURATION } = require('../lib/errors');
+const { MISSING_TASK, MISSING_ERROR_CODE, MISSING_NEW_DURATION } = require('../lib/__internal/errors');
 
 const TaskClient = require('../lib/TaskClient');
 
-const EngineClient = require('../lib/EngineClient');
+const EngineClient = require('../lib/__internal/EngineClient');
 
 describe('TaskClient', () => {
   const engineClient = new EngineClient({ workerId: 'someWorker', path: 'some/path' });
   const taskClient = new TaskClient(engineClient);
+
+  describe('sanitizeTask', () => {
+    test('should return task id when task id is passed', () => {
+      expect(taskClient.sanitizeTask('2')).toBe('2');
+    });
+
+    test('should return task id when task is passed', () => {
+      expect(taskClient.sanitizeTask({ id: '2' })).toBe('2');
+    });
+  });
 
   describe('complete', () => {
     test('should throw an error if no taskid is provided', async() => {

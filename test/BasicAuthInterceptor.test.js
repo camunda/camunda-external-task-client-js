@@ -1,5 +1,5 @@
 const BasicAuthInterceptor = require('../lib/BasicAuthInterceptor');
-const { MISSING_AUTH_PARAMS } = require('../lib/errors');
+const { MISSING_AUTH_PARAMS } = require('../lib/__internal/errors');
 
 describe('BasicAuthInterceptor', () => {
   test('should throw error if username or password are missing', () => {

@@ -2,7 +2,7 @@ jest.mock('got');
 
 const got = require('got');
 
-const EngineClient = require('../lib/EngineClient');
+const EngineClient = require('../lib/__internal/EngineClient');
 
 describe('EngineClient', () => {
   let engineClient, postSpy;

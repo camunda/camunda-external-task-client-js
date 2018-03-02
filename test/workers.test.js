@@ -1,6 +1,6 @@
 const Workers = require('../lib/Workers');
 
-const { WRONG_INTERCEPTOR, MISSING_PATH, ALREADY_REGISTERED, MISSING_HANDLER } = require('../lib/errors');
+const { WRONG_INTERCEPTOR, MISSING_PATH, ALREADY_REGISTERED, MISSING_HANDLER } = require('../lib/__internal/errors');
 
 jest.mock('got');
 
