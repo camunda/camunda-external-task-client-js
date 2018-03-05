@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 const events = require('events');
 jest.mock('got');
 
@@ -93,59 +92,59 @@ describe('TaskClient', () => {
   });
 
   describe('handleBpmnError', () => {
-	  test('should throw an error if no taskid is provided', async() => {
+    test('should throw an error if no taskid is provided', async() => {
       try {
         await taskClient.handleBpmnError();
       } catch (e) {
         expect(e).toEqual(new Error(MISSING_TASK));
       }
-	  });
+    });
 
-	  test('should throw an error if no error code is provided', async() => {
+    test('should throw an error if no error code is provided', async() => {
       try {
         await taskClient.handleBpmnError('fooId');
       } catch (e) {
         expect(e).toEqual(new Error(MISSING_ERROR_CODE));
       }
-	  });
+    });
 
-	  test('should call api handleBpmnError with povided task id and error code', () => {
-		  //given
-		  const handleBpmnErrorSpy = jest.spyOn(engineClient, 'handleBpmnError');
-		  const expectedTaskId = 'foo';
-		  const expectedErrorCode = 'foo123';
+    test('should call api handleBpmnError with povided task id and error code', () => {
+      //given
+      const handleBpmnErrorSpy = jest.spyOn(engineClient, 'handleBpmnError');
+      const expectedTaskId = 'foo';
+      const expectedErrorCode = 'foo123';
 
-		  //when
-		  taskClient.handleBpmnError(expectedTaskId, expectedErrorCode);
+      //when
+      taskClient.handleBpmnError(expectedTaskId, expectedErrorCode);
 
-		  //then
-		  expect(handleBpmnErrorSpy).toBeCalledWith(expectedTaskId, expectedErrorCode);
+      //then
+      expect(handleBpmnErrorSpy).toBeCalledWith(expectedTaskId, expectedErrorCode);
 
-	  });
+    });
 
-	  test('should call api handleBpmnError with povided task and error code', () => {
-		  //given
-		  const handleBpmnErrorSpy = jest.spyOn(engineClient, 'handleBpmnError');
-		  const expectedTaskId = 'foo';
-		  const expectedErrorCode = 'foo123';
+    test('should call api handleBpmnError with povided task and error code', () => {
+      //given
+      const handleBpmnErrorSpy = jest.spyOn(engineClient, 'handleBpmnError');
+      const expectedTaskId = 'foo';
+      const expectedErrorCode = 'foo123';
 
-		  //when
-		  taskClient.handleBpmnError({ id: expectedTaskId }, expectedErrorCode);
+      //when
+      taskClient.handleBpmnError({ id: expectedTaskId }, expectedErrorCode);
 
-		  //then
-		  expect(handleBpmnErrorSpy).toBeCalledWith(expectedTaskId, expectedErrorCode);
+      //then
+      expect(handleBpmnErrorSpy).toBeCalledWith(expectedTaskId, expectedErrorCode);
 
-	  });
+    });
   });
 
   describe('handleExtendLock', () => {
-	  test('should throw an error if no taskid is provided', async() => {
+    test('should throw an error if no taskid is provided', async() => {
       try {
         await taskClient.handleExtendLock();
       } catch (e) {
         expect(e).toEqual(new Error(MISSING_TASK));
       }
-	  });
+    });
 
     test('should throw an error if no new lock duration is provided', async() => {
       try {
@@ -155,31 +154,31 @@ describe('TaskClient', () => {
       }
     });
 
-	  test('should call api handleExtendLock with povided task id and error code', () => {
-		  //given
-		  const handleExtendLockSpy = jest.spyOn(engineClient, 'handleExtendLock');
+    test('should call api handleExtendLock with povided task id and error code', () => {
+      //given
+      const handleExtendLockSpy = jest.spyOn(engineClient, 'handleExtendLock');
       const expectedTaskId = 'foo';
-		  const expectedNewDuration = 100;
+      const expectedNewDuration = 100;
 
-		  //when
-		  taskClient.handleExtendLock(expectedTaskId, expectedNewDuration);
+      //when
+      taskClient.handleExtendLock(expectedTaskId, expectedNewDuration);
 
-		  //then
-		  expect(handleExtendLockSpy).toBeCalledWith(expectedTaskId, expectedNewDuration);
-	  });
+      //then
+      expect(handleExtendLockSpy).toBeCalledWith(expectedTaskId, expectedNewDuration);
+    });
 
-	  test('should call api handleExtendLock with povided task and error code', () => {
-		  //given
-		  const handleExtendLockSpy = jest.spyOn(engineClient, 'handleExtendLock');
+    test('should call api handleExtendLock with povided task and error code', () => {
+      //given
+      const handleExtendLockSpy = jest.spyOn(engineClient, 'handleExtendLock');
       const expectedTaskId = 'foo';
-		  const expectedNewDuration = 100;
+      const expectedNewDuration = 100;
 
-		  //when
-		  taskClient.handleExtendLock({ id: expectedTaskId }, expectedNewDuration);
+      //when
+      taskClient.handleExtendLock({ id: expectedTaskId }, expectedNewDuration);
 
-		  //then
-		  expect(handleExtendLockSpy).toBeCalledWith(expectedTaskId, expectedNewDuration);
-	  });
+      //then
+      expect(handleExtendLockSpy).toBeCalledWith(expectedTaskId, expectedNewDuration);
+    });
   });
 
 });
