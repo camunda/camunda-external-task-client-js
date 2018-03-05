@@ -14,36 +14,91 @@ const customWorkersOptions = {
 };
 
 describe('workers', () => {
-  describe('interceptors', () => {
-    it('should not add interceptors if they are not provided as a function or array of functions', () => {
-      // given
-      const options = { ...customWorkersOptions, interceptors: [] };
+  describe('poll ', () => {
+    jest.useFakeTimers();
+    describe('when autoPoll is false', () => {
+      let pollSpy, workers, engineClient;
 
-      // then
-      expect(() => new Workers(options)).toThrowError(WRONG_INTERCEPTOR);
+      beforeEach(() => {
+        workers = new Workers({ ...customWorkersOptions, autoPoll: false });
+        engineClient = workers.engineClient;
+        pollSpy = jest.spyOn(workers, 'poll');
+      });
+
+      test('calling start should call poll', () => {
+        // when
+        workers.start();
+
+        //then
+        expect(pollSpy).toHaveBeenCalled();
+      });
+
+      test('should call itself again after timeout when no worker is registered', () => {
+        // when
+        workers.start();
+        jest.advanceTimersByTime(customWorkersOptions.interval);
+
+        // then
+        expect(pollSpy).toHaveBeenCalledTimes(2);
+      });
+
+      test('should not call itself again after timeout when there are registered workers', () => {
+        //given
+        workers.registerWorker('foo', () => {});
+
+        // when
+        workers.start();
+        jest.advanceTimersByTime(customWorkersOptions.interval);
+
+        // then
+        expect(pollSpy).toHaveBeenCalledTimes(1);
+      });
+
+      test('should fetchAndLock and then call itself again when there are registered workers', async() => {
+        // given
+        const fetchAndLockSpy = jest.spyOn(engineClient, 'fetchAndLock');
+        workers.registerWorker('foo', () => {});
+
+        // when
+        workers.start();
+        jest.advanceTimersByTime(customWorkersOptions.interval);
+
+        //then
+        expect(fetchAndLockSpy).toBeCalled();
+        await(engineClient.fetchAndLock({}));
+        jest.advanceTimersByTime(customWorkersOptions.interval);
+        expect(pollSpy).toHaveBeenCalledTimes(2);
+      });
     });
 
-    it('should add interceptors if they are provided as a function', () => {
-      // given
-      const foo = () => {};
-      const expectedInterceptors = [foo];
-      const options ={ ...customWorkersOptions, interceptors: foo };
-      const workers = new Workers(options);
+    describe('when autoPoll is true', () => {
+      it('should call itself automatically when autoPoll is true', () => {
+        // given
+        const workers = new Workers({ ...customWorkersOptions, autoPoll: true });
+        const pollSpy = jest.spyOn(workers, 'poll');
 
-      // then
-      expect(workers.engineClient.interceptors).toEqual(expectedInterceptors);
+        //when
+        jest.advanceTimersByTime(2*customWorkersOptions.interval);
+
+        // then
+        expect(pollSpy).toHaveBeenCalledTimes(1);
+      });
     });
 
-    it('should add interceptors if they are provided as an array of functions', () => {
-      // given
-      const foo = () => {};
-      const expectedInterceptors = [foo];
-      const options = { ...customWorkersOptions, interceptors: [foo] };
-      const workers = new Workers(options);
+    describe('stop', () => {
+      it('should stop polling', () => {
+        // given: we advance time twice then call stop
+        const workers = new Workers(customWorkersOptions);
+        jest.advanceTimersByTime(2*customWorkersOptions.interval);
+        workers.stop();
+        const pollSpy = jest.spyOn(workers, 'poll');
 
-      // then
-      expect(workers.engineClient.interceptors).toEqual(expectedInterceptors);
+        // when
+        jest.advanceTimersByTime(2*customWorkersOptions.interval);
 
+        // then
+        expect(pollSpy).not.toHaveBeenCalled();
+      });
     });
   });
 
@@ -112,48 +167,37 @@ describe('workers', () => {
 
 
   });
-  describe('poll ', () => {
-    jest.useFakeTimers();
-    let pollSpy, workers, engineClient;
-    beforeEach(() => {
-      workers = new Workers(customWorkersOptions);
-      engineClient = workers.engineClient;
-      pollSpy = jest.spyOn(workers, 'poll');
-    });
 
-    test('should call itself again after timeout when no worker registered', () => {
-      // when
-      jest.advanceTimersByTime(2*customWorkersOptions.interval);
+  describe('interceptors', () => {
+    it('should not add interceptors if they are not provided as a function or array of functions', () => {
+      // given
+      const options = { ...customWorkersOptions, interceptors: [] };
 
       // then
-      expect(pollSpy).toHaveBeenCalledTimes(1);
+      expect(() => new Workers(options)).toThrowError(WRONG_INTERCEPTOR);
     });
 
-    test('should not call itself again after timeout when there are registered workers', () => {
+    it('should add interceptors if they are provided as a function', () => {
       // given
-      workers.registerWorker('foo', () => {});
-
-      // when
-      jest.advanceTimersByTime(2*customWorkersOptions.interval);
+      const foo = () => {};
+      const expectedInterceptors = [foo];
+      const options ={ ...customWorkersOptions, interceptors: foo };
+      const workers = new Workers(options);
 
       // then
-      expect(pollSpy).toHaveBeenCalledTimes(0);
+      expect(workers.engineClient.interceptors).toEqual(expectedInterceptors);
     });
 
-    test('should fetchAndLock and then call itself again when there are registered workers', async() => {
+    it('should add interceptors if they are provided as an array of functions', () => {
       // given
-      const fetchAndLockSpy = jest.spyOn(engineClient, 'fetchAndLock');
-      workers.registerWorker('foo', () => {});
+      const foo = () => {};
+      const expectedInterceptors = [foo];
+      const options = { ...customWorkersOptions, interceptors: [foo] };
+      const workers = new Workers(options);
 
-      // when
-      jest.advanceTimersByTime(2*customWorkersOptions.interval);
+      // then
+      expect(workers.engineClient.interceptors).toEqual(expectedInterceptors);
 
-      //then
-      expect(fetchAndLockSpy).toBeCalled();
-      await(engineClient.fetchAndLock({}));
-      jest.advanceTimersByTime(customWorkersOptions.interval);
-      expect(pollSpy).toHaveBeenCalledTimes(1);
     });
-
   });
 });
