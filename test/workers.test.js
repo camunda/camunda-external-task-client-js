@@ -1,6 +1,12 @@
 const Workers = require('../lib/Workers');
 
-const { WRONG_INTERCEPTOR, MISSING_PATH, ALREADY_REGISTERED, MISSING_HANDLER } = require('../lib/__internal/errors');
+const {
+  WRONG_INTERCEPTOR,
+  MISSING_PATH,
+  ALREADY_REGISTERED,
+  MISSING_HANDLER,
+  WRONG_MIDDLEWARES
+} = require('../lib/__internal/errors');
 
 jest.mock('got');
 
@@ -198,6 +204,36 @@ describe('workers', () => {
       // then
       expect(workers.engineClient.interceptors).toEqual(expectedInterceptors);
 
+    });
+  });
+
+  describe('middlewares', () => {
+    it('should not add middlewares if they are not provided as a function or array of functions', () => {
+      // given
+      const options = { ...customWorkersOptions, use: [] };
+
+      // then
+      expect(() => new Workers(options)).toThrowError(WRONG_MIDDLEWARES);
+    });
+
+    it('should accept middleware function', () => {
+      //given
+      const middleware = jest.fn();
+      const options = { ...customWorkersOptions, use: middleware };
+      const workers = new Workers(options);
+
+      //then
+      expect(middleware).toBeCalledWith(workers);
+    });
+
+    it('should accept middlewares array', () => {
+      //given
+      const middlewares = [jest.fn(), jest.fn()];
+      const options = { ...customWorkersOptions, use: middlewares };
+      const workers = new Workers(options);
+
+      //then
+      middlewares.forEach(middleware => expect(middleware).toBeCalledWith(workers));
     });
   });
 });
