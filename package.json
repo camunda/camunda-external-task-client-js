@@ -6,6 +6,7 @@
   "author": "Camunda Services GmbH",
   "license": "Apache License 2.0",
   "scripts": {
+    "pretest": "node_modules/.bin/eslint  .",
     "test": "jest --verbose",
     "test:watch": "jest --watch --verbose",
     "test:coverage": "jest --coverage"
