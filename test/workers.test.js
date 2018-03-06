@@ -12,7 +12,7 @@ jest.mock('got');
 
 
 const customWorkersOptions = {
-  path: 'http://localhost:XXXX/engine-rest/external-task',
+  path: 'http://localhost:XXXX/engine-rest/',
   workerId: 'foobarId',
   maxTasks: 3,
   interval: 100,
