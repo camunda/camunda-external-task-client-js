@@ -12,11 +12,11 @@ describe('TaskClient', () => {
   const taskClient = new TaskClient(new events(), engineClient);
 
   describe('sanitizeTask', () => {
-    test('should return task id when task id is passed', () => {
+    test('should return task id when task id is provided', () => {
       expect(taskClient.sanitizeTask('2')).toBe('2');
     });
 
-    test('should return task id when task is passed', () => {
+    test('should return task id when task is provided', () => {
       expect(taskClient.sanitizeTask({ id: '2' })).toBe('2');
     });
   });
@@ -30,7 +30,7 @@ describe('TaskClient', () => {
       }
     });
 
-    test('should call api complete with provided task id', () => {
+    test('should call api complete with provided task id if task id provided', () => {
       //given
       const completeSpy = jest.spyOn(engineClient, 'complete');
       const expectedTaskId = 'foo';
@@ -42,7 +42,7 @@ describe('TaskClient', () => {
       expect(completeSpy).toBeCalledWith(expectedTaskId);
     });
 
-    test('should call api complete with provided task', () => {
+    test('should call api complete with provided task id if task provided', () => {
       //given
       const completeSpy = jest.spyOn(engineClient, 'complete');
       const expectedTaskId = 'foo';
@@ -64,7 +64,7 @@ describe('TaskClient', () => {
       }
     });
 
-    test('should call api handleFailure with provided task id', () => {
+    test('should call api handleFailure with provided task id if task id provided', () => {
       //given
       const handleFailureSpy = jest.spyOn(engineClient, 'handleFailure');
       const expectedTaskId = 'foo';
@@ -77,7 +77,7 @@ describe('TaskClient', () => {
       expect(handleFailureSpy).toBeCalledWith(expectedTaskId, expectedPayload);
     });
 
-    test('should call api handleFailure with provided task', () => {
+    test('should call api handleFailure with provided task id if task provided', () => {
       //given
       const handleFailureSpy = jest.spyOn(engineClient, 'handleFailure');
       const expectedTaskId = 'foo';
@@ -108,7 +108,7 @@ describe('TaskClient', () => {
       }
     });
 
-    test('should call api handleBpmnError with povided task id and error code', () => {
+    test('should call api handleBpmnError with provided task id and error code if task id provided', () => {
       //given
       const handleBpmnErrorSpy = jest.spyOn(engineClient, 'handleBpmnError');
       const expectedTaskId = 'foo';
@@ -122,7 +122,7 @@ describe('TaskClient', () => {
 
     });
 
-    test('should call api handleBpmnError with povided task and error code', () => {
+    test('should call api handleBpmnError with provided task id and error code if task provided', () => {
       //given
       const handleBpmnErrorSpy = jest.spyOn(engineClient, 'handleBpmnError');
       const expectedTaskId = 'foo';
@@ -154,7 +154,7 @@ describe('TaskClient', () => {
       }
     });
 
-    test('should call api handleExtendLock with povided task id and error code', () => {
+    test('should call api handleExtendLock with provided task id and error code if task id provided', () => {
       //given
       const handleExtendLockSpy = jest.spyOn(engineClient, 'handleExtendLock');
       const expectedTaskId = 'foo';
@@ -167,7 +167,7 @@ describe('TaskClient', () => {
       expect(handleExtendLockSpy).toBeCalledWith(expectedTaskId, expectedNewDuration);
     });
 
-    test('should call api handleExtendLock with povided task and error code', () => {
+    test('should call api handleExtendLock with provided task id and error code if task provided', () => {
       //given
       const handleExtendLockSpy = jest.spyOn(engineClient, 'handleExtendLock');
       const expectedTaskId = 'foo';
