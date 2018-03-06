@@ -107,6 +107,21 @@ describe('EngineClient', () => {
 
   });
 
+  test('unlock', () => {
+    // given
+    const expectedTaskId = 'foo';
+    const expectedUrl = `/${expectedTaskId}/unlock`;
+    const expectedPayload = { json: true };
+
+    // when
+    engineClient.unlock(expectedTaskId);
+
+    // then
+    expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
+
+  });
+
+
   describe('request', () => {
     jest.mock('got', () => jest.fn());
     it('should send request with given options', () => {

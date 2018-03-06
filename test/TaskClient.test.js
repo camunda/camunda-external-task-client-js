@@ -181,4 +181,38 @@ describe('TaskClient', () => {
     });
   });
 
+  describe('unlock', () => {
+    test('should throw an error if no task id is provided', async() => {
+      try {
+        await taskClient.unlock();
+      } catch (e) {
+        expect(e).toEqual(new Error(MISSING_TASK));
+      }
+    });
+
+    test('should call api unlock with provided task id if task id provided', () => {
+      //given
+      const unlockSpy = jest.spyOn(engineClient, 'unlock');
+      const expectedTaskId = 'foo';
+
+      //when
+      taskClient.unlock(expectedTaskId);
+
+      //then
+      expect(unlockSpy).toBeCalledWith(expectedTaskId);
+    });
+
+    test('should call api unlock with provided task id if task provided', () => {
+      //given
+      const unlockSpy = jest.spyOn(engineClient, 'unlock');
+      const expectedTaskId = 'foo';
+
+      //when
+      taskClient.complete({ id: expectedTaskId });
+
+      //then
+      expect(unlockSpy).toBeCalledWith(expectedTaskId);
+    });
+  });
+
 });
