@@ -50,7 +50,7 @@ describe('workers', () => {
 
       test('should not call itself again after timeout when there are registered workers', () => {
         //given
-        workers.registerWorker('foo', () => {});
+        workers.subscribe('foo', () => {});
 
         // when
         workers.start();
@@ -63,7 +63,7 @@ describe('workers', () => {
       test('should fetchAndLock and then call itself again when there are registered workers', async() => {
         // given
         const fetchAndLockSpy = jest.spyOn(engineClient, 'fetchAndLock');
-        workers.registerWorker('foo', () => {});
+        workers.subscribe('foo', () => {});
 
         // when
         workers.start();
@@ -108,7 +108,7 @@ describe('workers', () => {
     });
   });
 
-  describe('registerWorker', () => {
+  describe('subscribe', () => {
 
     test('should throw error if api path wasn\'t passed as parameter', () => {
       expect(() => { new Workers();}).toThrowError(MISSING_PATH);
@@ -130,17 +130,17 @@ describe('workers', () => {
     });
 
 
-    test('should register worker without custom config ', () => {
+    test('should subscribe worker without custom config ', () => {
       // given
-      const fooWorker = workers.registerWorker('foo', fooWork);
+      const fooWorker = workers.subscribe('foo', fooWork);
 
       // then
       expect(fooWorker.handler).not.toBeUndefined();
     });
 
-    test('should register worker with custom config ', () =>{
+    test('should subscribe worker with custom config ', () =>{
       // given
-      const fooWorker = workers.registerWorker('foo', customConfig, fooWork);
+      const fooWorker = workers.subscribe('foo', customConfig, fooWork);
 
       // then
       expect(fooWorker.lockDuration).toBe(customConfig.lockDuration);
@@ -148,20 +148,20 @@ describe('workers', () => {
 
     test('should throw error if try to register twice', () => {
       // given
-      workers.registerWorker('foo', fooWork);
+      workers.subscribe('foo', fooWork);
 
       // then
-      expect(() => { workers.registerWorker('foo', fooWork); }).toThrowError(ALREADY_REGISTERED);
+      expect(() => { workers.subscribe('foo', fooWork); }).toThrowError(ALREADY_REGISTERED);
     });
 
     test('should throw error if work function is not passed', () => {
-      expect(() => { workers.registerWorker('foo2'); }).toThrowError(MISSING_HANDLER);
+      expect(() => { workers.subscribe('foo2'); }).toThrowError(MISSING_HANDLER);
     });
 
 
     test('should allow to unregister a worker from a topic', () => {
       // given
-      const fooWorker = workers.registerWorker('foo', fooWork);
+      const fooWorker = workers.subscribe('foo', fooWork);
 
       // when
       fooWorker.unregister();
