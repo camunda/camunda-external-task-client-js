@@ -73,7 +73,7 @@ Triggers polling.
 - **Long Polling** is enabled by configuring the option _asyncResponseTimeout_.
  
 #### subscribe(topic, [options], work)
-Subscribes a worker to a specific topic. 
+Subscribes a worker to a specific topic and returns a _worker client_.
 Here's a list of the available parameters:
 
 | Parameter     | Description                                           | Type     | Required | Default |
@@ -111,6 +111,25 @@ The worker function receives an object that has the following parameters:
 - _taskClient_: object that provides methods to perform the following operations on a specific task.
     
  > For more information about external tasks operations, check out this section of [Camunda Docs](https://docs.camunda.org/manual/develop/reference/rest/external-task/).
+
+#### About worker client
+A worker client, which is returned by the **subscribe()** method, is a an object that provides the following:
+- **worker:** the worker function.
+- **unsubscribe():** a method to unsubscribe the worker.
+- **lockDuration:** the lockDuration for the worker.
+
+```js
+const { Workers } = require('camunda-external-task-worker-js');
+
+const workers = new Workers({ use: logger, path: 'http://localhost:8080/engine-rest' });
+
+const workerClient = workers.subscribe('foo', ({ task, taskClient }) => {
+  // do some foo work
+});
+
+// unsubscribes the worker
+workerClient.unsubscribe();
+```
 
 #### stop()
 Stops polling.
