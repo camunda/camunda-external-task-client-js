@@ -92,7 +92,7 @@ describe('EngineClient', () => {
 
   });
 
-  test('extendLockTime', () => {
+  test('extendLock', () => {
     // given
     const expectedTaskId = 'foo';
     const expectedUrl = `/${expectedTaskId}/extendLock`;
@@ -100,7 +100,7 @@ describe('EngineClient', () => {
     const expectedPayload = { json: true, body: { newDuration: expectedNewDuration, workerId: engineClient.workerId } };
 
     // when
-    engineClient.handleExtendLock(expectedTaskId, expectedNewDuration);
+    engineClient.extendLock(expectedTaskId, expectedNewDuration);
 
     // then
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);

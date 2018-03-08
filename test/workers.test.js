@@ -132,18 +132,18 @@ describe('workers', () => {
 
     test('should subscribe worker without custom config ', () => {
       // given
-      const fooWorker = workers.subscribe('foo', fooWork);
+      const fooWorkerClient = workers.subscribe('foo', fooWork);
 
       // then
-      expect(fooWorker.handler).not.toBeUndefined();
+      expect(fooWorkerClient.worker).not.toBeUndefined();
     });
 
     test('should subscribe worker with custom config ', () =>{
       // given
-      const fooWorker = workers.subscribe('foo', customConfig, fooWork);
+      const fooWorkerClient = workers.subscribe('foo', customConfig, fooWork);
 
       // then
-      expect(fooWorker.lockDuration).toBe(customConfig.lockDuration);
+      expect(fooWorkerClient.lockDuration).toBe(customConfig.lockDuration);
     });
 
     test('should throw error if try to register twice', () => {
@@ -159,12 +159,12 @@ describe('workers', () => {
     });
 
 
-    test('should allow to unregister a worker from a topic', () => {
+    test('should allow to unsubscribe a worker from a topic', () => {
       // given
-      const fooWorker = workers.subscribe('foo', fooWork);
+      const fooWorkerClient = workers.subscribe('foo', fooWork);
 
       // when
-      fooWorker.unregister();
+      fooWorkerClient.unsubscribe();
 
       // then
       expect(workers.workers['foo']).toBeUndefined();

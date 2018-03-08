@@ -8,8 +8,11 @@ const TaskClient = require('../lib/TaskClient');
 const EngineClient = require('../lib/__internal/EngineClient');
 
 describe('TaskClient', () => {
-  const engineClient = new EngineClient({ workerId: 'someWorker', path: 'some/path' });
-  const taskClient = new TaskClient(new events(), engineClient);
+  let engineClient, taskClient;
+  beforeEach(() => {
+    engineClient = new EngineClient({ workerId: 'someWorker', path: 'some/path' });
+    taskClient = new TaskClient(new events(), engineClient);
+  });
 
   describe('sanitizeTask', () => {
     test('should return task id when task id is provided', () => {
@@ -137,10 +140,10 @@ describe('TaskClient', () => {
     });
   });
 
-  describe('handleExtendLock', () => {
+  describe('extendLock', () => {
     test('should throw an error if no taskid is provided', async() => {
       try {
-        await taskClient.handleExtendLock();
+        await taskClient.extendLock();
       } catch (e) {
         expect(e).toEqual(new Error(MISSING_TASK));
       }
@@ -148,40 +151,45 @@ describe('TaskClient', () => {
 
     test('should throw an error if no new lock duration is provided', async() => {
       try {
-        await taskClient.handleExtendLock('fooId');
+        await taskClient.extendLock('fooId');
       } catch (e) {
         expect(e).toEqual(new Error(MISSING_NEW_DURATION));
       }
     });
 
-    test('should call api handleExtendLock with provided task id and error code if task id provided', () => {
+    test('should call api extendLock with provided task id and error code if task id provided', () => {
       //given
-      const handleExtendLockSpy = jest.spyOn(engineClient, 'handleExtendLock');
+      const extendLockSpy = jest.spyOn(engineClient, 'extendLock');
       const expectedTaskId = 'foo';
       const expectedNewDuration = 100;
 
       //when
-      taskClient.handleExtendLock(expectedTaskId, expectedNewDuration);
+      taskClient.extendLock(expectedTaskId, expectedNewDuration);
 
       //then
-      expect(handleExtendLockSpy).toBeCalledWith(expectedTaskId, expectedNewDuration);
+      expect(extendLockSpy).toBeCalledWith(expectedTaskId, expectedNewDuration);
     });
 
-    test('should call api handleExtendLock with provided task id and error code if task provided', () => {
+    test('should call api extendLock with provided task id and error code if task provided', () => {
       //given
-      const handleExtendLockSpy = jest.spyOn(engineClient, 'handleExtendLock');
+      const extendLockSpy = jest.spyOn(engineClient, 'extendLock');
       const expectedTaskId = 'foo';
       const expectedNewDuration = 100;
 
       //when
-      taskClient.handleExtendLock({ id: expectedTaskId }, expectedNewDuration);
+      taskClient.extendLock({ id: expectedTaskId }, expectedNewDuration);
 
       //then
-      expect(handleExtendLockSpy).toBeCalledWith(expectedTaskId, expectedNewDuration);
+      expect(extendLockSpy).toBeCalledWith(expectedTaskId, expectedNewDuration);
     });
   });
 
   describe('unlock', () => {
+    let unlockSpy;
+    beforeEach(() => {
+      unlockSpy = jest.spyOn(engineClient, 'unlock');
+    });
+
     test('should throw an error if no task id is provided', async() => {
       try {
         await taskClient.unlock();
@@ -192,7 +200,6 @@ describe('TaskClient', () => {
 
     test('should call api unlock with provided task id if task id provided', () => {
       //given
-      const unlockSpy = jest.spyOn(engineClient, 'unlock');
       const expectedTaskId = 'foo';
 
       //when
@@ -204,8 +211,7 @@ describe('TaskClient', () => {
 
     test('should call api unlock with provided task id if task provided', () => {
       //given
-      const unlockSpy = jest.spyOn(engineClient, 'unlock');
-      const expectedTaskId = 'foo';
+      const expectedTaskId = 'boo';
 
       //when
       taskClient.unlock({ id: expectedTaskId });
