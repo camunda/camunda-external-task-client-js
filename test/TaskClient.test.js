@@ -208,7 +208,7 @@ describe('TaskClient', () => {
       const expectedTaskId = 'foo';
 
       //when
-      taskClient.complete({ id: expectedTaskId });
+      taskClient.unlock({ id: expectedTaskId });
 
       //then
       expect(unlockSpy).toBeCalledWith(expectedTaskId);
