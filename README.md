@@ -55,18 +55,18 @@ Here's a list of the available options:
 | interceptors         | Function(s) that will be called before a request is sent. Interceptors receive the configuration of the request and return a new configuration.                    | function or [function] |          |                  |
 | use                  | Function(s) that have access to the workers instance as soon as it is created and before any polling happens.                                                      | function or [function] |          |                  |
 
-> **About interceptors**
+#### About interceptors
 - Interceptors receive the configuration of the request and return a new configuration. 
 - In the case of multiple interceptors, they are piped in the order they are provided. 
 - Check out [BasicAuthInterceptor](/lib/BasicAuthInterceptor.js) for a better understanding of the usage of interceptors.   
 
-> **About use**
+#### About use
 Check out [Logger](/lib/Logger.js) for a better understanding of the usage of middlewares. 
 
 #### start()
 Triggers polling. 
 
-> **About Polling**  
+#### About Polling
 - Polling tasks from the engine works by performing a fetch & lock operation of tasks that have registered workers
   to them. It then calls the worker registered to each task.
 - Polling is done periodically based on the _interval_ configuration.  
@@ -88,10 +88,12 @@ The only possible options supported now are:
 |--------------|-------------------------------------------------------|--------|----------|--------------------------------------------------------|
 | lockDuration | specifies the lock duration for this specific worker. | number |          | global lockDuration configured in the workers instance |
 
-> **About the worker function** 
+#### About the worker function
+
 ```js
 const worker = ({ task, taskClient }) => {
   // doing some work
+  
   // 1- worker can complete a task:
   taskClient.complete(task);
   // 2- worker can handleFailure of a task:
@@ -103,6 +105,7 @@ const worker = ({ task, taskClient }) => {
 };
 workers.subscribe('bar', worker);
 ```
+
 The worker function receives an object that has the following parameters:
 - _task_: task object locked by the worker. For more information about the task object, check out this section of [Camunda Docs](https://docs.camunda.org/manual/develop/reference/rest/external-task/fetch/).
 - _taskClient_: object that provides methods to perform the following operations on a specific task.
