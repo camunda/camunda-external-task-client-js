@@ -4,21 +4,6 @@ A practical JavaScript client for [Camunda External Tasks](https://docs.camunda.
 
 > NodeJS >= v8.9.4 is required
 
-## About External Tasks
-External Tasks are service tasks whose execution differs particularly from the execution of other service tasks (e.g. Human Tasks).
-The execution works in a way that a list of workers polls units of work from the engine and complete them.
-
-**camunda-external-task-client.js** allows you to create easily such workers in NodeJS. 
-
-## Features
-* [Fetch and Lock](https://docs.camunda.org/manual/latest/reference/rest/external-task/fetch/) 
-* [Complete](https://docs.camunda.org/manual/latest/reference/rest/external-task/post-complete/)
-* [Handle Failure](https://docs.camunda.org/manual/latest/reference/rest/external-task/post-failure/) 
-* [Handle BPMN Error](https://docs.camunda.org/manual/latest/reference/rest/external-task/post-bpmn-error/)
-* [Unlock](https://docs.camunda.org/manual/latest/reference/rest/external-task/post-unlock/)
-* [Extend Lock](https://docs.camunda.org/manual/latest/reference/rest/external-task/post-extend-lock/) 
-
-
 ## Installing
 
 ```sh
@@ -44,7 +29,7 @@ const { Workers, logger } = require('camunda-external-task-worker-js');
 const workers = new Workers({ use: logger, path: 'http://localhost:8080/engine-rest' });
 
 // Susbscribe a worker to the topic: 'topicName'
-workers.subscribe('topicName', async({ task, taskClient }) => {
+workers.subscribe('topicName', async function({ task, taskClient }) {
   // Put your business logic
     
   // Complete the task
@@ -59,6 +44,94 @@ workers.subscribe('topicName', async({ task, taskClient }) => {
   
 > **Note:** Although the examples used in this documentation use _async await_ for handling asynchronous calls, you
 can also use Promises to achieve the same results.
+
+## About External Tasks
+External Tasks are service tasks whose execution differs particularly from the execution of other service tasks (e.g. Human Tasks).
+The execution works in a way that a list of workers polls units of work from the engine and complete them.
+
+**camunda-external-task-client.js** allows you to create easily such workers in NodeJS. 
+
+## Features
+### [Fetch and Lock](https://docs.camunda.org/manual/latest/reference/rest/external-task/fetch/) 
+Done through [polling](#about-polling).
+
+### [Complete](https://docs.camunda.org/manual/latest/reference/rest/external-task/post-complete/)
+```js
+// Susbscribe a worker to the topic: 'topicName'
+workers.subscribe('topicName', async function({ task, taskClient }) {
+  // Put your business logic
+    
+  // Complete the task
+  try {
+    await taskClient.complete(task);
+    console.log('I completed my task successfully!!');
+  } catch(e) {
+    console.error(`Failed completing my task, ${e}`)
+  }
+});
+```
+### [Handle Failure](https://docs.camunda.org/manual/latest/reference/rest/external-task/post-failure/) 
+```js
+// Susbscribe a worker to the topic: 'topicName'
+workers.subscribe('topicName', async function({ task, taskClient }) {
+  // Put your business logic
+    
+  // Handle a Failure
+  try {
+    await taskClient.handleFailure(task, 'some failure message');
+    console.log('I handled my failure successfully!!');
+  } catch(e) {
+    console.error(`Failed to handle my failure, ${e}`)
+  }
+});
+```
+### [Handle BPMN Error](https://docs.camunda.org/manual/latest/reference/rest/external-task/post-bpmn-error/)
+```js
+// Susbscribe a worker to the topic: 'topicName'
+workers.subscribe('topicName', async function({ task, taskClient }) {
+  // Put your business logic
+    
+  // Handle a BPMN Failure
+  try {
+    await taskClient.handleBPMNFailure(task, 'some BPMN failure message');
+    console.log('I handled my BPMN failure successfully!!');
+  } catch(e) {
+    console.error(`Failed to handle my BPMN failure, ${e}`)
+  }
+});
+```
+
+### [Extend Lock](https://docs.camunda.org/manual/latest/reference/rest/external-task/post-extend-lock/) 
+```js
+// Susbscribe a worker to the topic: 'topicName'
+workers.subscribe('topicName', async function({ task, taskClient }) {
+  // Put your business logic
+    
+  // Extend the lock time
+  try {
+    await taskClient.extendLock(task, 5000);
+    console.log('I extended the lock time successfully!!');
+  } catch(e) {
+    console.error(`Failed to extend the lock time, ${e}`)
+  }
+});
+```
+
+### [Unlock](https://docs.camunda.org/manual/latest/reference/rest/external-task/post-unlock/)
+```js
+// Susbscribe a worker to the topic: 'topicName'
+workers.subscribe('topicName', async function({ task, taskClient }) {
+  // Put your business logic
+    
+  // Unlock the task
+  try {
+    await taskClient.unlock(task);
+    console.log('I unlocked the task successfully!!');
+  } catch(e) {
+    console.error(`Failed to unlock the task, ${e}`)
+  }
+});
+```
 
 ## API
 
@@ -131,7 +204,7 @@ The only possible options supported now are:
 ##### _About the worker function_
 
 ```js
-const worker = async({ task, taskClient }) => {
+const worker = async function({ task, taskClient }) {
   // doing some work
   
   // 1- worker can complete a task:
@@ -145,6 +218,9 @@ const worker = async({ task, taskClient }) => {
   
   // 4- worker can extendLock of a task:
   await taskClient.extendLock(task, 5000);
+  
+  // 5- worker can unlock a task:
+  await taskClient.unlock(task);
 };
 
 workers.subscribe('bar', worker);
@@ -166,7 +242,7 @@ const { Workers } = require('camunda-external-task-worker-js');
 
 const workers = new Workers({ path: 'http://localhost:8080/engine-rest' });
 
-const workerClient = workers.subscribe('foo', async({ task, taskClient }) => {
+const workerClient = workers.subscribe('foo', async function({ task, taskClient }){
   // do some foo work
 });
 
