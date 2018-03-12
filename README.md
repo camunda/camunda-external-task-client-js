@@ -205,7 +205,7 @@ The only possible options supported now are:
 
 ```js
 const worker = async function({ task, taskClient }) {
-  // doing some work
+  // Put your business logic
   
   // 1- worker can complete a task:
   await taskClient.complete(task);
