@@ -206,21 +206,6 @@ The only possible options supported now are:
 ```js
 const worker = async function({ task, taskClient }) {
   // Put your business logic
-  
-  // 1- worker can complete a task:
-  await taskClient.complete(task);
-  
-  // 2- worker can handleFailure of a task:
-  await taskClient.handleFailure(task, 'some failure message');
-  
-  // 3- worker can handleBPMNFailure of a task:
-  await taskClient.handleBPMNFailure(task, 'some BPMN failure message');
-  
-  // 4- worker can extendLock of a task:
-  await taskClient.extendLock(task, 5000);
-  
-  // 5- worker can unlock a task:
-  await taskClient.unlock(task);
 };
 
 workers.subscribe('bar', worker);
