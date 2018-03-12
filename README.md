@@ -242,7 +242,7 @@ const { Workers } = require('camunda-external-task-worker-js');
 
 const workers = new Workers({ path: 'http://localhost:8080/engine-rest' });
 
-const workerClient = workers.subscribe('foo', async function({ task, taskClient }){
+const workerClient = workers.subscribe('foo', async function({ task, taskClient }) {
   // do some foo work
 });
 
