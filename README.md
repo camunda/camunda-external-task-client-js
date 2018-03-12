@@ -44,14 +44,21 @@ const { Workers, logger } = require('camunda-external-task-worker-js');
 const workers = new Workers({ use: logger, path: 'http://localhost:8080/engine-rest' });
 
 // Susbscribe a worker to the topic: 'topicName'
-workers.subscribe('topicName', ({ task, taskClient }) => {
+workers.subscribe('topicName', async({ task, taskClient }) => {
   // Put your business logic
     
   // Complete the task
-  taskClient.complete(task);  
+  try {
+    await taskClient.complete(task);
+    console.log('I completed my task successfully!!');
+  } catch(e) {
+    console.error(`Failed completing my task, ${e}`)
+  }
 });
 ```
   
+> **Note:** Although the examples used in this documentation use _async await_ for handling asynchronous calls, you
+can also use Promises to achieve the same results.
 
 ## API
 
@@ -124,20 +131,20 @@ The only possible options supported now are:
 ##### _About the worker function_
 
 ```js
-const worker = ({ task, taskClient }) => {
+const worker = async({ task, taskClient }) => {
   // doing some work
   
   // 1- worker can complete a task:
-  taskClient.complete(task);
+  await taskClient.complete(task);
   
   // 2- worker can handleFailure of a task:
-  taskClient.handleFailure(task, 'some failure message');
+  await taskClient.handleFailure(task, 'some failure message');
   
   // 3- worker can handleBPMNFailure of a task:
-  taskClient.handleBPMNFailure(task, 'some BPMN failure message');
+  await taskClient.handleBPMNFailure(task, 'some BPMN failure message');
   
   // 4- worker can extendLock of a task:
-  taskClient.extendLock(task, 5000);
+  await taskClient.extendLock(task, 5000);
 };
 
 workers.subscribe('bar', worker);
@@ -159,7 +166,7 @@ const { Workers } = require('camunda-external-task-worker-js');
 
 const workers = new Workers({ path: 'http://localhost:8080/engine-rest' });
 
-const workerClient = workers.subscribe('foo', ({ task, taskClient }) => {
+const workerClient = workers.subscribe('foo', async({ task, taskClient }) => {
   // do some foo work
 });
 
