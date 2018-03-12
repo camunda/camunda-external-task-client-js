@@ -253,6 +253,54 @@ workerClient.unsubscribe();
 #### workers.stop()
 Stops polling.
 
+### Workers Events
+
+#### workers.on('worker:subscribe:success', function(topic, workerClient) {})
+Emitted whenever a new worker is subscribed successfully.
+
+#### workers.on('poll:start', function() {})
+Emitted at the beginning of every poll iteration.
+
+#### workers.on('poll:stop', function() {})
+Emitted when polling is stopped manually through `workers.stop()`.
+
+#### workers.on('poll:success', function(tasks) {})
+Emitted whenever tasks are polled (fetched & locked) from the engine successfully.
+
+#### workers.on('poll:error', function(error) {})
+Emitted whenever a polling error occurs.
+
+#### workers.on('complete:success', function(task) {})
+Emitted whenever a complete operation is performed successfully.
+
+#### workers.on('complete:error', function(task, error) {})
+Emitted whenever a complete operation fails.
+
+#### workers.on('handleFailure:success', function(task) {})
+Emitted whenever a handleFailure operation is performed successfully.
+
+#### workers.on('handleFailure:error', function(task, error) {})
+Emitted whenever a handleFailure operation fails.
+
+#### workers.on('handleBpmnError:success', function(task) {})
+Emitted whenever a handleBpmnError operation is performed successfully.
+
+#### workers.on('handleBpmnError:error', function(task, error) {})
+Emitted whenever a handleBpmnError operation fails.
+
+#### workers.on('extendLock:success', function(task) {})
+Emitted whenever an extendLock operation is performed successfully.
+
+#### workers.on('extendLock:error', function(task, error) {})
+Emitted whenever an extendLock operation fails.
+
+#### workers.on('unlock:success', function(task) {})
+Emitted whenever an unlock operation is performed successfully.
+
+
+#### workers.on('unlock:error', function(task, error) {})
+Emitted whenever an unlock operation is performed successfully.
+
 ### BasicAuthInterceptor
 A BasicAuthInterceptor instance is a simple interceptor that adds basic authentication to all requests.
 
