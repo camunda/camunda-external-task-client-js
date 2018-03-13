@@ -3,7 +3,7 @@ const {
   andArrayWith,
   isArrayOfFunctions,
   isUndefinedOrNull
-} = require('../lib/__internal/utils');
+} = require('../../lib/__internal/utils');
 
 describe('utils', () => {
   describe('isFunction', () => {

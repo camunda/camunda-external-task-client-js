@@ -1,8 +1,8 @@
 {
-  "name": "camunda-external-task-worker-js",
+  "name": "camunda-external-task-client-js",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/camunda/camunda-external-task-worker-js.git",
+  "repository": "https://github.com/camunda/camunda-external-task-client-js.git",
   "author": "Camunda Services GmbH",
   "license": "Apache License 2.0",
   "scripts": {

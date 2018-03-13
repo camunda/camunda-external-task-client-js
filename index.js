@@ -1,5 +1,5 @@
 module.exports = {
-  Workers: require('./lib/Workers'),
+  Client: require('./lib/Client'),
   logger: require('./lib/logger'),
   BasicAuthInterceptor: require('./lib/BasicAuthInterceptor')
 };
