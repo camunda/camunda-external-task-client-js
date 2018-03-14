@@ -1,4 +1,6 @@
 const Client = require('../lib/Client');
+const VariableService = require('../lib/__internal/VariableService');
+const TaskService = require('../lib/TaskService');
 
 const {
   WRONG_INTERCEPTOR,
@@ -19,7 +21,7 @@ const customClientOptions = {
   lockDuration: 30000
 };
 
-describe('client', () => {
+describe('Client', () => {
   describe('poll ', () => {
     jest.useFakeTimers();
     describe('when autoPoll is false', () => {
@@ -235,5 +237,32 @@ describe('client', () => {
       //then
       middlewares.forEach(middleware => expect(middleware).toBeCalledWith(client));
     });
+  });
+
+  describe('executeTask', () => {
+    let client;
+    const handler = jest.fn();
+
+    beforeEach(() => {
+      client = new Client({ ...customClientOptions, autoPoll: false });
+      client.subscribe('foo', handler);
+    });
+
+    test('should call handler with task and taskService', () => {
+      // given
+      const expectedTask = { topicName: 'foo', variables: {} };
+
+      // when
+      client.executeTask(expectedTask);
+
+      // then
+      expect(handler).toBeCalled();
+      const { task, taskService } = handler.mock.calls[0][0];
+      expect(taskService).toBeInstanceOf(TaskService);
+      expect(task).toBeDefined();
+      expect(task.topicName).toBe(expectedTask.topicName);
+      expect(task.variables).toBeInstanceOf(VariableService);
+    });
+
   });
 });
