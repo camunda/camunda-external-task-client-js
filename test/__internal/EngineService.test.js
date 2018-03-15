@@ -49,7 +49,7 @@ describe('EngineService', () => {
     };
 
     // when
-    engineService.complete(expectedTaskId);
+    engineService.complete({ id: expectedTaskId });
 
     // then
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
@@ -67,7 +67,7 @@ describe('EngineService', () => {
     };
 
     // when
-    engineService.handleFailure(expectedTaskId, expectedRequestBody);
+    engineService.handleFailure({ id: expectedTaskId }, expectedRequestBody);
 
     // then
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
@@ -85,7 +85,7 @@ describe('EngineService', () => {
     };
 
     // when
-    engineService.handleBpmnError(expectedTaskId, expectedErrorCode);
+    engineService.handleBpmnError({ id: expectedTaskId }, expectedErrorCode);
 
     // then
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
@@ -100,7 +100,7 @@ describe('EngineService', () => {
     const expectedPayload = { json: true, body: { newDuration: expectedNewDuration, workerId: engineService.workerId } };
 
     // when
-    engineService.extendLock(expectedTaskId, expectedNewDuration);
+    engineService.extendLock({ id: expectedTaskId }, expectedNewDuration);
 
     // then
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
@@ -114,7 +114,7 @@ describe('EngineService', () => {
     const expectedPayload = { json: true };
 
     // when
-    engineService.unlock(expectedTaskId);
+    engineService.unlock({ id: expectedTaskId });
 
     // then
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);

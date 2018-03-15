@@ -2,7 +2,8 @@ const {
   isFunction,
   andArrayWith,
   isArrayOfFunctions,
-  isUndefinedOrNull
+  isUndefinedOrNull,
+  getVariableType
 } = require('../../lib/__internal/utils');
 
 describe('utils', () => {
@@ -61,4 +62,33 @@ describe('utils', () => {
     });
   });
 
+  describe('getVariableType', () => {
+    test('getVariableType(null) should be Null', () => {
+      expect(getVariableType(null)).toBe('Null');
+    });
+
+    test('getVariableType() should be Null', () => {
+      expect(getVariableType()).toBe('Null');
+    });
+
+    test('getVariableType(1) should be Integer', () => {
+      expect(getVariableType(1)).toBe('Integer');
+    });
+
+    test('getVariableType(2^32) should be Long', () => {
+      expect(getVariableType(Math.pow(2, 32))).toBe('Long');
+    });
+
+    test('getVariableType(2.32) should be Double', () => {
+      expect(getVariableType(2.32)).toBe('Double');
+    });
+
+    test('getVariableType(true) should be Boolean', () => {
+      expect(getVariableType(true)).toBe('Boolean');
+    });
+
+    test('getVariableType(\'foo\') should be String', () => {
+      expect(getVariableType('foo')).toBe('String');
+    });
+  });
 });
