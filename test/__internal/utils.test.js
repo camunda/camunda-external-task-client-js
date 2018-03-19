@@ -3,7 +3,8 @@ const {
   andArrayWith,
   isArrayOfFunctions,
   isUndefinedOrNull,
-  getVariableType
+  getVariableType,
+  mapEntries
 } = require('../../lib/__internal/utils');
 
 describe('utils', () => {
@@ -89,6 +90,26 @@ describe('utils', () => {
 
     test('getVariableType(\'foo\') should be String', () => {
       expect(getVariableType('foo')).toBe('String');
+    });
+
+    test('getVariableType({"x": 2}) should be Json', () => {
+      expect(getVariableType({ 'x': 2 })).toBe('Json');
+    });
+
+    test('getVariableType({ x: 2 }) should be Json', () => {
+      expect(getVariableType({ x: 2 })).toBe('Json');
+    });
+  });
+
+  describe('mapEntries', () => {
+    it('should map entries with mapper: entry -> entry × 2', () => {
+      // given
+      const initialObject = { a: 2, b: 3, c: 4 };
+      const expectedObject = { a: 4, b: 6, c: 8 };
+      const mapper = ({ key, value }) => ({ [key]: value * 2 });
+
+      // then
+      expect(mapEntries(initialObject, mapper)).toEqual(expectedObject);
     });
   });
 });

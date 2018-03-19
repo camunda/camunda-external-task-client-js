@@ -2,14 +2,23 @@ const VariableService = require('../../lib/__internal/VariableService');
 const { getVariableType } = require('../../lib/__internal/utils');
 
 describe('VariableService', () => {
-  let expectedVariables, expectedVariableValues, variableService;
+  let variables, expectedVariables, variableValues, expectedVariableValues, variableService;
   beforeEach(() => {
-    expectedVariableValues = { foo: 'FooValue', bar: 2 };
-    expectedVariables = {
-      foo:  { type: 'String', value: expectedVariableValues.foo, valueInfo: {} },
-      bar:  { type: 'Integer', value: expectedVariableValues.bar, valueInfo: {} }
+    variableValues = { foo: 'FooValue', bar: 2, baz: '{"name":"baz"}' };
+    expectedVariableValues = { ...variableValues, baz: { name: 'baz' } };
+
+    variables = {
+      foo:  { type: 'String', value: variableValues.foo, valueInfo: {} },
+      bar:  { type: 'Integer', value: variableValues.bar, valueInfo: {} },
+      baz: { type: 'Json', value: variableValues.baz, valueInfo: {} }
     };
-    variableService = new VariableService(expectedVariables);
+
+    expectedVariables = {
+      ...variables,
+      baz: { ...variables.baz, value: expectedVariableValues.baz }
+    };
+
+    variableService = new VariableService(variables);
   });
 
   describe('getters', () => {
