@@ -1,6 +1,5 @@
-const handleRequest = (url, { error }) => {
-  const path = url.split('/').reverse()[0];
-  switch (path) {
+const handleRequest = (url, { errorType, error }) => {
+  switch (errorType) {
   case 'FAIL_WITHOUT_RESPONSE':
   case 'FAIL_WITH_RESPONSE':
     return Promise.reject(error);

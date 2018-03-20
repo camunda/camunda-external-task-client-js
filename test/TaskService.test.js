@@ -14,6 +14,20 @@ describe('TaskService', () => {
     taskService = new TaskService(new events(), engineService);
   });
 
+  it('error(event, data) should emit error event with data: ', () => {
+    // given
+    const emitSpy = jest.spyOn(taskService.events, 'emit');
+    const event = 'some_event';
+    const expectedEvent = `${event}:error`;
+    const expectedData = 'some data';
+
+    // when
+    taskService.error(event, expectedData);
+
+    // then
+    expect(emitSpy).toBeCalledWith(expectedEvent, expectedData);
+  });
+
   describe('sanitizeTask', () => {
     test('should return task with id when task id is provided', () => {
       expect(taskService.sanitizeTask('2')).toEqual({ id: '2' });
@@ -40,6 +54,18 @@ describe('TaskService', () => {
         } catch (e) {
           expect(e).toEqual(new Error(MISSING_TASK));
         }
+      });
+
+      test('should call api complete with provided task', () => {
+        //given
+        const completeSpy = jest.spyOn(engineService, 'complete');
+        const expectedTaskId = 'foo';
+
+        //when
+        taskService.complete(expectedTaskId);
+
+        //then
+        expect(completeSpy).toBeCalledWith({ id: expectedTaskId });
       });
     });
 

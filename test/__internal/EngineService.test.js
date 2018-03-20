@@ -179,32 +179,40 @@ describe('EngineService', () => {
 
     it('should throw error if request fails without response', async() => {
       // given
-      const url = '/FAIL_WITHOUT_RESPONSE';
+      const errorType = 'FAIL_WITHOUT_RESPONSE';
       const error = 'some error message';
 
       // then
+      let thrownError;
+
       try {
-        await engineService.request('GET', url, { error });
+        await engineService.request('GET', '', { errorType, error });
       } catch (e) {
-        expect(e).toEqual(error);
+        thrownError = e;
       }
+
+      expect(thrownError).toBe(error);
     });
 
     it('should throw error response if request fails with response', async() => {
       // given
-      const url = '/FAIL_WITHOUT_RESPONSE';
+      const errorType = 'FAIL_WITHOUT_RESPONSE';
       const error = {
         response: {
-          body: { messsage: 'Some error message' }
+          body: { message: 'Some error message' }
         }
       };
 
       // then
+      let thrownError;
+
       try {
-        await engineService.request('GET', url, { error });
+        await engineService.request('GET', '', { errorType, error });
       } catch (e) {
-        expect(e).toEqual(error.response.body.message);
+        thrownError = e;
       }
+
+      expect(thrownError).toBe(error.response.body.message);
     });
   });
 });
