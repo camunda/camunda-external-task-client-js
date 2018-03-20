@@ -5,13 +5,14 @@ const got = require('got');
 const EngineService = require('../../lib/__internal/EngineService');
 
 describe('EngineService', () => {
-  let engineService, postSpy;
+  let engineService, postSpy, requestSpy;
   beforeEach(() => {
     engineService = new EngineService({ workerId: 'someWorker', baseUrl: 'some/baseUrl' });
     postSpy = jest.spyOn(engineService, 'post');
+    requestSpy = jest.spyOn(engineService, 'request');
   });
 
-  test('post', () => {
+  test('post should call request with url and payload', () => {
     //given
     const expectedUrl = 'some/url';
     const expectedPayload = { key: 'some value' };
@@ -20,7 +21,19 @@ describe('EngineService', () => {
     engineService.post(expectedUrl, expectedPayload);
 
     //then
-    expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
+    expect(requestSpy).toBeCalledWith('POST', expectedUrl, expectedPayload);
+  });
+
+  test('get should call request with url and payload', () => {
+    //given
+    const expectedUrl = 'some/url';
+    const expectedPayload = { key: 'some value' };
+
+    //when
+    engineService.get(expectedUrl, expectedPayload);
+
+    //then
+    expect(requestSpy).toBeCalledWith('GET', expectedUrl, expectedPayload);
   });
 
   test('fetchAndLock', () => {
@@ -126,7 +139,6 @@ describe('EngineService', () => {
     jest.mock('got', () => jest.fn());
     it('should send request with given options', () => {
       //given
-
       const method = 'POST';
       const path = '/some/url';
       const expectedUrl = `${engineService.baseUrl}${path}`;
@@ -163,6 +175,36 @@ describe('EngineService', () => {
       //then
       expect(got).toBeCalledWith(expectedUrl, expectedPayload);
 
+    });
+
+    it('should throw error if request fails without response', async() => {
+      // given
+      const url = '/FAIL_WITHOUT_RESPONSE';
+      const error = 'some error message';
+
+      // then
+      try {
+        await engineService.request('GET', url, { error });
+      } catch (e) {
+        expect(e).toEqual(error);
+      }
+    });
+
+    it('should throw error response if request fails with response', async() => {
+      // given
+      const url = '/FAIL_WITHOUT_RESPONSE';
+      const error = {
+        response: {
+          body: { messsage: 'Some error message' }
+        }
+      };
+
+      // then
+      try {
+        await engineService.request('GET', url, { error });
+      } catch (e) {
+        expect(e).toEqual(error.response.body.message);
+      }
     });
   });
 });
