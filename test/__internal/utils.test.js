@@ -4,8 +4,11 @@ const {
   isArrayOfFunctions,
   isUndefinedOrNull,
   getVariableType,
-  mapEntries
+  mapEntries,
+  sanitizeTypedValue
 } = require('../../lib/__internal/utils');
+
+const { WRONG_TYPED_FORMAT, UNSUPPORTED_VARIABLE_TYPE } = require('../../lib/__internal/errors');
 
 describe('utils', () => {
   describe('isFunction', () => {
@@ -64,40 +67,44 @@ describe('utils', () => {
   });
 
   describe('getVariableType', () => {
-    test('getVariableType(null) should be Null', () => {
-      expect(getVariableType(null)).toBe('Null');
+    test('getVariableType(null) should be null', () => {
+      expect(getVariableType(null)).toBe('null');
     });
 
-    test('getVariableType() should be Null', () => {
-      expect(getVariableType()).toBe('Null');
+    test('getVariableType() should be null', () => {
+      expect(getVariableType()).toBe('null');
     });
 
-    test('getVariableType(1) should be Integer', () => {
-      expect(getVariableType(1)).toBe('Integer');
+    test('getVariableType(1) should be integer', () => {
+      expect(getVariableType(1)).toBe('integer');
     });
 
-    test('getVariableType(2^32) should be Long', () => {
-      expect(getVariableType(Math.pow(2, 32))).toBe('Long');
+    test('getVariableType(2^32) should be long', () => {
+      expect(getVariableType(Math.pow(2, 32))).toBe('long');
     });
 
-    test('getVariableType(2.32) should be Double', () => {
-      expect(getVariableType(2.32)).toBe('Double');
+    test('getVariableType(2.32) should be double', () => {
+      expect(getVariableType(2.32)).toBe('double');
     });
 
-    test('getVariableType(true) should be Boolean', () => {
-      expect(getVariableType(true)).toBe('Boolean');
+    test('getVariableType(true) should be boolean', () => {
+      expect(getVariableType(true)).toBe('boolean');
     });
 
-    test('getVariableType(\'foo\') should be String', () => {
-      expect(getVariableType('foo')).toBe('String');
+    test('getVariableType(\'foo\') should be string', () => {
+      expect(getVariableType('foo')).toBe('string');
     });
 
-    test('getVariableType({"x": 2}) should be Json', () => {
-      expect(getVariableType({ 'x': 2 })).toBe('Json');
+    test('getVariableType(new Date()) should be date', () => {
+      expect(getVariableType(new Date())).toBe('date');
     });
 
-    test('getVariableType({ x: 2 }) should be Json', () => {
-      expect(getVariableType({ x: 2 })).toBe('Json');
+    test('getVariableType({"x": 2}) should be json', () => {
+      expect(getVariableType({ 'x': 2 })).toBe('json');
+    });
+
+    test('getVariableType({ x: 2 }) should be json', () => {
+      expect(getVariableType({ x: 2 })).toBe('json');
     });
   });
 
@@ -110,6 +117,59 @@ describe('utils', () => {
 
       // then
       expect(mapEntries(initialObject, mapper)).toEqual(expectedObject);
+    });
+  });
+
+  describe('sanitizeTypedValue', () => {
+    let key, type;
+    beforeAll(() => {
+      key = 'some_key';
+      type = 'some_unsupported_type';
+    });
+
+    it('should throw an error for undefined/null typedValue', () => {
+      expect(() => sanitizeTypedValue(key, null)).toThrowError(WRONG_TYPED_FORMAT(key));
+    });
+
+    it('should throw an error for typedValue = { value: 1, type: \'integer\' }', () => {
+      // given
+      const typedValue = { value: 1, type: 'integer' };
+
+      // then
+      expect(() => sanitizeTypedValue(key, typedValue)).toThrowError(WRONG_TYPED_FORMAT(key));
+    });
+
+    it('should throw an error for typedValue = { a: 1, b: \'integer\' }', () => {
+      // given
+      const typedValue = { a: 1, b: 'integer' };
+
+      // then
+      expect(() => sanitizeTypedValue(key, typedValue)).toThrowError(WRONG_TYPED_FORMAT(key));
+    });
+
+    it('should throw an error for typedValue = { value: 1, type: \'integer\', valueInfo: null }', () => {
+      // given
+      const typedValue = { value: 1, type: 'integer', valueInfo: null };
+
+      // then
+      expect(() => sanitizeTypedValue(key, typedValue)).toThrowError(WRONG_TYPED_FORMAT(key));
+    });
+
+    it('should throw an error for typedValue = { value: 1, type: \'some_unsupported_type\', valueInfo: null }', () => {
+      // given
+      const typedValue = { value: 1, type, valueInfo: {} };
+
+      // then
+      expect(() => sanitizeTypedValue(key, typedValue)).toThrowError(UNSUPPORTED_VARIABLE_TYPE(key));
+    });
+
+    it('should return typedValue with lowercase type', () => {
+      // given
+      const typedValue = { value: 1, type: 'Integer', valueInfo: {} };
+      const expectedTypedValue = { value: 1, type: 'integer', valueInfo: {} };
+
+      // then
+      expect(sanitizeTypedValue(key, typedValue)).toEqual(expectedTypedValue);
     });
   });
 });

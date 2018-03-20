@@ -8,9 +8,9 @@ describe('VariableService', () => {
     expectedVariableValues = { ...variableValues, baz: { name: 'baz' } };
 
     variables = {
-      foo:  { type: 'String', value: variableValues.foo, valueInfo: {} },
-      bar:  { type: 'Integer', value: variableValues.bar, valueInfo: {} },
-      baz: { type: 'Json', value: variableValues.baz, valueInfo: {} }
+      foo:  { type: 'string', value: variableValues.foo, valueInfo: {} },
+      bar:  { type: 'integer', value: variableValues.bar, valueInfo: {} },
+      baz: { type: 'json', value: variableValues.baz, valueInfo: {} }
     };
 
     expectedVariables = {
@@ -34,6 +34,10 @@ describe('VariableService', () => {
       expect(variableService.get('foo')).toBe(expectedVariableValues.foo);
     });
 
+    it('getTyped(\'non_existing_key\') should return null', () => {
+      expect(variableService.getTyped('non_existing_key')).toBe(null);
+    });
+
     it('getTyped(\'foo\') should return the typed value of key foo', () => {
       expect(variableService.getTyped('foo')).toEqual(expectedVariables.foo);
     });
@@ -42,19 +46,20 @@ describe('VariableService', () => {
   describe('setters', () => {
     it('setTyped(key,typedValue) should set typed value of dirty variable with key to typedValue', () => {
       // given
-      const key = 'foo', typedValue = { value: 'fooValue', type: 'String', valueInfo: {} };
+      const key = 'baz';
+
       // when
-      variableService.setTyped(key, typedValue);
+      variableService.setTyped(key, expectedVariables[key]);
 
       // then
-      expect(variableService.getTyped(key)).toEqual(typedValue);
-      expect(variableService.getDirtyVariables()[key]).toEqual(typedValue);
+      expect(variableService.getTyped(key)).toEqual(expectedVariables[key]);
+      expect(variableService.getDirtyVariables()[key]).toEqual(variables[key]);
     });
 
     it('setAllTyped(typedValues) should merge dirty variables with typedValues', () => {
       // given
       const typedValues = {
-        foo: { value: 'fooValue', type: 'String', valueInfo: {} }
+        foo: { value: 'fooValue', type: 'string', valueInfo: {} }
       };
       variableService.set('bar', 'barValue');
 
@@ -85,7 +90,7 @@ describe('VariableService', () => {
         foo: 'fooValue'
       };
       const expectedTypedValue = {
-        foo: { value: 'fooValue', type: 'String', valueInfo: {} }
+        foo: { value: 'fooValue', type: 'string', valueInfo: {} }
       };
 
       variableService.set('bar', 'barValue');
