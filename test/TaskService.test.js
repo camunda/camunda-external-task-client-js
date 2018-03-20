@@ -35,7 +35,7 @@ describe('TaskService', () => {
 
     test('should return task with dirty variables when task is provided', () => {
       // given
-      const expectedVariables = { fooVar: { value: 'foo', type: 'String', valueInfo: {} } };
+      const expectedVariables = { fooVar: { value: 'foo', type: 'string', valueInfo: {} } };
       let variables = new VariableService();
       variables.setAllTyped(expectedVariables);
       const task = { id: '2', variables };
@@ -185,7 +185,7 @@ describe('TaskService', () => {
   describe('using task object', () => {
     let variables, task, expectedSantizedTask;
     beforeEach(() => {
-      const expectedVariables = { fooVar: { value: 'foo', type: 'String', valueInfo: {} } };
+      const expectedVariables = { fooVar: { value: 'foo', type: 'string', valueInfo: {} } };
       variables = new VariableService();
       variables.setAllTyped(expectedVariables);
       task = { id: '2', variables };
