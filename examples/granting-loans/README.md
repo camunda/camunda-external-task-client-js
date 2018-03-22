@@ -6,7 +6,8 @@
 ## Running the example
 
 1. First, download the following [model](assets/loan-process.bpmn) and deploy it using the Camunda Modeler.
-<img alt="Deploying from Camunda Modeler" src="assets/deploy.gif />
+
+<img alt="Deploying from Camunda Modeler" src="assets/deploy.gif" />
 
 2. Install Dependencies:
 
