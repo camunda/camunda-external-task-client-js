@@ -1,7 +1,7 @@
 # Example
 > NodeJS >= v8.9.4 is required
 
-<img alt="A Workflow for Granting Loans" src="assets/loan-process.bpmn" />
+<img alt="A Workflow for Granting Loans" src="assets/loan-process.svg" />
 
 ## Running the example
 
