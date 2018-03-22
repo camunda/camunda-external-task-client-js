@@ -1,0 +1,10 @@
+{
+  "name": "granting-loans",
+  "version": "1.0.0",
+  "main": "example.js",
+  "author": "Camunda Services GmbH",
+  "license": "Apache License 2.0\"",
+  "dependencies": {
+    "camunda-external-task-client-js": "^0.1.0"
+  }
+}
