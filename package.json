@@ -1,10 +1,10 @@
 {
-  "name": "camunda-external-task-client-js",
   "version": "0.1.0",
+  "name": "@camunda/camunda-external-task-client",
   "main": "index.js",
   "repository": "https://github.com/camunda/camunda-external-task-client-js.git",
   "author": "Camunda Services GmbH",
-  "license": "Apache License 2.0",
+  "license": "Apache-2.0",
   "scripts": {
     "pretest": "node_modules/.bin/eslint  lib/",
     "test": "jest --verbose",
@@ -20,5 +20,15 @@
   "dependencies": {
     "chalk": "^2.3.2",
     "got": "^8.2.0"
+  },
+  "description": "Implement your [BPMN Service Task](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) in NodeJS.",
+  "bugs": {
+    "url": "https://github.com/camunda/camunda-external-task-client-js/issues"
+  },
+  "homepage": "https://github.com/camunda/camunda-external-task-client-js#readme",
+  "directories": {
+    "example": "examples",
+    "lib": "lib",
+    "test": "test"
   }
 }
