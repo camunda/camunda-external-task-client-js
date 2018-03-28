@@ -33,8 +33,8 @@ const config = { baseUrl: 'http://localhost:8080/engine-rest', use: logger };
 // create a Client instance with custom configuration
 const client = new Client(config);
 
-// susbscribe to the topic: 'topicName'
-client.subscribe('topicName', async function({ task, taskService }) {
+// susbscribe to the topic: 'creditScoreChecker'
+client.subscribe('creditScoreChecker', async function({ task, taskService }) {
   // Put your business logic
     
   // complete the task
