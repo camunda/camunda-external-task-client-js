@@ -230,11 +230,19 @@ Here's a list of the available parameters:
 | options       | options about subscription                            | object   |          |         |
 | handler       | handler function                                      | function | ✓        |         |
 
-The only possible options supported now are:
+The currently supported options are:
 
-| Option       | Description                                           | Type   | Required | Default                                                |
-|--------------|-------------------------------------------------------|--------|----------|--------------------------------------------------------|
-| lockDuration | specifies the lock duration for this specific handler.| number |          | global lockDuration configured in the client instance |
+| Option       | Description                                             | Type   | Required | Default                                                |
+|--------------|---------------------------------------------------------|--------|----------|--------------------------------------------------------|
+| lockDuration | specifies the lock duration for this specific handler.  | number |          | global lockDuration configured in the client instance |
+| variables    | defines a subset of variables available in the handler. | array  |          | global lockDuration configured in the client instance |
+
+#### About options
+```js
+const options = { lockDuration: 5000, variables: ['fooVariable', 'barVariable']};
+
+client.subscribe('bar', customOptions, handler);
+```
 
 #### About the handler function
 ```js
@@ -255,7 +263,7 @@ A topic subscription, which is returned by the **subscribe()** method, is a an o
 - **handler:** a function that is executed whenever a task is fetched & locked for the topic subscribed to.
 - **unsubscribe():** a function to unsubscribe from a topic.
 - **lockDuration:** the configured lockDuration for this specific topic subscription.
-
+- **variables:** the selected subset of variables.
 ```js
 const { Client } = require('camunda-external-task-client-js');
 
