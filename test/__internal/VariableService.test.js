@@ -2,26 +2,45 @@ const VariableService = require('../../lib/__internal/VariableService');
 const { getVariableType } = require('../../lib/__internal/utils');
 
 describe('VariableService', () => {
-  let variables, expectedVariables, variableValues, expectedVariableValues, variableService;
-  beforeEach(() => {
-    variableValues = { foo: 'FooValue', bar: 2, baz: '{"name":"baz"}' };
-    expectedVariableValues = { ...variableValues, baz: { name: 'baz' } };
+  describe('read-only', () => {
+    it('should only have getters if readOnly is true', () => {
+      // given
+      const readOnly = true;
+      const variableService = new VariableService({}, readOnly);
 
-    variables = {
-      foo:  { type: 'string', value: variableValues.foo, valueInfo: {} },
-      bar:  { type: 'integer', value: variableValues.bar, valueInfo: {} },
-      baz: { type: 'json', value: variableValues.baz, valueInfo: {} }
-    };
+      // then
+      expect(Object.keys(variableService)).toMatchSnapshot();
+    });
 
-    expectedVariables = {
-      ...variables,
-      baz: { ...variables.baz, value: expectedVariableValues.baz }
-    };
+    it('should have getters and setters if readOnly is true', () => {
+      // given
+      const readOnly = false;
+      const variableService = new VariableService({}, readOnly);
 
-    variableService = new VariableService(variables);
+      // then
+      expect(Object.keys(variableService)).toMatchSnapshot();
+    });
   });
 
   describe('getters', () => {
+    let variables, expectedVariables, variableValues, expectedVariableValues, variableService;
+    beforeEach(() => {
+      variableValues = { foo: 'FooValue', bar: 2, baz: '{"name":"baz"}' };
+      expectedVariableValues = { ...variableValues, baz: { name: 'baz' } };
+
+      variables = {
+        foo:  { type: 'string', value: variableValues.foo, valueInfo: {} },
+        bar:  { type: 'integer', value: variableValues.bar, valueInfo: {} },
+        baz: { type: 'json', value: variableValues.baz, valueInfo: {} }
+      };
+
+      expectedVariables = {
+        ...variables,
+        baz: { ...variables.baz, value: expectedVariableValues.baz }
+      };
+
+      variableService = new VariableService(variables);
+    });
     it('getAllTyped() should return all variables', () => {
       expect(variableService.getAllTyped()).toEqual(expectedVariables);
     });
@@ -44,6 +63,24 @@ describe('VariableService', () => {
   });
 
   describe('setters', () => {
+    let variables, expectedVariables, variableValues, expectedVariableValues, variableService;
+    beforeEach(() => {
+      variableValues = { foo: 'FooValue', bar: 2, baz: '{"name":"baz"}' };
+      expectedVariableValues = { ...variableValues, baz: { name: 'baz' } };
+
+      variables = {
+        foo:  { type: 'string', value: variableValues.foo, valueInfo: {} },
+        bar:  { type: 'integer', value: variableValues.bar, valueInfo: {} },
+        baz: { type: 'json', value: variableValues.baz, valueInfo: {} }
+      };
+
+      expectedVariables = {
+        ...variables,
+        baz: { ...variables.baz, value: expectedVariableValues.baz }
+      };
+
+      variableService = new VariableService(variables);
+    });
     it('setTyped(key,typedValue) should set typed value of dirty variable with key to typedValue', () => {
       // given
       const key = 'baz';

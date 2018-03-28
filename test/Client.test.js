@@ -1,6 +1,6 @@
 const Client = require('../lib/Client');
-const VariableService = require('../lib/__internal/VariableService');
 const TaskService = require('../lib/TaskService');
+const VariableService = require('../lib/__internal/VariableService');
 
 const {
   WRONG_INTERCEPTOR,
@@ -11,6 +11,8 @@ const {
 } = require('../lib/__internal/errors');
 
 jest.mock('got');
+jest.mock('../lib/__internal/VariableService');
+
 
 
 const customClientOptions = {
@@ -239,30 +241,24 @@ describe('Client', () => {
     });
   });
 
-  describe('executeTask', () => {
-    let client;
+  it('executeTask should call handler with task and taskService', () => {
+    // given
+    let client = new Client({ ...customClientOptions, autoPoll: false });
     const handler = jest.fn();
+    client.subscribe('foo', handler);
+    const expectedTask = { topicName: 'foo', variables: {} };
 
-    beforeEach(() => {
-      client = new Client({ ...customClientOptions, autoPoll: false });
-      client.subscribe('foo', handler);
-    });
+    // when
+    client.executeTask(expectedTask);
 
-    test('should call handler with task and taskService', () => {
-      // given
-      const expectedTask = { topicName: 'foo', variables: {} };
-
-      // when
-      client.executeTask(expectedTask);
-
-      // then
-      expect(handler).toBeCalled();
-      const { task, taskService } = handler.mock.calls[0][0];
-      expect(taskService).toBeInstanceOf(TaskService);
-      expect(task).toBeDefined();
-      expect(task.topicName).toBe(expectedTask.topicName);
-      expect(task.variables).toBeInstanceOf(VariableService);
-    });
+    // then
+    expect(VariableService).toHaveBeenCalledWith(expectedTask.variables, true);
+    expect(handler).toBeCalled();
+    const { task, taskService } = handler.mock.calls[0][0];
+    expect(taskService).toBeInstanceOf(TaskService);
+    expect(task).toBeDefined();
+    expect(task.topicName).toBe(expectedTask.topicName);
+    expect(task.variables).toBeInstanceOf(VariableService);
 
   });
 });

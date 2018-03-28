@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VariableService read-only should have getters and setters if readOnly is true 1`] = `
+Array [
+  "getTyped",
+  "get",
+  "getAll",
+  "getAllTyped",
+  "getDirtyVariables",
+  "setTyped",
+  "set",
+  "setAll",
+  "setAllTyped",
+]
+`;
+
+exports[`VariableService read-only should only have getters if readOnly is true 1`] = `
+Array [
+  "getTyped",
+  "get",
+  "getAll",
+  "getAllTyped",
+  "getDirtyVariables",
+]
+`;
