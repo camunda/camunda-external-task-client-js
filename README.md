@@ -25,6 +25,8 @@ yarn add camunda-external-task-client-js
 4. In your NodeJS script:
 
 ```js
+const { Client, logger } = require('camunda-external-task-client-js');
+
 // configuration for the Client:
 //  - 'baseUrl': url to the Workflow Engine
 //  - 'logger': utility to automatically log important events
