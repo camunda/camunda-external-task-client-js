@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Client subscribe should call the API with the custom configs 1`] = `
+Array [
+  Object {
+    "maxTasks": 3,
+    "topics": Array [
+      Object {
+        "lockDuration": 3000,
+        "topicName": "foo",
+        "variables": Array [
+          "fooVariable",
+          "barVariable",
+        ],
+      },
+    ],
+  },
+]
+`;

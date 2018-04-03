@@ -123,7 +123,7 @@ describe('Client', () => {
     beforeEach( () => {
       client = new Client(customClientOptions);
       fooWork = () => 'foobar';
-      customConfig = { lockDuration: 3000 };
+      customConfig = { lockDuration: 3000, variables: ['fooVariable', 'barVariable'] };
     });
 
     test('should overwrite default with custom client config', () =>{
@@ -142,13 +142,33 @@ describe('Client', () => {
       expect(footopicSubscription.handler).not.toBeUndefined();
     });
 
-    test('should subscribe to topic with custom config ', () =>{
+    test('should subscribe to topic with custom lockDuration config ', () =>{
       // given
       const footopicSubscription = client.subscribe('foo', customConfig, fooWork);
 
       // then
       expect(footopicSubscription.lockDuration).toBe(customConfig.lockDuration);
     });
+
+    test('should subscribe to topic with custom variable subset ', () =>{
+      // given
+      const footopicSubscription = client.subscribe('foo', customConfig, fooWork);
+      // then
+      expect(footopicSubscription.variables).toBe(customConfig.variables);
+    });
+
+    test('should call the API with the custom configs', () => {
+      // given
+      const fetchAnLockSpy = jest.spyOn(client.engineService, 'fetchAndLock');
+      client.subscribe('foo', customConfig, fooWork);
+      client.poll();
+
+      // then
+      expect(fetchAnLockSpy).toBeCalled();
+      const args = fetchAnLockSpy.mock.calls[0];
+      expect(args).toMatchSnapshot();
+
+    })
 
     test('should throw error if try to subscribe twice', () => {
       // given
