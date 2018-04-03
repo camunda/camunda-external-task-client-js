@@ -95,14 +95,13 @@ describe('EngineService', () => {
 
     // then
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
-
   });
 
   test('handleBpmnError', () => {
     // given
     const expectedTaskId = 'foo';
     const expectedUrl = `/${expectedTaskId}/bpmnError`;
-    const expectedErrorCode =  'some error code';
+    const expectedErrorCode = 'some error code';
     const expectedPayload = {
       json: true,
       body: { errorCode: expectedErrorCode, workerId: engineService.workerId }
@@ -113,22 +112,26 @@ describe('EngineService', () => {
 
     // then
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
-
   });
 
   test('extendLock', () => {
     // given
     const expectedTaskId = 'foo';
     const expectedUrl = `/${expectedTaskId}/extendLock`;
-    const expectedNewDuration = 100 ;
-    const expectedPayload = { json: true, body: { newDuration: expectedNewDuration, workerId: engineService.workerId } };
+    const expectedNewDuration = 100;
+    const expectedPayload = {
+      json: true,
+      body: {
+        newDuration: expectedNewDuration,
+        workerId: engineService.workerId
+      }
+    };
 
     // when
     engineService.extendLock({ id: expectedTaskId }, expectedNewDuration);
 
     // then
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
-
   });
 
   test('unlock', () => {
@@ -142,9 +145,7 @@ describe('EngineService', () => {
 
     // then
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
-
   });
-
 
   describe('request', () => {
     jest.mock('got', () => jest.fn());
@@ -169,9 +170,17 @@ describe('EngineService', () => {
       const expectedUrl = `${engineService.baseUrl}${path}`;
       const expectedInitialPayload = { key: 'some value' };
       const someExpectedAddedPayload = { someNewKey: 'some new value' };
-      const anotherExpectedAddedPayload = { anotherNewKey: 'another new value' };
-      const someInterceptor = (config) => ({ ...config, ...someExpectedAddedPayload });
-      const anotherInterceptor = (config) => ({ ...config, ...anotherExpectedAddedPayload });
+      const anotherExpectedAddedPayload = {
+        anotherNewKey: 'another new value'
+      };
+      const someInterceptor = config => ({
+        ...config,
+        ...someExpectedAddedPayload
+      });
+      const anotherInterceptor = config => ({
+        ...config,
+        ...anotherExpectedAddedPayload
+      });
       engineService.interceptors = [someInterceptor, anotherInterceptor];
       const expectedPayload = {
         method,
@@ -185,7 +194,6 @@ describe('EngineService', () => {
 
       //then
       expect(got).toBeCalledWith(expectedUrl, expectedPayload);
-
     });
 
     it('should throw error if request fails without response', async() => {
