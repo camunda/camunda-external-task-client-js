@@ -56,17 +56,28 @@ describe('EngineService', () => {
     // given
     const expectedTaskId = 'foo';
     const expectedUrl = `/${expectedTaskId}/complete`;
+    const expectedVariables = { someVariable: 'some variable value' };
+    const expectedLocalVariables = {
+      someLocalVariable: 'some local variable value'
+    };
     const expectedPayload = {
       json: true,
-      body: { workerId: engineService.workerId }
+      body: {
+        workerId: engineService.workerId,
+        variables: expectedVariables,
+        localVariables: expectedLocalVariables
+      }
     };
 
     // when
-    engineService.complete({ id: expectedTaskId });
+    engineService.complete({
+      id: expectedTaskId,
+      variables: expectedVariables,
+      localVariables: expectedLocalVariables
+    });
 
     // then
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
-
   });
 
   test('handleFailure', () => {

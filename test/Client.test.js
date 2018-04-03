@@ -1,6 +1,6 @@
 const Client = require('../lib/Client');
 const TaskService = require('../lib/TaskService');
-const VariableService = require('../lib/__internal/VariableService');
+const VariableService = require('../lib/VariableService');
 
 const {
   WRONG_INTERCEPTOR,
@@ -11,7 +11,7 @@ const {
 } = require('../lib/__internal/errors');
 
 jest.mock('got');
-jest.mock('../lib/__internal/VariableService');
+jest.mock('../lib/VariableService');
 
 
 

@@ -1,4 +1,4 @@
-const VariableService = require('../../lib/__internal/VariableService');
+const VariableService = require('../../lib/VariableService');
 const { getVariableType } = require('../../lib/__internal/utils');
 
 describe('VariableService', () => {
