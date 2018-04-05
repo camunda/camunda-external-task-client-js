@@ -1,28 +1,35 @@
-const events = require('events');
+const events = require("events");
 
-const { MISSING_TASK, MISSING_ERROR_CODE, MISSING_NEW_DURATION } = require('../lib/__internal/errors');
-const TaskService = require('../lib/TaskService');
-const EngineService = require('../lib/__internal/EngineService');
-const VariableService = require('../lib/VariableService');
+const {
+  MISSING_TASK,
+  MISSING_ERROR_CODE,
+  MISSING_NEW_DURATION
+} = require("../lib/__internal/errors");
+const TaskService = require("../lib/TaskService");
+const EngineService = require("../lib/__internal/EngineService");
+const VariableService = require("../lib/VariableService");
 
-jest.mock('got');
-const got = require('got');
+jest.mock("got");
+const got = require("got");
 
-describe('TaskService', () => {
+describe("TaskService", () => {
   let engineService, taskService, sanitizeTaskSpy, errorSpy;
   beforeEach(() => {
-    engineService = new EngineService({ workerId: 'someWorker', baseUrl: 'some/baseUrl' });
+    engineService = new EngineService({
+      workerId: "someWorker",
+      baseUrl: "some/baseUrl"
+    });
     taskService = new TaskService(new events(), engineService);
-    sanitizeTaskSpy = jest.spyOn(taskService, 'sanitizeTask');
-    errorSpy = jest.spyOn(taskService, 'error');
+    sanitizeTaskSpy = jest.spyOn(taskService, "sanitizeTask");
+    errorSpy = jest.spyOn(taskService, "error");
   });
 
-  it('error(event, data) should emit error event with data: ', () => {
+  it("error(event, data) should emit error event with data: ", () => {
     // given
-    const emitSpy = jest.spyOn(taskService.events, 'emit');
-    const event = 'some_event';
+    const emitSpy = jest.spyOn(taskService.events, "emit");
+    const event = "some_event";
     const expectedEvent = `${event}:error`;
-    const expectedData = 'some data';
+    const expectedData = "some data";
 
     // when
     taskService.error(event, expectedData);
@@ -31,26 +38,26 @@ describe('TaskService', () => {
     expect(emitSpy).toBeCalledWith(expectedEvent, expectedData);
   });
 
-  describe('sanitizeTask', () => {
-    test('should return task with id when task id is provided', () => {
+  describe("sanitizeTask", () => {
+    test("should return task with id when task id is provided", () => {
       // given
-      const expectedTask = { id: '2' };
+      const expectedTask = { id: "2" };
 
       // then
-      expect(taskService.sanitizeTask('2')).toEqual(expectedTask);
+      expect(taskService.sanitizeTask("2")).toEqual(expectedTask);
     });
 
-    test('should return task with id when task is provided', () => {
+    test("should return task with id when task is provided", () => {
       // given
-      const expectedTask = { id: '2' };
+      const expectedTask = { id: "2" };
 
       // then
       expect(taskService.sanitizeTask(expectedTask)).toEqual(expectedTask);
     });
   });
 
-  describe('complete', () => {
-    test('should throw an error if no parameter is provided', async() => {
+  describe("complete", () => {
+    test("should throw an error if no parameter is provided", async () => {
       try {
         await taskService.complete();
       } catch (e) {
@@ -58,9 +65,9 @@ describe('TaskService', () => {
       }
     });
 
-    test('should call sanitizeTask with given parameter', () => {
+    test("should call sanitizeTask with given parameter", () => {
       // given
-      const expectedTaskId = 'foo';
+      const expectedTaskId = "foo";
 
       // when
       taskService.complete(expectedTaskId);
@@ -69,10 +76,10 @@ describe('TaskService', () => {
       expect(sanitizeTaskSpy).toBeCalledWith(expectedTaskId);
     });
 
-    test('should call api complete with provided task', () => {
+    test("should call api complete with provided task", () => {
       //given
-      const completeSpy = jest.spyOn(engineService, 'complete');
-      const expectedTaskId = 'foo';
+      const completeSpy = jest.spyOn(engineService, "complete");
+      const expectedTaskId = "foo";
 
       //when
       taskService.complete(expectedTaskId);
@@ -81,15 +88,23 @@ describe('TaskService', () => {
       expect(completeSpy).toBeCalledWith({ id: expectedTaskId });
     });
 
-    test('should call api complete with provided variables and localVariables', () => {
+    test("should call api complete with provided variables and localVariables", () => {
       //given
-      const completeSpy = jest.spyOn(engineService, 'complete');
-      const expectedTaskId = 'foo';
+      const completeSpy = jest.spyOn(engineService, "complete");
+      const expectedTaskId = "foo";
       const expectedVariables = {
-        someVariable: { value: 'some variable value', type: 'string', valueInfo: {} }
+        someVariable: {
+          value: "some variable value",
+          type: "string",
+          valueInfo: {}
+        }
       };
       const expectedLocalVariables = {
-        someLocalVariable: { value: 'some local variable value', type: 'string', valueInfo: {} }
+        someLocalVariable: {
+          value: "some local variable value",
+          type: "string",
+          valueInfo: {}
+        }
       };
       const variables = new VariableService();
       variables.setAllTyped(expectedVariables);
@@ -108,8 +123,8 @@ describe('TaskService', () => {
     });
   });
 
-  describe('handleFailure', () => {
-    test('should throw an error if no taskid is provided', async() => {
+  describe("handleFailure", () => {
+    test("should throw an error if no taskid is provided", async () => {
       try {
         await taskService.handleFailure();
       } catch (e) {
@@ -117,9 +132,9 @@ describe('TaskService', () => {
       }
     });
 
-    test('should call sanitizeTask with given parameter', () => {
+    test("should call sanitizeTask with given parameter", () => {
       // given
-      const expectedTaskId = 'foo';
+      const expectedTaskId = "foo";
 
       // when
       taskService.handleFailure(expectedTaskId);
@@ -128,23 +143,25 @@ describe('TaskService', () => {
       expect(sanitizeTaskSpy).toBeCalledWith(expectedTaskId);
     });
 
-    test('should call api handleFailure with provided task and error message', () => {
+    test("should call api handleFailure with provided task and error message", () => {
       //given
-      const handleFailureSpy = jest.spyOn(engineService, 'handleFailure');
-      const expectedPayload = { errorMessage: 'some error message' };
-      const expectedTaskId = 'foo';
+      const handleFailureSpy = jest.spyOn(engineService, "handleFailure");
+      const expectedPayload = { errorMessage: "some error message" };
+      const expectedTaskId = "foo";
 
       //when
       taskService.handleFailure(expectedTaskId, expectedPayload);
 
       //then
-      expect(handleFailureSpy).toBeCalledWith({ id: expectedTaskId }, expectedPayload);
+      expect(handleFailureSpy).toBeCalledWith(
+        { id: expectedTaskId },
+        expectedPayload
+      );
     });
-
   });
 
-  describe('handleBpmnError', () => {
-    test('should throw an error if no taskid is provided', async() => {
+  describe("handleBpmnError", () => {
+    test("should throw an error if no taskid is provided", async () => {
       try {
         await taskService.handleBpmnError();
       } catch (e) {
@@ -152,42 +169,44 @@ describe('TaskService', () => {
       }
     });
 
-    test('should throw an error if no error code is provided', async() => {
+    test("should throw an error if no error code is provided", async () => {
       try {
-        await taskService.handleBpmnError('fooId');
+        await taskService.handleBpmnError("fooId");
       } catch (e) {
         expect(e).toEqual(new Error(MISSING_ERROR_CODE));
       }
     });
 
-    test('should call sanitizeTask with given parameter', () => {
+    test("should call sanitizeTask with given parameter", () => {
       // given
-      const expectedTaskId = 'foo';
+      const expectedTaskId = "foo";
 
       // when
-      taskService.handleBpmnError(expectedTaskId, 'some bpmn error');
+      taskService.handleBpmnError(expectedTaskId, "some bpmn error");
 
       // then
       expect(sanitizeTaskSpy).toBeCalledWith(expectedTaskId);
     });
 
-    test('should call api handleBpmnError with provided task and error code', () => {
+    test("should call api handleBpmnError with provided task and error code", () => {
       //given
-      const handleBpmnErrorSpy = jest.spyOn(engineService, 'handleBpmnError');
-      const expectedTaskId = 'foo';
-      const expectedErrorCode = 'foo123';
+      const handleBpmnErrorSpy = jest.spyOn(engineService, "handleBpmnError");
+      const expectedTaskId = "foo";
+      const expectedErrorCode = "foo123";
 
       //when
       taskService.handleBpmnError(expectedTaskId, expectedErrorCode);
 
       //then
-      expect(handleBpmnErrorSpy).toBeCalledWith({ id: expectedTaskId }, expectedErrorCode);
-
+      expect(handleBpmnErrorSpy).toBeCalledWith(
+        { id: expectedTaskId },
+        expectedErrorCode
+      );
     });
   });
 
-  describe('extendLock', () => {
-    test('should throw an error if no taskid is provided', async() => {
+  describe("extendLock", () => {
+    test("should throw an error if no taskid is provided", async () => {
       try {
         await taskService.extendLock();
       } catch (e) {
@@ -195,17 +214,17 @@ describe('TaskService', () => {
       }
     });
 
-    test('should throw an error if no new lock duration is provided', async() => {
+    test("should throw an error if no new lock duration is provided", async () => {
       try {
-        await taskService.extendLock('fooId');
+        await taskService.extendLock("fooId");
       } catch (e) {
         expect(e).toEqual(new Error(MISSING_NEW_DURATION));
       }
     });
 
-    test('should call sanitizeTask with given parameter', () => {
+    test("should call sanitizeTask with given parameter", () => {
       // given
-      const expectedTaskId = 'foo';
+      const expectedTaskId = "foo";
 
       // when
       taskService.extendLock(expectedTaskId, 2000);
@@ -214,27 +233,30 @@ describe('TaskService', () => {
       expect(sanitizeTaskSpy).toBeCalledWith(expectedTaskId);
     });
 
-    test('should call api extendLock with provided task and lock duration', () => {
+    test("should call api extendLock with provided task and lock duration", () => {
       // given
-      const extendLockSpy = jest.spyOn(engineService, 'extendLock');
-      const expectedTaskId = 'foo';
+      const extendLockSpy = jest.spyOn(engineService, "extendLock");
+      const expectedTaskId = "foo";
       const expectedNewDuration = 100;
 
       // when
       taskService.extendLock(expectedTaskId, expectedNewDuration);
 
       // then
-      expect(extendLockSpy).toBeCalledWith({ id: expectedTaskId }, expectedNewDuration);
+      expect(extendLockSpy).toBeCalledWith(
+        { id: expectedTaskId },
+        expectedNewDuration
+      );
     });
   });
 
-  describe('unlock', () => {
+  describe("unlock", () => {
     let unlockSpy;
     beforeEach(() => {
-      unlockSpy = jest.spyOn(engineService, 'unlock');
+      unlockSpy = jest.spyOn(engineService, "unlock");
     });
 
-    test('should throw an error if no task id is provided', async() => {
+    test("should throw an error if no task id is provided", async () => {
       try {
         await taskService.unlock();
       } catch (e) {
@@ -242,9 +264,9 @@ describe('TaskService', () => {
       }
     });
 
-    test('should call sanitizeTask with given parameter', () => {
+    test("should call sanitizeTask with given parameter", () => {
       // given
-      const expectedTaskId = 'foo';
+      const expectedTaskId = "foo";
 
       // when
       taskService.unlock(expectedTaskId);
@@ -253,9 +275,9 @@ describe('TaskService', () => {
       expect(sanitizeTaskSpy).toBeCalledWith(expectedTaskId);
     });
 
-    test('should call api unlock with provided task', () => {
+    test("should call api unlock with provided task", () => {
       //given
-      const expectedTaskId = 'foo';
+      const expectedTaskId = "foo";
 
       //when
       taskService.unlock(expectedTaskId);
@@ -264,5 +286,4 @@ describe('TaskService', () => {
       expect(unlockSpy).toBeCalledWith({ id: expectedTaskId });
     });
   });
-
 });

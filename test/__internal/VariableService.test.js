@@ -1,18 +1,17 @@
-const VariableService = require('../../lib/VariableService');
-const { getVariableType } = require('../../lib/__internal/utils');
+const VariableService = require("../../lib/VariableService");
+const { getVariableType } = require("../../lib/__internal/utils");
 
-describe('VariableService', () => {
-  describe('read-only', () => {
-    it('should only have getters if readOnly is true', () => {
+describe("VariableService", () => {
+  describe("read-only", () => {
+    it("should only have getters if readOnly is true", () => {
       // given
-      const readOnly = true;
-      const variableService = new VariableService({}, readOnly);
+      const variableService = new VariableService({}, { readOnly: true });
 
       // then
       expect(Object.keys(variableService)).toMatchSnapshot();
     });
 
-    it('should have getters and setters if readOnly is true', () => {
+    it("should have getters and setters if readOnly is true", () => {
       // given
       const readOnly = false;
       const variableService = new VariableService({}, readOnly);
@@ -22,16 +21,20 @@ describe('VariableService', () => {
     });
   });
 
-  describe('getters', () => {
-    let variables, expectedVariables, variableValues, expectedVariableValues, variableService;
+  describe("getters", () => {
+    let variables,
+      expectedVariables,
+      variableValues,
+      expectedVariableValues,
+      variableService;
     beforeEach(() => {
-      variableValues = { foo: 'FooValue', bar: 2, baz: '{"name":"baz"}' };
-      expectedVariableValues = { ...variableValues, baz: { name: 'baz' } };
+      variableValues = { foo: "FooValue", bar: 2, baz: '{"name":"baz"}' };
+      expectedVariableValues = { ...variableValues, baz: { name: "baz" } };
 
       variables = {
-        foo:  { type: 'string', value: variableValues.foo, valueInfo: {} },
-        bar:  { type: 'integer', value: variableValues.bar, valueInfo: {} },
-        baz: { type: 'json', value: variableValues.baz, valueInfo: {} }
+        foo: { type: "string", value: variableValues.foo, valueInfo: {} },
+        bar: { type: "integer", value: variableValues.bar, valueInfo: {} },
+        baz: { type: "json", value: variableValues.baz, valueInfo: {} }
       };
 
       expectedVariables = {
@@ -41,29 +44,33 @@ describe('VariableService', () => {
 
       variableService = new VariableService(variables);
     });
-    it('getAllTyped() should return all variables', () => {
+    it("getAllTyped() should return all variables", () => {
       expect(variableService.getAllTyped()).toEqual(expectedVariables);
     });
 
-    it('getAll() should return values of all variables', () => {
+    it("getAll() should return values of all variables", () => {
       expect(variableService.getAll()).toEqual(expectedVariableValues);
     });
 
-    it('get(\'foo\') should return value of key foo', () => {
-      expect(variableService.get('foo')).toBe(expectedVariableValues.foo);
+    it("get('foo') should return value of key foo", () => {
+      expect(variableService.get("foo")).toBe(expectedVariableValues.foo);
     });
 
-    it('getTyped(\'non_existing_key\') should return null', () => {
-      expect(variableService.getTyped('non_existing_key')).toBe(null);
+    it("getTyped('non_existing_key') should return null", () => {
+      expect(variableService.getTyped("non_existing_key")).toBe(null);
     });
 
-    it('getTyped(\'foo\') should return the typed value of key foo', () => {
-      expect(variableService.getTyped('foo')).toEqual(expectedVariables.foo);
+    it("getTyped('foo') should return the typed value of key foo", () => {
+      expect(variableService.getTyped("foo")).toEqual(expectedVariables.foo);
     });
   });
 
-  describe('setters', () => {
-    let variables, expectedVariables, variableValues, expectedVariableValues, variableService;
+  describe("setters", () => {
+    let variables,
+      expectedVariables,
+      variableValues,
+      expectedVariableValues,
+      variableService;
     beforeEach(() => {
       variableValues = {
         foo: "FooValue",
@@ -93,9 +100,9 @@ describe('VariableService', () => {
 
       variableService = new VariableService(variables);
     });
-    it('setTyped(key,typedValue) should set typed value of dirty variable with key to typedValue', () => {
+    it("setTyped(key,typedValue) should set typed value of dirty variable with key to typedValue", () => {
       // given
-      const key = 'baz';
+      const key = "baz";
 
       // when
       variableService.setTyped(key, expectedVariables[key]);
@@ -105,12 +112,12 @@ describe('VariableService', () => {
       expect(variableService.getDirtyVariables()[key]).toEqual(variables[key]);
     });
 
-    it('setAllTyped(typedValues) should merge dirty variables with typedValues', () => {
+    it("setAllTyped(typedValues) should merge dirty variables with typedValues", () => {
       // given
       const typedValues = {
-        foo: { value: 'fooValue', type: 'string', valueInfo: {} }
+        foo: { value: "fooValue", type: "string", valueInfo: {} }
       };
-      variableService.set('bar', 'barValue');
+      variableService.set("bar", "barValue");
 
       // when
       variableService.setAllTyped(typedValues);
@@ -120,35 +127,41 @@ describe('VariableService', () => {
       expect(variableService.getAllTyped()).toMatchObject(typedValues);
     });
 
-    it('set(key, value) should set value of dirty variable with key to typed value', () => {
+    it("set(key, value) should set value of dirty variable with key to typed value", () => {
       // given
-      const expectedValue = 'fooValue';
+      const expectedValue = "fooValue";
       const expectedType = getVariableType(expectedValue);
-      const expectedTypedValue = { value: expectedValue, type: expectedType, valueInfo: {} };
+      const expectedTypedValue = {
+        value: expectedValue,
+        type: expectedType,
+        valueInfo: {}
+      };
 
       // when
-      variableService.set('foo', expectedValue);
+      variableService.set("foo", expectedValue);
 
       // then
-      expect(variableService.getTyped('foo')).toEqual(expectedTypedValue);
+      expect(variableService.getTyped("foo")).toEqual(expectedTypedValue);
     });
 
-    it('setAll(values) should merge dirty variables with values', () => {
+    it("setAll(values) should merge dirty variables with values", () => {
       // given
       const newValues = {
-        foo: 'fooValue'
+        foo: "fooValue"
       };
       const expectedTypedValue = {
-        foo: { value: 'fooValue', type: 'string', valueInfo: {} }
+        foo: { value: "fooValue", type: "string", valueInfo: {} }
       };
 
-      variableService.set('bar', 'barValue');
+      variableService.set("bar", "barValue");
 
       // when
       variableService.setAll(newValues);
 
       // then
-      expect(variableService.getDirtyVariables()).toMatchObject(expectedTypedValue);
+      expect(variableService.getDirtyVariables()).toMatchObject(
+        expectedTypedValue
+      );
       expect(variableService.getAllTyped()).toMatchObject(expectedTypedValue);
     });
   });

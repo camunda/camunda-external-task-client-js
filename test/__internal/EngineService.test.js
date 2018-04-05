@@ -1,45 +1,48 @@
-jest.mock('got');
+jest.mock("got");
 
-const got = require('got');
+const got = require("got");
 
-const EngineService = require('../../lib/__internal/EngineService');
+const EngineService = require("../../lib/__internal/EngineService");
 
-describe('EngineService', () => {
+describe("EngineService", () => {
   let engineService, postSpy, requestSpy;
   beforeEach(() => {
-    engineService = new EngineService({ workerId: 'someWorker', baseUrl: 'some/baseUrl' });
-    postSpy = jest.spyOn(engineService, 'post');
-    requestSpy = jest.spyOn(engineService, 'request');
+    engineService = new EngineService({
+      workerId: "someWorker",
+      baseUrl: "some/baseUrl"
+    });
+    postSpy = jest.spyOn(engineService, "post");
+    requestSpy = jest.spyOn(engineService, "request");
   });
 
-  test('post should call request with url and payload', () => {
+  test("post should call request with url and payload", () => {
     //given
-    const expectedUrl = 'some/url';
-    const expectedPayload = { key: 'some value' };
+    const expectedUrl = "some/url";
+    const expectedPayload = { key: "some value" };
 
     //when
     engineService.post(expectedUrl, expectedPayload);
 
     //then
-    expect(requestSpy).toBeCalledWith('POST', expectedUrl, expectedPayload);
+    expect(requestSpy).toBeCalledWith("POST", expectedUrl, expectedPayload);
   });
 
-  test('get should call request with url and payload', () => {
+  test("get should call request with url and payload", () => {
     //given
-    const expectedUrl = 'some/url';
-    const expectedPayload = { key: 'some value' };
+    const expectedUrl = "some/url";
+    const expectedPayload = { key: "some value" };
 
     //when
     engineService.get(expectedUrl, expectedPayload);
 
     //then
-    expect(requestSpy).toBeCalledWith('GET', expectedUrl, expectedPayload);
+    expect(requestSpy).toBeCalledWith("GET", expectedUrl, expectedPayload);
   });
 
-  test('fetchAndLock', () => {
+  test("fetchAndLock", () => {
     //given
-    const expectedUrl = '/fetchAndLock';
-    const expectedReqBody = { someKey: 'some value' };
+    const expectedUrl = "/external-task/fetchAndLock";
+    const expectedReqBody = { someKey: "some value" };
     const expectedPayload = {
       json: true,
       body: { ...expectedReqBody, workerId: engineService.workerId }
@@ -52,13 +55,13 @@ describe('EngineService', () => {
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
   });
 
-  test('complete', () => {
+  test("complete", () => {
     // given
-    const expectedTaskId = 'foo';
-    const expectedUrl = `/${expectedTaskId}/complete`;
-    const expectedVariables = { someVariable: 'some variable value' };
+    const expectedTaskId = "foo";
+    const expectedUrl = `/external-task/${expectedTaskId}/complete`;
+    const expectedVariables = { someVariable: "some variable value" };
     const expectedLocalVariables = {
-      someLocalVariable: 'some local variable value'
+      someLocalVariable: "some local variable value"
     };
     const expectedPayload = {
       json: true,
@@ -80,11 +83,11 @@ describe('EngineService', () => {
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
   });
 
-  test('handleFailure', () => {
+  test("handleFailure", () => {
     // given
-    const expectedTaskId = 'foo';
-    const expectedUrl = `/${expectedTaskId}/failure`;
-    const expectedRequestBody = { errorMessage: 'some error message' };
+    const expectedTaskId = "foo";
+    const expectedUrl = `/external-task/${expectedTaskId}/failure`;
+    const expectedRequestBody = { errorMessage: "some error message" };
     const expectedPayload = {
       json: true,
       body: { ...expectedRequestBody, workerId: engineService.workerId }
@@ -97,11 +100,11 @@ describe('EngineService', () => {
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
   });
 
-  test('handleBpmnError', () => {
+  test("handleBpmnError", () => {
     // given
-    const expectedTaskId = 'foo';
-    const expectedUrl = `/${expectedTaskId}/bpmnError`;
-    const expectedErrorCode = 'some error code';
+    const expectedTaskId = "foo";
+    const expectedUrl = `/external-task/${expectedTaskId}/bpmnError`;
+    const expectedErrorCode = "some error code";
     const expectedPayload = {
       json: true,
       body: { errorCode: expectedErrorCode, workerId: engineService.workerId }
@@ -114,10 +117,10 @@ describe('EngineService', () => {
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
   });
 
-  test('extendLock', () => {
+  test("extendLock", () => {
     // given
-    const expectedTaskId = 'foo';
-    const expectedUrl = `/${expectedTaskId}/extendLock`;
+    const expectedTaskId = "foo";
+    const expectedUrl = `/external-task/${expectedTaskId}/extendLock`;
     const expectedNewDuration = 100;
     const expectedPayload = {
       json: true,
@@ -134,10 +137,10 @@ describe('EngineService', () => {
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
   });
 
-  test('unlock', () => {
+  test("unlock", () => {
     // given
-    const expectedTaskId = 'foo';
-    const expectedUrl = `/${expectedTaskId}/unlock`;
+    const expectedTaskId = "foo";
+    const expectedUrl = `/external-task/${expectedTaskId}/unlock`;
     const expectedPayload = { json: true };
 
     // when
@@ -147,14 +150,14 @@ describe('EngineService', () => {
     expect(postSpy).toBeCalledWith(expectedUrl, expectedPayload);
   });
 
-  describe('request', () => {
-    jest.mock('got', () => jest.fn());
-    it('should send request with given options', () => {
+  describe("request", () => {
+    jest.mock("got", () => jest.fn());
+    it("should send request with given options", () => {
       //given
-      const method = 'POST';
-      const path = '/some/url';
+      const method = "POST";
+      const path = "/some/url";
       const expectedUrl = `${engineService.baseUrl}${path}`;
-      const expectedPayload = { method, key: 'some value' };
+      const expectedPayload = { method, key: "some value" };
 
       //when
       engineService.request(method, path, expectedPayload);
@@ -163,15 +166,15 @@ describe('EngineService', () => {
       expect(got).toBeCalledWith(expectedUrl, expectedPayload);
     });
 
-    it('should get request options from interceptors', () => {
+    it("should get request options from interceptors", () => {
       //given
-      const method = 'POST';
-      const path = '/some/url';
+      const method = "POST";
+      const path = "/some/url";
       const expectedUrl = `${engineService.baseUrl}${path}`;
-      const expectedInitialPayload = { key: 'some value' };
-      const someExpectedAddedPayload = { someNewKey: 'some new value' };
+      const expectedInitialPayload = { key: "some value" };
+      const someExpectedAddedPayload = { someNewKey: "some new value" };
       const anotherExpectedAddedPayload = {
-        anotherNewKey: 'another new value'
+        anotherNewKey: "another new value"
       };
       const someInterceptor = config => ({
         ...config,
@@ -196,16 +199,16 @@ describe('EngineService', () => {
       expect(got).toBeCalledWith(expectedUrl, expectedPayload);
     });
 
-    it('should throw error if request fails without response', async() => {
+    it("should throw error if request fails without response", async () => {
       // given
-      const errorType = 'FAIL_WITHOUT_RESPONSE';
-      const error = 'some error message';
+      const errorType = "FAIL_WITHOUT_RESPONSE";
+      const error = "some error message";
 
       // then
       let thrownError;
 
       try {
-        await engineService.request('GET', '', { errorType, error });
+        await engineService.request("GET", "", { errorType, error });
       } catch (e) {
         thrownError = e;
       }
@@ -213,12 +216,12 @@ describe('EngineService', () => {
       expect(thrownError).toBe(error);
     });
 
-    it('should throw error response if request fails with response', async() => {
+    it("should throw error response if request fails with response", async () => {
       // given
-      const errorType = 'FAIL_WITHOUT_RESPONSE';
+      const errorType = "FAIL_WITHOUT_RESPONSE";
       const error = {
         response: {
-          body: { message: 'Some error message' }
+          body: { message: "Some error message" }
         }
       };
 
@@ -226,7 +229,7 @@ describe('EngineService', () => {
       let thrownError;
 
       try {
-        await engineService.request('GET', '', { errorType, error });
+        await engineService.request("GET", "", { errorType, error });
       } catch (e) {
         thrownError = e;
       }
