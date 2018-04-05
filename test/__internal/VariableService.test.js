@@ -65,18 +65,30 @@ describe('VariableService', () => {
   describe('setters', () => {
     let variables, expectedVariables, variableValues, expectedVariableValues, variableService;
     beforeEach(() => {
-      variableValues = { foo: 'FooValue', bar: 2, baz: '{"name":"baz"}' };
-      expectedVariableValues = { ...variableValues, baz: { name: 'baz' } };
+      variableValues = {
+        foo: "FooValue",
+        bar: 2,
+        baz: '{"name":"baz"}',
+        qux: new Date("2018-01-23T14:42:45.435+0200")
+      };
+
+      expectedVariableValues = {
+        ...variableValues,
+        baz: { name: "baz" },
+        qux: "2018-01-23T14:42:45.435+0200"
+      };
 
       variables = {
-        foo:  { type: 'string', value: variableValues.foo, valueInfo: {} },
-        bar:  { type: 'integer', value: variableValues.bar, valueInfo: {} },
-        baz: { type: 'json', value: variableValues.baz, valueInfo: {} }
+        foo: { type: "string", value: variableValues.foo, valueInfo: {} },
+        bar: { type: "integer", value: variableValues.bar, valueInfo: {} },
+        baz: { type: "json", value: variableValues.baz, valueInfo: {} },
+        qux: { type: "date", varlue: variableValues.qux, valueInfo: {} }
       };
 
       expectedVariables = {
         ...variables,
-        baz: { ...variables.baz, value: expectedVariableValues.baz }
+        baz: { ...variables.baz, value: expectedVariableValues.baz },
+        qux: { ...variables.qux, value: expectedVariableValues.qux }
       };
 
       variableService = new VariableService(variables);
