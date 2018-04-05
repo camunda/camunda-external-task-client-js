@@ -1,5 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Client executeTask should call handler with task and taskService 1`] = `
+Array [
+  Object {},
+  Object {
+    "engineService": EngineService {
+      "baseUrl": "http://localhost:XXXX/engine-rest",
+      "complete": [Function],
+      "fetchAndLock": [Function],
+      "get": [Function],
+      "handleFailure": [Function],
+      "interceptors": undefined,
+      "post": [Function],
+      "request": [Function],
+      "workerId": "foobarId",
+    },
+    "processInstanceId": undefined,
+    "readOnly": true,
+  },
+]
+`;
+
 exports[`Client subscribe should call the API with the custom configs 1`] = `
 Array [
   Object {
