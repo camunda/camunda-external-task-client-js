@@ -1,0 +1,275 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VariableService getters get('foo') should return value of key foo 1`] = `"FooValue"`;
+
+exports[`VariableService getters getAll() should return values of all variables 1`] = `
+Object {
+  "bar": 2,
+  "baz": Object {
+    "name": "baz",
+  },
+  "blax": File {
+    "__readFile": [Function],
+    "content": Object {
+      "data": Array [
+        115,
+        111,
+        109,
+        101,
+        32,
+        99,
+        111,
+        110,
+        116,
+        101,
+        110,
+        116,
+      ],
+      "type": "Buffer",
+    },
+    "createTypedValue": [Function],
+    "filename": "path",
+    "load": [Function],
+    "localPath": "some/local/path",
+  },
+  "foo": "FooValue",
+  "qux": "2018-01-23T12:42:45.435",
+  "zex": File {
+    "__readFile": [Function],
+    "createTypedValue": [Function],
+    "engineService": undefined,
+    "filename": "data",
+    "load": [Function],
+    "remotePath": "/execution/undefined/localVariables/zex/data",
+  },
+}
+`;
+
+exports[`VariableService getters getAllTyped() should return all variables 1`] = `
+Object {
+  "bar": Object {
+    "type": "integer",
+    "value": 2,
+    "valueInfo": Object {},
+  },
+  "baz": Object {
+    "type": "json",
+    "value": Object {
+      "name": "baz",
+    },
+    "valueInfo": Object {},
+  },
+  "blax": Object {
+    "type": "file",
+    "value": File {
+      "__readFile": [Function],
+      "content": Object {
+        "data": Array [
+          115,
+          111,
+          109,
+          101,
+          32,
+          99,
+          111,
+          110,
+          116,
+          101,
+          110,
+          116,
+        ],
+        "type": "Buffer",
+      },
+      "createTypedValue": [Function],
+      "filename": "path",
+      "load": [Function],
+      "localPath": "some/local/path",
+    },
+    "valueInfo": Object {},
+  },
+  "foo": Object {
+    "type": "string",
+    "value": "FooValue",
+    "valueInfo": Object {},
+  },
+  "qux": Object {
+    "type": "date",
+    "value": "2018-01-23T12:42:45.435",
+    "valueInfo": Object {},
+  },
+  "zex": Object {
+    "type": "file",
+    "value": File {
+      "__readFile": [Function],
+      "createTypedValue": [Function],
+      "engineService": undefined,
+      "filename": "data",
+      "load": [Function],
+      "remotePath": "/execution/undefined/localVariables/zex/data",
+    },
+    "valueInfo": Object {},
+  },
+}
+`;
+
+exports[`VariableService getters getDirtyVariables() should return all dirty variables 1`] = `
+Object {
+  "blax": Object {
+    "type": "file",
+    "value": "c29tZSBjb250ZW50",
+    "valueInfo": Object {
+      "filename": "path",
+    },
+  },
+}
+`;
+
+exports[`VariableService getters getTyped('foo') should return the typed value of key foo 1`] = `
+Object {
+  "type": "string",
+  "value": "FooValue",
+  "valueInfo": Object {},
+}
+`;
+
+exports[`VariableService read-only should have getters and setters if readOnly is not true 1`] = `
+Array [
+  "getTyped",
+  "get",
+  "getAll",
+  "getAllTyped",
+  "getDirtyVariables",
+  "setTyped",
+  "set",
+  "setAll",
+  "setAllTyped",
+]
+`;
+
+exports[`VariableService read-only should only have getters if readOnly is true 1`] = `
+Array [
+  "getTyped",
+  "get",
+  "getAll",
+  "getAllTyped",
+  "getDirtyVariables",
+]
+`;
+
+exports[`VariableService setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": dirty variables 1`] = `Object {}`;
+
+exports[`VariableService setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": dirty variables 2`] = `
+Object {
+  "foo": Object {
+    "type": "string",
+    "value": "fooValue",
+    "valueInfo": Object {},
+  },
+}
+`;
+
+exports[`VariableService setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": variables 1`] = `Object {}`;
+
+exports[`VariableService setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": variables 2`] = `
+Object {
+  "foo": Object {
+    "type": "string",
+    "value": "fooValue",
+    "valueInfo": Object {},
+  },
+}
+`;
+
+exports[`VariableService setters setAll(someValues)  should add someValues to variables: dirty variables 1`] = `Object {}`;
+
+exports[`VariableService setters setAll(someValues)  should add someValues to variables: dirty variables 2`] = `
+Object {
+  "bar": Object {
+    "type": "integer",
+    "value": 2,
+    "valueInfo": Object {},
+  },
+  "foo": Object {
+    "type": "string",
+    "value": "FooValue",
+    "valueInfo": Object {},
+  },
+}
+`;
+
+exports[`VariableService setters setAll(someValues)  should add someValues to variables: variables 1`] = `Object {}`;
+
+exports[`VariableService setters setAll(someValues)  should add someValues to variables: variables 2`] = `
+Object {
+  "bar": Object {
+    "type": "integer",
+    "value": 2,
+    "valueInfo": Object {},
+  },
+  "foo": Object {
+    "type": "string",
+    "value": "FooValue",
+    "valueInfo": Object {},
+  },
+}
+`;
+
+exports[`VariableService setters setAllTyped(someTypedValues) should add someTypedValues to variables: dirty variables 1`] = `Object {}`;
+
+exports[`VariableService setters setAllTyped(someTypedValues) should add someTypedValues to variables: dirty variables 2`] = `
+Object {
+  "bar": Object {
+    "type": "string",
+    "value": "barValue",
+    "valueInfo": Object {},
+  },
+  "foo": Object {
+    "type": "string",
+    "value": "fooValue",
+    "valueInfo": Object {},
+  },
+}
+`;
+
+exports[`VariableService setters setAllTyped(someTypedValues) should add someTypedValues to variables: variables 1`] = `Object {}`;
+
+exports[`VariableService setters setAllTyped(someTypedValues) should add someTypedValues to variables: variables 2`] = `
+Object {
+  "bar": Object {
+    "type": "string",
+    "value": "barValue",
+    "valueInfo": Object {},
+  },
+  "foo": Object {
+    "type": "string",
+    "value": "fooValue",
+    "valueInfo": Object {},
+  },
+}
+`;
+
+exports[`VariableService setters setTyped("baz",someTypeValue) should set typed value with key "baz": dirty variables 1`] = `Object {}`;
+
+exports[`VariableService setters setTyped("baz",someTypeValue) should set typed value with key "baz": dirty variables 2`] = `
+Object {
+  "baz": Object {
+    "type": "json",
+    "value": "{\\"name\\":\\"bazname\\"}",
+    "valueInfo": Object {},
+  },
+}
+`;
+
+exports[`VariableService setters setTyped("baz",someTypeValue) should set typed value with key "baz": variables 1`] = `Object {}`;
+
+exports[`VariableService setters setTyped("baz",someTypeValue) should set typed value with key "baz": variables 2`] = `
+Object {
+  "baz": Object {
+    "type": "json",
+    "value": Object {
+      "name": "bazname",
+    },
+    "valueInfo": Object {},
+  },
+}
+`;

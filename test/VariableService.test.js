@@ -1,4 +1,4 @@
-const VariableService = require("../../lib/VariableService");
+const { VariableService, File } = require("../index");
 
 describe("VariableService", () => {
   describe("read-only", () => {
@@ -20,35 +20,50 @@ describe("VariableService", () => {
   });
 
   describe("getters", () => {
-    let variables, variableValues, variableService;
+    let variables, variableService;
     beforeEach(() => {
-      variableValues = {
-        foo: "FooValue",
-        bar: 2,
-        baz: '{"name":"baz"}',
-        qux: new Date("2018-01-23T14:42:45.435+0200")
-      };
-
       variables = {
-        foo: { type: "string", value: variableValues.foo, valueInfo: {} },
-        bar: { type: "integer", value: variableValues.bar, valueInfo: {} },
-        baz: { type: "json", value: variableValues.baz, valueInfo: {} },
-        qux: { type: "date", value: variableValues.qux, valueInfo: {} }
+        foo: { type: "string", value: "FooValue", valueInfo: {} },
+        bar: { type: "integer", value: 2, valueInfo: {} },
+        baz: { type: "json", value: '{"name":"baz"}', valueInfo: {} },
+        qux: {
+          type: "date",
+          value: new Date("2018-01-23T14:42:45.435+0200"),
+          valueInfo: {}
+        },
+        zex: {
+          type: "file",
+          value: null,
+          valueInfo: {}
+        }
       };
 
       variableService = new VariableService(variables);
+
+      const file = new File({ localPath: "some/local/path" });
+      file.content = Buffer.from("some content");
+
+      variableService.setTyped("blax", {
+        type: "file",
+        value: file,
+        valueInfo: {}
+      });
     });
 
     it("getAllTyped() should return all variables", () => {
-      expect(variableService.getAllTyped()).toMatchSnapshot("getAllTyped()");
+      expect(variableService.getAllTyped()).toMatchSnapshot();
     });
 
     it("getAll() should return values of all variables", () => {
-      expect(variableService.getAll()).toMatchSnapshot("getAll()");
+      expect(variableService.getAll()).toMatchSnapshot();
+    });
+
+    it("getDirtyVariables() should return all dirty variables", () => {
+      expect(variableService.getDirtyVariables()).toMatchSnapshot();
     });
 
     it("get('foo') should return value of key foo", () => {
-      expect(variableService.get("foo")).toMatchSnapshot("get('foo')");
+      expect(variableService.get("foo")).toMatchSnapshot();
     });
 
     it("getTyped('non_existing_key') should return null", () => {
@@ -56,9 +71,7 @@ describe("VariableService", () => {
     });
 
     it("getTyped('foo') should return the typed value of key foo", () => {
-      expect(variableService.getTyped("foo")).toMatchSnapshot(
-        "getTyped('foo')"
-      );
+      expect(variableService.getTyped("foo")).toMatchSnapshot();
     });
   });
 
@@ -91,7 +104,7 @@ describe("VariableService", () => {
       );
     });
 
-    it("setAllTyped(someTypedValues) should merge dirty variables with someTypedValues", () => {
+    it("setAllTyped(someTypedValues) should add someTypedValues to variables", () => {
       // given
       expect(variableService.getAllTyped()).toMatchSnapshot("variables");
       expect(variableService.getDirtyVariables()).toMatchSnapshot(
@@ -121,6 +134,28 @@ describe("VariableService", () => {
       variableService.set("foo", "fooValue");
 
       // then
+      expect(variableService.getAllTyped()).toMatchSnapshot("variables");
+      expect(variableService.getDirtyVariables()).toMatchSnapshot(
+        "dirty variables"
+      );
+    });
+
+    it("setAll(someValues)  should add someValues to variables", () => {
+      // given
+      expect(variableService.getAllTyped()).toMatchSnapshot("variables");
+      expect(variableService.getDirtyVariables()).toMatchSnapshot(
+        "dirty variables"
+      );
+      const someValues = {
+        foo: "FooValue",
+        bar: 2
+      };
+
+      // when
+      variableService.setAll(someValues);
+
+      // then
+      // given
       expect(variableService.getAllTyped()).toMatchSnapshot("variables");
       expect(variableService.getDirtyVariables()).toMatchSnapshot(
         "dirty variables"
