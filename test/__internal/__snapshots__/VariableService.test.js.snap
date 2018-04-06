@@ -1,6 +1,54 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VariableService read-only should have getters and setters if readOnly is true 1`] = `
+exports[`VariableService getters get('foo') should return value of key foo: get('foo') 1`] = `"FooValue"`;
+
+exports[`VariableService getters getAll() should return values of all variables: getAll() 1`] = `
+Object {
+  "bar": 2,
+  "baz": Object {
+    "name": "baz",
+  },
+  "foo": "FooValue",
+  "qux": "2018-01-23T12:42:45.435",
+}
+`;
+
+exports[`VariableService getters getAllTyped() should return all variables: getAllTyped() 1`] = `
+Object {
+  "bar": Object {
+    "type": "integer",
+    "value": 2,
+    "valueInfo": Object {},
+  },
+  "baz": Object {
+    "type": "json",
+    "value": Object {
+      "name": "baz",
+    },
+    "valueInfo": Object {},
+  },
+  "foo": Object {
+    "type": "string",
+    "value": "FooValue",
+    "valueInfo": Object {},
+  },
+  "qux": Object {
+    "type": "date",
+    "value": "2018-01-23T12:42:45.435",
+    "valueInfo": Object {},
+  },
+}
+`;
+
+exports[`VariableService getters getTyped('foo') should return the typed value of key foo: getTyped('foo') 1`] = `
+Object {
+  "type": "string",
+  "value": "FooValue",
+  "valueInfo": Object {},
+}
+`;
+
+exports[`VariableService read-only should have getters and setters if readOnly is not true 1`] = `
 Array [
   "getTyped",
   "get",
@@ -22,4 +70,88 @@ Array [
   "getAllTyped",
   "getDirtyVariables",
 ]
+`;
+
+exports[`VariableService setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": dirty variables 1`] = `Object {}`;
+
+exports[`VariableService setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": dirty variables 2`] = `
+Object {
+  "foo": Object {
+    "type": "string",
+    "value": "fooValue",
+    "valueInfo": Object {},
+  },
+}
+`;
+
+exports[`VariableService setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": variables 1`] = `Object {}`;
+
+exports[`VariableService setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": variables 2`] = `
+Object {
+  "foo": Object {
+    "type": "string",
+    "value": "fooValue",
+    "valueInfo": Object {},
+  },
+}
+`;
+
+exports[`VariableService setters setAllTyped(someTypedValues) should merge dirty variables with someTypedValues: dirty variables 1`] = `Object {}`;
+
+exports[`VariableService setters setAllTyped(someTypedValues) should merge dirty variables with someTypedValues: dirty variables 2`] = `
+Object {
+  "bar": Object {
+    "type": "string",
+    "value": "barValue",
+    "valueInfo": Object {},
+  },
+  "foo": Object {
+    "type": "string",
+    "value": "fooValue",
+    "valueInfo": Object {},
+  },
+}
+`;
+
+exports[`VariableService setters setAllTyped(someTypedValues) should merge dirty variables with someTypedValues: variables 1`] = `Object {}`;
+
+exports[`VariableService setters setAllTyped(someTypedValues) should merge dirty variables with someTypedValues: variables 2`] = `
+Object {
+  "bar": Object {
+    "type": "string",
+    "value": "barValue",
+    "valueInfo": Object {},
+  },
+  "foo": Object {
+    "type": "string",
+    "value": "fooValue",
+    "valueInfo": Object {},
+  },
+}
+`;
+
+exports[`VariableService setters setTyped("baz",someTypeValue) should set typed value with key "baz": dirty variables 1`] = `Object {}`;
+
+exports[`VariableService setters setTyped("baz",someTypeValue) should set typed value with key "baz": dirty variables 2`] = `
+Object {
+  "baz": Object {
+    "type": "json",
+    "value": "{\\"name\\":\\"bazname\\"}",
+    "valueInfo": Object {},
+  },
+}
+`;
+
+exports[`VariableService setters setTyped("baz",someTypeValue) should set typed value with key "baz": variables 1`] = `Object {}`;
+
+exports[`VariableService setters setTyped("baz",someTypeValue) should set typed value with key "baz": variables 2`] = `
+Object {
+  "baz": Object {
+    "type": "json",
+    "value": Object {
+      "name": "bazname",
+    },
+    "valueInfo": Object {},
+  },
+}
 `;
