@@ -1,5 +1,7 @@
 # camunda-external-task-client
 
+[![Build Status](https://travis-ci.org/camunda/camunda-external-task-client-js.svg?branch=master)](https://travis-ci.org/camunda/camunda-external-task-client-js)
+
 Implement your [BPMN Service Task](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) in
 NodeJS.
 
