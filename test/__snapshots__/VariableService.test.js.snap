@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VariableService getters get('foo') should return value of key foo 1`] = `"FooValue"`;
+exports[`Variables getters get('foo') should return value of key foo 1`] = `"FooValue"`;
 
-exports[`VariableService getters getAll() should return values of all variables 1`] = `
+exports[`Variables getters getAll() should return values of all variables 1`] = `
 Object {
   "bar": 2,
   "baz": Object {
@@ -45,7 +45,7 @@ Object {
 }
 `;
 
-exports[`VariableService getters getAllTyped() should return all variables 1`] = `
+exports[`Variables getters getAllTyped() should return all variables 1`] = `
 Object {
   "bar": Object {
     "type": "integer",
@@ -112,7 +112,7 @@ Object {
 }
 `;
 
-exports[`VariableService getters getDirtyVariables() should return all dirty variables 1`] = `
+exports[`Variables getters getDirtyVariables() should return all dirty variables 1`] = `
 Object {
   "blax": Object {
     "type": "file",
@@ -124,7 +124,7 @@ Object {
 }
 `;
 
-exports[`VariableService getters getTyped('foo') should return the typed value of key foo 1`] = `
+exports[`Variables getters getTyped('foo') should return the typed value of key foo 1`] = `
 Object {
   "type": "string",
   "value": "FooValue",
@@ -132,7 +132,7 @@ Object {
 }
 `;
 
-exports[`VariableService read-only should have getters and setters if readOnly is not true 1`] = `
+exports[`Variables read-only should have getters and setters if readOnly is not true 1`] = `
 Array [
   "getTyped",
   "get",
@@ -146,7 +146,7 @@ Array [
 ]
 `;
 
-exports[`VariableService read-only should only have getters if readOnly is true 1`] = `
+exports[`Variables read-only should only have getters if readOnly is true 1`] = `
 Array [
   "getTyped",
   "get",
@@ -156,9 +156,9 @@ Array [
 ]
 `;
 
-exports[`VariableService setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": dirty variables 1`] = `Object {}`;
+exports[`Variables setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": dirty variables 1`] = `Object {}`;
 
-exports[`VariableService setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": dirty variables 2`] = `
+exports[`Variables setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": dirty variables 2`] = `
 Object {
   "foo": Object {
     "type": "string",
@@ -168,9 +168,9 @@ Object {
 }
 `;
 
-exports[`VariableService setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": variables 1`] = `Object {}`;
+exports[`Variables setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": variables 1`] = `Object {}`;
 
-exports[`VariableService setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": variables 2`] = `
+exports[`Variables setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": variables 2`] = `
 Object {
   "foo": Object {
     "type": "string",
@@ -180,9 +180,9 @@ Object {
 }
 `;
 
-exports[`VariableService setters setAll(someValues)  should add someValues to variables: dirty variables 1`] = `Object {}`;
+exports[`Variables setters setAll(someValues)  should add someValues to variables: dirty variables 1`] = `Object {}`;
 
-exports[`VariableService setters setAll(someValues)  should add someValues to variables: dirty variables 2`] = `
+exports[`Variables setters setAll(someValues)  should add someValues to variables: dirty variables 2`] = `
 Object {
   "bar": Object {
     "type": "integer",
@@ -197,9 +197,9 @@ Object {
 }
 `;
 
-exports[`VariableService setters setAll(someValues)  should add someValues to variables: variables 1`] = `Object {}`;
+exports[`Variables setters setAll(someValues)  should add someValues to variables: variables 1`] = `Object {}`;
 
-exports[`VariableService setters setAll(someValues)  should add someValues to variables: variables 2`] = `
+exports[`Variables setters setAll(someValues)  should add someValues to variables: variables 2`] = `
 Object {
   "bar": Object {
     "type": "integer",
@@ -214,9 +214,9 @@ Object {
 }
 `;
 
-exports[`VariableService setters setAllTyped(someTypedValues) should add someTypedValues to variables: dirty variables 1`] = `Object {}`;
+exports[`Variables setters setAllTyped(someTypedValues) should add someTypedValues to variables: dirty variables 1`] = `Object {}`;
 
-exports[`VariableService setters setAllTyped(someTypedValues) should add someTypedValues to variables: dirty variables 2`] = `
+exports[`Variables setters setAllTyped(someTypedValues) should add someTypedValues to variables: dirty variables 2`] = `
 Object {
   "bar": Object {
     "type": "string",
@@ -231,9 +231,9 @@ Object {
 }
 `;
 
-exports[`VariableService setters setAllTyped(someTypedValues) should add someTypedValues to variables: variables 1`] = `Object {}`;
+exports[`Variables setters setAllTyped(someTypedValues) should add someTypedValues to variables: variables 1`] = `Object {}`;
 
-exports[`VariableService setters setAllTyped(someTypedValues) should add someTypedValues to variables: variables 2`] = `
+exports[`Variables setters setAllTyped(someTypedValues) should add someTypedValues to variables: variables 2`] = `
 Object {
   "bar": Object {
     "type": "string",
@@ -248,9 +248,9 @@ Object {
 }
 `;
 
-exports[`VariableService setters setTyped("baz",someTypeValue) should set typed value with key "baz": dirty variables 1`] = `Object {}`;
+exports[`Variables setters setTyped("baz",someTypeValue) should set typed value with key "baz": dirty variables 1`] = `Object {}`;
 
-exports[`VariableService setters setTyped("baz",someTypeValue) should set typed value with key "baz": dirty variables 2`] = `
+exports[`Variables setters setTyped("baz",someTypeValue) should set typed value with key "baz": dirty variables 2`] = `
 Object {
   "baz": Object {
     "type": "json",
@@ -260,9 +260,9 @@ Object {
 }
 `;
 
-exports[`VariableService setters setTyped("baz",someTypeValue) should set typed value with key "baz": variables 1`] = `Object {}`;
+exports[`Variables setters setTyped("baz",someTypeValue) should set typed value with key "baz": variables 1`] = `Object {}`;
 
-exports[`VariableService setters setTyped("baz",someTypeValue) should set typed value with key "baz": variables 2`] = `
+exports[`Variables setters setTyped("baz",someTypeValue) should set typed value with key "baz": variables 2`] = `
 Object {
   "baz": Object {
     "type": "json",

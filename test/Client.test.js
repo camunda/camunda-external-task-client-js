@@ -1,6 +1,6 @@
 const Client = require("../lib/Client");
 const TaskService = require("../lib/TaskService");
-const VariableService = require("../lib/VariableService");
+const Variables = require("../lib/Variables");
 
 const {
   WRONG_INTERCEPTOR,
@@ -11,7 +11,7 @@ const {
 } = require("../lib/__internal/errors");
 
 jest.mock("got");
-jest.mock("../lib/VariableService");
+jest.mock("../lib/Variables");
 
 const customClientOptions = {
   baseUrl: "http://localhost:XXXX/engine-rest/",
@@ -284,14 +284,14 @@ describe("Client", () => {
 
     // then
     // Variable service is called with specific parameters (c.f. snapshot)
-    const variableServiceCall = VariableService.mock.calls[0];
-    expect(variableServiceCall).toMatchSnapshot();
+    const VariablesCall = Variables.mock.calls[0];
+    expect(VariablesCall).toMatchSnapshot();
     // handler should be called with specific parameters
     expect(handler).toBeCalled();
     const { task, taskService } = handler.mock.calls[0][0];
     expect(taskService).toBeInstanceOf(TaskService);
     expect(task).toBeDefined();
     expect(task.topicName).toBe(expectedTask.topicName);
-    expect(task.variables).toBeInstanceOf(VariableService);
+    expect(task.variables).toBeInstanceOf(Variables);
   });
 });

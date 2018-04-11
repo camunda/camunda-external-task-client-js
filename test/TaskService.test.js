@@ -7,7 +7,7 @@ const {
 } = require("../lib/__internal/errors");
 const TaskService = require("../lib/TaskService");
 const EngineService = require("../lib/__internal/EngineService");
-const VariableService = require("../lib/VariableService");
+const Variables = require("../lib/Variables");
 
 jest.mock("got");
 const got = require("got");
@@ -106,9 +106,9 @@ describe("TaskService", () => {
           valueInfo: {}
         }
       };
-      const variables = new VariableService();
+      const variables = new Variables();
       variables.setAllTyped(expectedVariables);
-      const localVariables = new VariableService(expectedLocalVariables);
+      const localVariables = new Variables(expectedLocalVariables);
       localVariables.setAllTyped(expectedLocalVariables);
 
       //when

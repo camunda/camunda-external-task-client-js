@@ -1,10 +1,10 @@
-const { VariableService, File } = require("../index");
+const { Variables, File } = require("../index");
 
-describe("VariableService", () => {
+describe("Variables", () => {
   describe("read-only", () => {
     it("should only have getters if readOnly is true", () => {
       // given
-      const readOnlyVariables = new VariableService({}, { readOnly: true });
+      const readOnlyVariables = new Variables({}, { readOnly: true });
 
       // then
       expect(Object.keys(readOnlyVariables)).toMatchSnapshot();
@@ -12,7 +12,7 @@ describe("VariableService", () => {
 
     it("should have getters and setters if readOnly is not true", () => {
       // given
-      const readOnlyVariables = new VariableService({});
+      const readOnlyVariables = new Variables({});
 
       // then
       expect(Object.keys(readOnlyVariables)).toMatchSnapshot();
@@ -20,9 +20,9 @@ describe("VariableService", () => {
   });
 
   describe("getters", () => {
-    let variables, variableService;
+    let variables;
     beforeEach(() => {
-      variables = {
+      variables = new Variables({
         foo: { type: "string", value: "FooValue", valueInfo: {} },
         bar: { type: "integer", value: 2, valueInfo: {} },
         baz: { type: "json", value: '{"name":"baz"}', valueInfo: {} },
@@ -36,14 +36,12 @@ describe("VariableService", () => {
           value: null,
           valueInfo: {}
         }
-      };
-
-      variableService = new VariableService(variables);
+      });
 
       const file = new File({ localPath: "some/local/path" });
       file.content = Buffer.from("some content");
 
-      variableService.setTyped("blax", {
+      variables.setTyped("blax", {
         type: "file",
         value: file,
         valueInfo: {}
@@ -51,42 +49,40 @@ describe("VariableService", () => {
     });
 
     it("getAllTyped() should return all variables", () => {
-      expect(variableService.getAllTyped()).toMatchSnapshot();
+      expect(variables.getAllTyped()).toMatchSnapshot();
     });
 
     it("getAll() should return values of all variables", () => {
-      expect(variableService.getAll()).toMatchSnapshot();
+      expect(variables.getAll()).toMatchSnapshot();
     });
 
     it("getDirtyVariables() should return all dirty variables", () => {
-      expect(variableService.getDirtyVariables()).toMatchSnapshot();
+      expect(variables.getDirtyVariables()).toMatchSnapshot();
     });
 
     it("get('foo') should return value of key foo", () => {
-      expect(variableService.get("foo")).toMatchSnapshot();
+      expect(variables.get("foo")).toMatchSnapshot();
     });
 
     it("getTyped('non_existing_key') should return null", () => {
-      expect(variableService.getTyped("non_existing_key")).toBeNull();
+      expect(variables.getTyped("non_existing_key")).toBeNull();
     });
 
     it("getTyped('foo') should return the typed value of key foo", () => {
-      expect(variableService.getTyped("foo")).toMatchSnapshot();
+      expect(variables.getTyped("foo")).toMatchSnapshot();
     });
   });
 
   describe("setters", () => {
-    let variableService;
+    let variables;
     beforeEach(() => {
-      variableService = new VariableService();
+      variables = new Variables();
     });
 
     it('setTyped("baz",someTypeValue) should set typed value with key "baz"', () => {
       // given
-      expect(variableService.getAllTyped()).toMatchSnapshot("variables");
-      expect(variableService.getDirtyVariables()).toMatchSnapshot(
-        "dirty variables"
-      );
+      expect(variables.getAllTyped()).toMatchSnapshot("variables");
+      expect(variables.getDirtyVariables()).toMatchSnapshot("dirty variables");
       const key = "baz";
       const typedValue = {
         type: "json",
@@ -95,71 +91,57 @@ describe("VariableService", () => {
       };
 
       // when
-      variableService.setTyped(key, typedValue);
+      variables.setTyped(key, typedValue);
 
       // then
-      expect(variableService.getAllTyped()).toMatchSnapshot("variables");
-      expect(variableService.getDirtyVariables()).toMatchSnapshot(
-        "dirty variables"
-      );
+      expect(variables.getAllTyped()).toMatchSnapshot("variables");
+      expect(variables.getDirtyVariables()).toMatchSnapshot("dirty variables");
     });
 
     it("setAllTyped(someTypedValues) should add someTypedValues to variables", () => {
       // given
-      expect(variableService.getAllTyped()).toMatchSnapshot("variables");
-      expect(variableService.getDirtyVariables()).toMatchSnapshot(
-        "dirty variables"
-      );
+      expect(variables.getAllTyped()).toMatchSnapshot("variables");
+      expect(variables.getDirtyVariables()).toMatchSnapshot("dirty variables");
       const typedValues = {
         foo: { value: "fooValue", type: "string", valueInfo: {} }
       };
-      variableService.set("bar", "barValue");
+      variables.set("bar", "barValue");
 
       // when
-      variableService.setAllTyped(typedValues);
+      variables.setAllTyped(typedValues);
 
       // then
-      expect(variableService.getAllTyped()).toMatchSnapshot("variables");
-      expect(variableService.getDirtyVariables()).toMatchSnapshot(
-        "dirty variables"
-      );
+      expect(variables.getAllTyped()).toMatchSnapshot("variables");
+      expect(variables.getDirtyVariables()).toMatchSnapshot("dirty variables");
     });
 
     it('set("foo", "fooValue")) should set variable with key "foo" and value "fooValue"', () => {
       // given
-      expect(variableService.getAllTyped()).toMatchSnapshot("variables");
-      expect(variableService.getDirtyVariables()).toMatchSnapshot(
-        "dirty variables"
-      );
-      variableService.set("foo", "fooValue");
+      expect(variables.getAllTyped()).toMatchSnapshot("variables");
+      expect(variables.getDirtyVariables()).toMatchSnapshot("dirty variables");
+      variables.set("foo", "fooValue");
 
       // then
-      expect(variableService.getAllTyped()).toMatchSnapshot("variables");
-      expect(variableService.getDirtyVariables()).toMatchSnapshot(
-        "dirty variables"
-      );
+      expect(variables.getAllTyped()).toMatchSnapshot("variables");
+      expect(variables.getDirtyVariables()).toMatchSnapshot("dirty variables");
     });
 
     it("setAll(someValues)  should add someValues to variables", () => {
       // given
-      expect(variableService.getAllTyped()).toMatchSnapshot("variables");
-      expect(variableService.getDirtyVariables()).toMatchSnapshot(
-        "dirty variables"
-      );
+      expect(variables.getAllTyped()).toMatchSnapshot("variables");
+      expect(variables.getDirtyVariables()).toMatchSnapshot("dirty variables");
       const someValues = {
         foo: "FooValue",
         bar: 2
       };
 
       // when
-      variableService.setAll(someValues);
+      variables.setAll(someValues);
 
       // then
       // given
-      expect(variableService.getAllTyped()).toMatchSnapshot("variables");
-      expect(variableService.getDirtyVariables()).toMatchSnapshot(
-        "dirty variables"
-      );
+      expect(variables.getAllTyped()).toMatchSnapshot("variables");
+      expect(variables.getDirtyVariables()).toMatchSnapshot("dirty variables");
     });
   });
 });

@@ -1,4 +1,8 @@
-const { Client, logger, Variables } = require("camunda-external-task-handler-js");
+const {
+  Client,
+  logger,
+  Variables
+} = require("camunda-external-task-handler-js");
 
 // configuration for the Client:
 //  - 'baseUrl': url to the Workflow Engine
