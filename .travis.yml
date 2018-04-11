@@ -7,4 +7,4 @@ env:
   - TEST_DIR=./
   - TEST_DIR=test/
 script:
-  - cd $TEST_DIR && yarn test
+  - cd $TEST_DIR && yarn && yarn test
