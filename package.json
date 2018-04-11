@@ -6,10 +6,14 @@
   "author": "Camunda Services GmbH",
   "license": "Apache-2.0",
   "scripts": {
-    "pretest": "node_modules/.bin/eslint  lib/",
+    "pretest": "node_modules/.bin/eslint  lib/;",
     "test": "jest --verbose",
+    "pretest:integration": "",
+    "test:integration": "jest test/integration/NewIntegration.test.js",
+    "posttest:integration": "",
     "test:watch": "jest --watch --verbose",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "runCamunda": "camunda start"
   },
   "devDependencies": {
     "eslint": "^4.18.1",
@@ -17,12 +21,15 @@
     "eslint-plugin-bpmn-io": "0.4.1",
     "eslint-plugin-jest": "^21.12.2",
     "eslint-plugin-prettier": "^2.6.0",
+    "form-data": "^2.3.2",
     "jest": "22.4.2",
-    "prettier": "^1.11.1"
+    "prettier": "^1.11.1",
+    "run-camunda": "^1.2.1"
   },
   "dependencies": {
     "chalk": "^2.3.2",
-    "got": "^8.2.0"
+    "got": "^8.2.0",
+    "node-fetch": "^2.1.2"
   },
   "description": "Implement your [BPMN Service Task](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) in NodeJS.",
   "bugs": {

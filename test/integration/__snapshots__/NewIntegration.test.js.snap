@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test basic features fetch and lock  should call fetchAndLock with specified params 1`] = `
+Array [
+  Object {
+    "maxTasks": 10,
+    "topics": Array [
+      Object {
+        "lockDuration": 50000,
+        "topicName": "foo",
+        "variables": undefined,
+      },
+    ],
+  },
+]
+`;
