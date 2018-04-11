@@ -3,5 +3,8 @@ node_js:
   - '8'
 cache:
   yarn: true
+env:
+  - TEST_DIR=./
+  - TEST_DIR=test/
 script:
   - yarn test

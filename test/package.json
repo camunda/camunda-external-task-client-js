@@ -1,0 +1,17 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "main": "integration.test.js",
+  "license": "MIT",
+  "scripts": {
+    "pretest": "node scripts/setup",
+    "test": "jest",
+    "posttest": "node scripts/clearSetup"
+  },
+  "devDependencies": {
+    "form-data": "^2.3.2",
+    "got": "7.0.0",
+    "jest": "22.4.2",
+    "run-camunda": "^1.2.1"
+  }
+}
