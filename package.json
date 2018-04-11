@@ -23,13 +23,11 @@
     "eslint-plugin-prettier": "^2.6.0",
     "form-data": "^2.3.2",
     "jest": "22.4.2",
-    "prettier": "^1.11.1",
-    "run-camunda": "^1.2.1"
+    "prettier": "^1.11.1"
   },
   "dependencies": {
     "chalk": "^2.3.2",
-    "got": "^8.2.0",
-    "node-fetch": "^2.1.2"
+    "got": "^8.2.0"
   },
   "description": "Implement your [BPMN Service Task](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) in NodeJS.",
   "bugs": {
