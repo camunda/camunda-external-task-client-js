@@ -40,14 +40,8 @@ const client = new Client(config);
 // susbscribe to the topic: 'creditScoreChecker'
 client.subscribe("creditScoreChecker", async function({ task, taskService }) {
   // Put your business logic
-
   // complete the task
-  try {
-    await taskService.complete(task);
-    console.log("I completed my task successfully!!");
-  } catch (e) {
-    console.error(`Failed completing my task, ${e}`);
-  }
+  await taskService.complete(task);
 });
 ```
 
@@ -73,14 +67,8 @@ Done through [polling](/docs/Client.md#about-polling).
 // Susbscribe to the topic: 'topicName'
 client.subscribe("topicName", async function({ task, taskService }) {
   // Put your business logic
-
   // Complete the task
-  try {
-    await taskService.complete(task);
-    console.log("I completed my task successfully!!");
-  } catch (e) {
-    console.error(`Failed completing my task, ${e}`);
-  }
+  await taskService.complete(task);
 });
 ```
 
@@ -90,14 +78,8 @@ client.subscribe("topicName", async function({ task, taskService }) {
 // Susbscribe to the topic: 'topicName'
 client.subscribe("topicName", async function({ task, taskService }) {
   // Put your business logic
-
   // Handle a Failure
-  try {
-    await taskService.handleFailure(task, "some failure message");
-    console.log("I handled my failure successfully!!");
-  } catch (e) {
-    console.error(`Failed to handle my failure, ${e}`);
-  }
+  await taskService.handleFailure(task, "some failure message");
 });
 ```
 
@@ -107,14 +89,8 @@ client.subscribe("topicName", async function({ task, taskService }) {
 // Susbscribe to the topic: 'topicName'
 client.subscribe("topicName", async function({ task, taskService }) {
   // Put your business logic
-
   // Handle a BPMN Failure
-  try {
-    await taskService.handleBPMNFailure(task, "some BPMN failure message");
-    console.log("I handled my BPMN failure successfully!!");
-  } catch (e) {
-    console.error(`Failed to handle my BPMN failure, ${e}`);
-  }
+  await taskService.handleBPMNFailure(task, "some BPMN failure message");
 });
 ```
 
@@ -124,14 +100,8 @@ client.subscribe("topicName", async function({ task, taskService }) {
 // Susbscribe to the topic: 'topicName'
 client.subscribe("topicName", async function({ task, taskService }) {
   // Put your business logic
-
   // Extend the lock time
-  try {
-    await taskService.extendLock(task, 5000);
-    console.log("I extended the lock time successfully!!");
-  } catch (e) {
-    console.error(`Failed to extend the lock time, ${e}`);
-  }
+  await taskService.extendLock(task, 5000);
 });
 ```
 
@@ -141,14 +111,8 @@ client.subscribe("topicName", async function({ task, taskService }) {
 // Susbscribe to the topic: 'topicName'
 client.subscribe("topicName", async function({ task, taskService }) {
   // Put your business logic
-
   // Unlock the task
-  try {
-    await taskService.unlock(task);
-    console.log("I unlocked the task successfully!!");
-  } catch (e) {
-    console.error(`Failed to unlock the task, ${e}`);
-  }
+  await taskService.unlock(task);
 });
 ```
 
@@ -170,12 +134,7 @@ client.subscribe("topicName", async function({ task, taskService }) {
   localVariables.set("winningDate", new Date());
 
   // complete the task
-  try {
-    await taskService.complete(task, processVariables, localVariables);
-    console.log("I completed my task successfully!!");
-  } catch (e) {
-    console.error(`Failed completing my task, ${e}`);
-  }
+  await taskService.complete(task, processVariables, localVariables);
 });
 ```
 
