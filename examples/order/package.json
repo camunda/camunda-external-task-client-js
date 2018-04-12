@@ -1,0 +1,9 @@
+{
+  "name": "order",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "camunda-external-task-client-js": "^0.1.1"
+  }
+}

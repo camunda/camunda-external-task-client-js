@@ -6,9 +6,9 @@
   "author": "Camunda Services GmbH",
   "license": "Apache-2.0",
   "scripts": {
-    "pretest": "node_modules/.bin/eslint  lib/;",
-    "test": "jest lib/ --verbose --coverage",
-    "test:watch": "jest lib/ --watch --verbose --coverage"
+    "pretest": "node_modules/.bin/eslint  lib/",
+    "test": "jest lib --verbose --coverage",
+    "test:watch": "jest lib --watch --verbose --coverage"
   },
   "devDependencies": {
     "eslint": "^4.18.1",
