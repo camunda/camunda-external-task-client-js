@@ -33,7 +33,7 @@ Object {
     "localPath": "some/local/path",
   },
   "foo": "FooValue",
-  "qux": "2018-01-23T12:42:45.435",
+  "qux": "2018-01-23T12:42:45.435UTC+00:00",
   "zex": File {
     "__readFile": [Function],
     "createTypedValue": [Function],
@@ -94,7 +94,7 @@ Object {
   },
   "qux": Object {
     "type": "date",
-    "value": "2018-01-23T12:42:45.435",
+    "value": "2018-01-23T12:42:45.435UTC+00:00",
     "valueInfo": Object {},
   },
   "zex": Object {

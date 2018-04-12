@@ -25,7 +25,7 @@ yarn
 
 4. Run the example:
 ```sh
-node example.js
+node index.js
 ```
 
 ### Output
