@@ -34,7 +34,7 @@
     <bpmn:startEvent id="StartEvent_1" name="order received">
       <bpmn:outgoing>SequenceFlow_0xz1ar4</bpmn:outgoing>
       <bpmn:timerEventDefinition>
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">R0/PT1S</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">R10/PT5S</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:startEvent>
     <bpmn:boundaryEvent id="BoundaryEvent_1y1bvad" attachedToRef="Task_1nbdup3">
@@ -113,11 +113,11 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_01c1qup_di" bpmnElement="TextAnnotation_01c1qup">
-        <dc:Bounds x="835" y="425" width="219" height="28" />
+        <dc:Bounds x="906" y="419" width="78" height="30" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_0ax8ssv_di" bpmnElement="Association_0ax8ssv">
         <di:waypoint x="945" y="387" />
-        <di:waypoint x="946" y="425" />
+        <di:waypoint x="945" y="419" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Task_1yjkccw_di" bpmnElement="Task_1yjkccw">
         <dc:Bounds x="1023" y="329" width="100" height="80" />
