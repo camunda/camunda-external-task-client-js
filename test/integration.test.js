@@ -1,7 +1,7 @@
 const { Client, logger, Variables } = require("../index");
 
 describe("integration", () => {
-  let client, expectedScore;
+  let client, expectedScore, expectedUser;
 
   beforeAll(() => {
     const config = {
@@ -10,6 +10,7 @@ describe("integration", () => {
     };
 
     expectedScore = 6;
+    expectedUser = { name: "Jean Pierre", balance: "$2000" };
     // create a Client instance with custom configuration
     client = new Client(config);
   });
@@ -22,7 +23,9 @@ describe("integration", () => {
         taskService
       }) {
         try {
-          const processVariables = new Variables().set("score", expectedScore);
+          const processVariables = new Variables()
+            .set("score", expectedScore)
+            .set("user", expectedUser);
           await taskService.complete(task, processVariables);
           resolve();
         } catch (e) {
@@ -37,9 +40,12 @@ describe("integration", () => {
     return new Promise((resolve, reject) => {
       client.subscribe("loanGranter", async function({ task, taskService }) {
         try {
-          const score = task.variables.get("score");
+          const { score, user } = task.variables.getAll();
           expect(score).toBe(expectedScore);
-          await taskService.handleFailure(task, { errorMessage: "something failed" });
+          expect(user).toEqual(expectedUser);
+          await taskService.handleFailure(task, {
+            errorMessage: "something failed"
+          });
           resolve();
         } catch (e) {
           reject(e);
