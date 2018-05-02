@@ -2,12 +2,19 @@ const {
   Client,
   logger,
   Variables
-} = require("camunda-external-task-handler-js");
+} = require("camunda-external-task-client-js");
+
+const BearerInterceptor = require("./BearerInterceptor");
+const interceptor = new BearerInterceptor();
 
 // configuration for the Client:
 //  - 'baseUrl': url to the Workflow Engine
 //  - 'logger': utility to automatically log important events
-const config = { baseUrl: "http://localhost:8080/engine-rest", use: logger };
+const config = {
+  baseUrl: "http://localhost:8080/engine-rest",
+  interceptors: interceptor,
+  use: logger
+};
 
 // create a Client instance with custom configuration
 const client = new Client(config);
