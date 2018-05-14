@@ -209,17 +209,11 @@ Output:
 ```
 
 ## About JSON & Date Variables
+Date and JSON values are automatically serialized when being set and deserialized when being read.
 
 ### Date
-Date values are automatically parsed to the date format supported by the engine when
-completing a task.  
-Moreover, dates are always available in the string format in the `task.variables`
-object.
 
 ```js
-// `task.variables.get("aDate")`returns a string
-console.log( typeof task.variables.get("aDate") ); // output: "string"
-
 // 'variables.set()' can be used to set a date by providing a date object
 variables.set("someDate", new Date());
 
@@ -228,12 +222,15 @@ variables.set("someDate", new Date());
 variables.setTyped("anotherDate", { type: "date", value: new Date(), valueInfo: {} });
 // 2- providing a date string as a value:
 variables.setTyped("anotherDate", { type: "date", value: "31 march 1994", valueInfo: {} });
+
+// `variables.get("anotherDate")` is a date object
+console.log(typeof variables.get("anotherDate")); // output: object
+
+// `variables.getTyped("anotherDate").value` is date object
+console.log(typeof variables.getTyped("anotherDate").value); // output: object
 ```
 
 ### JSON
-JSON variables are automatically converted to string when completing a task.  
-They are also parsed to objects when polling variables.
-
 ```js
 // 'variables.set()' can be used to set a JSON object by providing an object
 variables.set("meal", { id: 0, name: "pasta" });
@@ -245,6 +242,9 @@ variables.setTyped({
   valueInfo: {}
 });
 
-// `variables.get("meal")`returns an object
+// `variables.get("meal")` is an object
 console.log(variables.get("someJSON")); // output: { id: 0, name: "pasta" }
+
+// `variables.getTyped("meal").value` is an object
+console.log(variables.getTyped("someJSON").value); // output: { id: 0, name: "pasta" }
 ```

@@ -3,6 +3,7 @@
 exports[`File constructor should create instance with proper values 1`] = `
 File {
   "__readFile": [Function],
+  "content": "",
   "createTypedValue": [Function],
   "encoding": "utf-8",
   "filename": "somefile",
@@ -15,6 +16,7 @@ File {
 exports[`File constructor should create instance with proper values when typedValue is provided 1`] = `
 File {
   "__readFile": [Function],
+  "content": "",
   "createTypedValue": [Function],
   "encoding": "utf-8",
   "filename": "somefile",
