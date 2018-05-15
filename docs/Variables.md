@@ -221,7 +221,7 @@ variables.set("someDate", new Date());
 // 1- providing a date object as a value:
 variables.setTyped("anotherDate", { type: "date", value: new Date(), valueInfo: {} });
 // 2- providing a date string as a value:
-variables.setTyped("anotherDate", { type: "date", value: "31 march 1994", valueInfo: {} });
+variables.setTyped("anotherDate", { type: "date", value: "2016-01-25T13:33:42.165+0100", valueInfo: {} });
 
 // `variables.get("anotherDate")` is a date object
 console.log(typeof variables.get("anotherDate")); // output: object
