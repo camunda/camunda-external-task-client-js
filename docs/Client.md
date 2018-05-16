@@ -64,7 +64,7 @@ The currently supported options are:
 |--------------|-------------------------------------------------------------------------------------|--------|----------|-------------------------------------------------------|
 | lockDuration | specifies the lock duration for this specific handler.                              | number |          | global lockDuration configured in the client instance |
 | variables    | defines a subset of variables available in the handler.                             | array  |          | global lockDuration configured in the client instance |
-| businessKey  | A value which enables the filtering of tasks based on process instance business key | string |          |                                                       |
+| businessKey  | A value which allows to filter tasks based on process instance business key         | string |          |                                                       |
 
 
 ### About topic subscriptions
