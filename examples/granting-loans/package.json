@@ -5,6 +5,6 @@
   "author": "Camunda Services GmbH",
   "license": "Apache License 2.0\"",
   "dependencies": {
-    "camunda-external-task-client-js": "^0.2.0"
+    "camunda-external-task-client-js": "1.0.0"
   }
 }
