@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0
+### Features
+- Filter tasks by business key.
+
+### Bug Fixes
+- Setting typed date variable with a string value causes serialization issue.
+
 ## 0.2.0
 ### Features
 - Setting Local Variables
