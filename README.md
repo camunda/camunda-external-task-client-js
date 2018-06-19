@@ -90,7 +90,7 @@ client.subscribe("topicName", async function({ task, taskService }) {
 client.subscribe("topicName", async function({ task, taskService }) {
   // Put your business logic
   // Handle a BPMN Failure
-  await taskService.handleBPMNFailure(task, "some BPMN failure message");
+  await taskService.handleBpmnError(task, "BPMNError_Code");
 });
 ```
 
