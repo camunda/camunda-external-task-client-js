@@ -59,8 +59,18 @@ client.subscribe("topicName", async function({ task, taskService }) {
 
 | Parameter | Description                              | Type             | Required |
 |-----------|------------------------------------------|------------------|----------|
-| task      | task or id of the task to handle failure | object or string | ✓        |
-| options   | options about the failure                | object           |          |
+| task      | task or id of the task to handle failure. | object or string | ✓        |
+| options   | options about the failure.                | object           |          |
+
+
+options include:
+
+| Option       | Description                                                                                                                                                                                                                                      | Type   | Required | Default |
+|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|----------|---------|
+| errorMessage | An message indicating the reason of the failure.                                                                                                                                                                                                 | string |          |         |
+| errorDetails | A detailed error description.                                                                                                                                                                                                                    | string |          |         |
+| retries      | A number of how often the task should be retried. Must be >= 0. If this is 0, an incident is created and the task cannot be fetched anymore unless the retries are increased again. The incident's message is set to the errorMessage parameter. | number |          |         |
+| retryTimeout | A timeout in milliseconds before the external task becomes available again for fetching. Must be >= 0.                                                                                                                                           | number |          |         |
 
 ```js
 // Susbscribe to the topic: 'topicName'
@@ -68,7 +78,12 @@ client.subscribe("topicName", async function({ task, taskService }) {
   // Put your business logic
 
   // Handle a Failure
-  await taskService.handleFailure(task, "some failure message");
+  await taskService.handleFailure(task, {
+    errorMessage: "some failure message",
+    errorDetails: "some details",
+    retries: 1,
+    retryTimeout: 1000
+  });
 });
 ```
 

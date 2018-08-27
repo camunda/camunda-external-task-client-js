@@ -79,7 +79,13 @@ client.subscribe("topicName", async function({ task, taskService }) {
 client.subscribe("topicName", async function({ task, taskService }) {
   // Put your business logic
   // Handle a Failure
-  await taskService.handleFailure(task, "some failure message");
+  await taskService.handleFailure(task, {
+    errorMessage: "some failure message",
+    errorDetails: "some details",
+    retries: 1,
+    retryTimeout: 1000
+  });
+
 });
 ```
 
