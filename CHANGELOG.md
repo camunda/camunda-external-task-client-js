@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0-alpha1
+### Features
+- Make it possible to pass error message and variables when handling a bpmn error.
+
 ## 1.0.0
 ### Features
 - Filter tasks by business key
