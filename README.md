@@ -95,6 +95,10 @@ client.subscribe("topicName", async function({ task, taskService }) {
 // Susbscribe to the topic: 'topicName'
 client.subscribe("topicName", async function({ task, taskService }) {
   // Put your business logic
+
+  // Create some variables
+  const variables = new Variables().set('date', new Date());
+
   // Handle a BPMN Failure
   await taskService.handleBpmnError(task, "BPMNError_Code", "Error message", variables);
 });

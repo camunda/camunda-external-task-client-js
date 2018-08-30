@@ -88,18 +88,23 @@ client.subscribe("topicName", async function({ task, taskService }) {
 ```
 
 ## `taskService.handleBpmnError(task, errorCode)`
-| Parameter | Description                                                                                    | Type             | Required |
-|-----------|------------------------------------------------------------------------------------------------|------------------|----------|
-| task      | task or id of the task to handle bpmn failure                                                  | object or string | ✓        |
-| errorCode | An error code that indicates the predefined error. Is used to identify the BPMN error handler. | string           | ✓        |
+| Parameter    | Description                                                                                    | Type             | Required |
+|--------------|------------------------------------------------------------------------------------------------|------------------|----------|
+| task         | task or id of the task to handle bpmn failure                                                  | object or string | ✓        |
+| errorCode    | An error code that indicates the predefined error. Is used to identify the BPMN error handler. | string           | ✓        |
+| errorMessage | An error message that describes the error.                                                     | string           |          |
+| variables    | Map of variables which will be passed to the execution.                                        |                  |          |
 
 ```js
 // Susbscribe to the topic: 'topicName'
 client.subscribe("topicName", async function({ task, taskService }) {
   // Put your business logic
 
+  // Create some variables
+  const variables = new Variables().set('date', new Date());
+
   // Handle a BPMN Failure
-  await taskService.handleBPMNFailure(task, "some BPMN failure message");
+  await taskService.handleBpmnError(task, "BPMNError_Code", "Error message", variables);
 });
 ```
 
