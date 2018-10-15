@@ -38,11 +38,15 @@ Array [
           "processKey",
           "processKey2",
         ],
+        "tenantIdIn": Array [
+          "tenantId",
+        ],
         "topicName": "foo",
         "variables": Array [
           "fooVariable",
           "barVariable",
         ],
+        "withoutTenantId": true,
       },
     ],
   },

@@ -69,6 +69,8 @@ The currently supported options are:
 | processDefinitionIdIn  | A value which allows to filter tasks based on process definition ids         | string |          |                                                       |
 | processDefinitionKey  | A value which allows to filter tasks based on process definition key         | string |          |                                                       |
 | processDefinitionKeyIn  | A value which allows to filter tasks based on process definition keys         | string |          |                                                       |
+| withoutTenantId  | A value which allows to filter tasks based on tenant ids         | string |          |                                                       |
+| tenantIdIn   | A value which allows to filter tasks without tenant id                              | boolean |         |                                                       |
 
 
 ### About topic subscriptions
