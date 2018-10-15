@@ -28,6 +28,16 @@ Array [
     "topics": Array [
       Object {
         "lockDuration": 3000,
+        "processDefinitionId": "processId",
+        "processDefinitionIdIn": Array [
+          "processId",
+          "processId2",
+        ],
+        "processDefinitionKey": "processKey",
+        "processDefinitionKeyIn": Array [
+          "processKey",
+          "processKey2",
+        ],
         "topicName": "foo",
         "variables": Array [
           "fooVariable",
