@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.0
+## 1.1.1
 ### Features
 - Filter tasks by tenant
 - Filter tasks by process definition
