@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0
+### Features
+- Filter tasks by tenant
+- Filter tasks by process definition
+
 ## 1.1.0-alpha1
 ### Features
 - Make it possible to pass error message and variables when handling a bpmn error.
