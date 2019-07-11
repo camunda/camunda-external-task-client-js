@@ -71,7 +71,7 @@ The currently supported options are:
 | processDefinitionKeyIn  | A value which allows to filter tasks based on process definition keys         | string |          |                                                       |
 | withoutTenantId  | A value which allows to filter tasks based on tenant ids         | string |          |                                                       |
 | tenantIdIn   | A value which allows to filter tasks without tenant id                              | boolean |         |                                                       |
-
+| deserializeValues | If set to true, a serializable variable will be deserialized on server side and transformed to JSON using Jackson's POJO/bean property introspection feature. | boolean |                                                       |     
 
 ### About topic subscriptions
 
