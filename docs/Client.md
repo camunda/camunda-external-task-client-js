@@ -24,6 +24,7 @@ Here"s a list of the available options:
 | baseUrl | Path to the engine api | string | ✓ |  |
 | workerId | The id of the worker on which behalf tasks are fetched. The returned tasks are locked for that worker and can only be completed when providing the same worker id. | string |  | "some-random-id" |
 | maxTasks | The maximum number of tasks to fetch | number |  | 10 |
+| maxParallelExecutions | The maximum number of tasks to be worked on simultaneously | number |  |  |
 | interval | Interval of time to wait before making a new poll. | number |  | 300 |
 | lockDuration | The default duration to lock the external tasks for in milliseconds. | number |  | 50000 |
 | autoPoll | If true, then polling start automatically as soon as a Client instance is created. | boolean |  | true |
@@ -69,6 +70,7 @@ The currently supported options are:
 | processDefinitionIdIn  | A value which allows to filter tasks based on process definition ids         | string |          |                                                       |
 | processDefinitionKey  | A value which allows to filter tasks based on process definition key         | string |          |                                                       |
 | processDefinitionKeyIn  | A value which allows to filter tasks based on process definition keys         | string |          |                                                       |
+| processDefinitionVersionTag  | A value which allows to filter tasks based on process definition Version Tag         | string |          |                                                       |
 | withoutTenantId  | A value which allows to filter tasks based on tenant ids         | string |          |                                                       |
 | tenantIdIn   | A value which allows to filter tasks without tenant id                              | boolean |         |                                                       |
 

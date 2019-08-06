@@ -38,6 +38,7 @@ Array [
           "processKey",
           "processKey2",
         ],
+        "processDefinitionVersionTag": "versionTag",
         "tenantIdIn": Array [
           "tenantId",
         ],
