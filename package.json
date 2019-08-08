@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "pretest": "node_modules/.bin/eslint  lib/ examples/ index.js",
-    "test": "jest lib --verbose --coverage",
+    "test": "jest lib --verbose --coverage && node test/license-check.js",
     "test:watch": "jest lib --watch --verbose --coverage"
   },
   "devDependencies": {
@@ -19,7 +19,8 @@
     "eslint-plugin-prettier": "^2.6.0",
     "form-data": "^2.3.2",
     "jest": "22.4.2",
-    "prettier": "^1.11.1"
+    "prettier": "^1.11.1",
+    "license-checker": "^25.0.1"
   },
   "dependencies": {
     "chalk": "^2.3.2",
