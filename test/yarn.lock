@@ -3672,10 +3672,10 @@ rsvp@^4.8.4:
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-4.8.5.tgz#c8f155311d167f68f21e168df71ec5b083113734"
   integrity sha512-nfMOlASu9OnRJo1mbEk2cz0D56a1MBNrJ7orjRZQG10XDyuvwksKbuXNp6qa+kbn839HwjwhBzhFmdsaEAfauA==
 
-run-camunda@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/run-camunda/-/run-camunda-2.1.0.tgz#c9921c42978632165118fff3b853c214b030659a"
-  integrity sha512-/zyhKovDoeyP7So8xsICNsUwwVKdMszTNf6b3tXUyKQhtirCrLM2kgvLCJYwOv5xNp88a5BfTF8xffKqz7L6wQ==
+run-camunda@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/run-camunda/-/run-camunda-2.3.0.tgz#dd07319cad0d1191e6c5096046983d9af188b4a3"
+  integrity sha512-BHnD6ilrzgYsZJuXYhMcpJXXkbPCH9yYSsPZPNYRm/Xlcf/1wzNMp/Gadlt+GqLm+woM+nll+uW5IcrBHXnR7A==
   dependencies:
     del "^3.0.0"
     download "^7.1.0"
