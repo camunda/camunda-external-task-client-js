@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.0-alpha1
+### Features
+- Filter tasks by version tag
+
 ## 1.2.0
 ### Features
 - Set maximum number of executed tasks using `maxParallelExecutions`
