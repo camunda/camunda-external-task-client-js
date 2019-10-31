@@ -29,6 +29,7 @@ Here"s a list of the available options:
 | lockDuration | The default duration to lock the external tasks for in milliseconds. | number |  | 50000 |
 | autoPoll | If true, then polling start automatically as soon as a Client instance is created. | boolean |  | true |
 | asyncResponseTimeout | The Long Polling timeout in milliseconds. | number |  |  |
+| usePriority | If false, task will be fetched arbitrarily instead of based on its priority. | boolean |  | true |
 | interceptors | Function(s) that will be called before a request is sent. Interceptors receive the configuration of the request and return a new configuration. | function or [function] |  |  |
 | use | Function(s) that have access to the client instance as soon as it is created and before any polling happens.  Check out [logger](/lib/logger.js) for a better understanding of the usage of middlewares. | function or [function] |  |  |
 

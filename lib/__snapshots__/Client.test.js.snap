@@ -50,6 +50,7 @@ Array [
         "withoutTenantId": true,
       },
     ],
+    "usePriority": true,
   },
 ]
 `;
