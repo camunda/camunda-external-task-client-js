@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.0-alpha2
+### Features
+- use priority when fetching Tasks
+
 ## 1.3.0-alpha1
 ### Features
 - Filter tasks by version tag
