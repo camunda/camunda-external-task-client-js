@@ -3,9 +3,9 @@
 ```js
 const { Client } = require("camunda-external-task-handler-js");
 
-const client = new Client({ baseUrl: "http://localhost:8080/engine-rest" });
+const client = new Client({baseUrl: "http://localhost:8080/engine-rest"});
 
-client.subscribe("foo", async function({ task, taskService}) {
+client.subscribe("foo", async function({task, taskService}) {
   // Put your business logic
 });
 ```
@@ -72,8 +72,8 @@ The currently supported options are:
 | processDefinitionKey  | A value which allows to filter tasks based on process definition key         | string |          |                                                       |
 | processDefinitionKeyIn  | A value which allows to filter tasks based on process definition keys         | string |          |                                                       |
 | processDefinitionVersionTag  | A value which allows to filter tasks based on process definition Version Tag         | string |          |                                                       |
-| withoutTenantId  | A value which allows to filter tasks based on tenant ids         | string |          |                                                       |
-| tenantIdIn   | A value which allows to filter tasks without tenant id                              | boolean |         |                                                       |
+| tenantIdIn | A value which allows to filter tasks based on tenant ids         | string |          |                                                       |
+| withoutTenantId | A value which allows to filter tasks without tenant id                              | boolean |         |                                                       |
 
 
 ### About topic subscriptions
@@ -86,13 +86,20 @@ A topic subscription, which is returned by the **subscribe()** method, is a an o
 * **variables:** the selected subset of variables.
 
 ```js
-const { Client } = require("camunda-external-task-client-js");
+const {Client} = require("camunda-external-task-client-js");
 
-const client = new Client({ baseUrl: "http://localhost:8080/engine-rest" });
+const client = new Client({baseUrl: "http://localhost:8080/engine-rest"});
 
-const topicSubscription = client.subscribe("foo", async function({ task, taskService}) {
-  // Put your business logic
-});
+const topicSubscription = client.subscribe(
+  "foo",
+  {
+    // Put your options here
+    processDefinitionVersionTag: "v2"
+  },
+  async function({task, taskService}) {
+    // Put your business logic
+  }
+);
 
 // unsubscribe from a topic
 topicSubscription.unsubscribe();
