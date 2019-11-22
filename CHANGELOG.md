@@ -1,11 +1,8 @@
 # Changelog
 
-## 1.3.0-alpha2
+## 1.3.0
 ### Features
-- use priority when fetching Tasks
-
-## 1.3.0-alpha1
-### Features
+- Use priority when fetching Tasks
 - Filter tasks by version tag
 
 ## 1.2.0
