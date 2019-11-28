@@ -179,6 +179,30 @@ client.subscribe("topicName", async function({ task, taskService }) {
   * [logger.success(text)](https://github.com/camunda/camunda-external-task-client-js/blob/master/docs/logger.md#loggersuccesstext)
   * [logger.error(text)](https://github.com/camunda/camunda-external-task-client-js/blob/master/docs/logger.md#loggererrortext)
 
+## Contributing
+
+You are __more than welcome__ to take part on the development of this project!
+
+### Issues
+
+You can submit issues in the [camunda Jira](https://app.camunda.com/jira/issues/).
+
+### Coding
+
+Clone the repository, add, fix or improve and send us a pull request.
+But please take care about the commit messages, [our conventions can be found
+here](https://github.com/camunda/camunda-bpm-platform/blob/master/CONTRIBUTING.md).
+
+### Coding style guide
+
+In place of a guide, just follow the formatting of existing code (and / or use the [.editorconfig](http://editorconfig.org/) files provided).
+
+## Help and support
+
+* [Documentation](http://docs.camunda.org/latest/)
+* [Forum](https://forum.camunda.org)
+* [Stackoverflow](https://stackoverflow.com/questions/tagged/camunda)
+
 ## License
 
 The source files in this repository are made available under the [Apache License Version 2.0](./LICENSE).
