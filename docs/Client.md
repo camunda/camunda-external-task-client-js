@@ -71,7 +71,8 @@ The currently supported options are:
 | processDefinitionIdIn  | A value which allows to filter tasks based on process definition ids         | string |          |                                                       |
 | processDefinitionKey  | A value which allows to filter tasks based on process definition key         | string |          |                                                       |
 | processDefinitionKeyIn  | A value which allows to filter tasks based on process definition keys         | string |          |                                                       |
-| processDefinitionVersionTag  | A value which allows to filter tasks based on process definition Version Tag         | string |          |                                                       |
+| processDefinitionVersionTag  | A value which allows to filter tasks based on process definition Version Tag         | string |          |
+| processVariables  | A JSON object used for filtering tasks based on process instance variable values. A property name of the object represents a process variable name, while the property value represents the process variable value to filter tasks by.         | object |          |                                                       |
 | tenantIdIn | A value which allows to filter tasks based on tenant ids         | string |          |                                                       |
 | withoutTenantId | A value which allows to filter tasks without tenant id                              | boolean |         |                                                       |
 
