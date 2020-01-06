@@ -19,8 +19,8 @@
     "eslint-plugin-prettier": "^2.6.0",
     "form-data": "^2.3.2",
     "jest": "22.4.2",
-    "prettier": "^1.11.1",
-    "license-checker": "^25.0.1"
+    "license-checker": "^25.0.1",
+    "prettier": "^1.11.1"
   },
   "dependencies": {
     "chalk": "^2.3.2",
