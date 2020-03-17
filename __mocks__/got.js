@@ -15,17 +15,24 @@
  * limitations under the License.
  */
 
-const handleRequest = (url, { errorType, error }) => {
-  switch (errorType) {
-    case "FAIL_WITHOUT_RESPONSE":
-    case "FAIL_WITH_RESPONSE":
-      return Promise.reject(error);
-    default:
-      return Promise.resolve({ body: [] });
+const got = jest.requireActual('got');
+
+const handleRequest = (url, { testResult }) => {
+  return {
+    json: () => {
+      if (testResult instanceof Error) {
+        return Promise.reject(testResult);
+      }
+
+      return Promise.resolve(testResult);
+    }
   }
 };
 
-const got = handleRequest;
-got.post = got.get = handleRequest;
+const gotMock = handleRequest;
+gotMock.json = () => {};
 
-module.exports = jest.fn().mockImplementation(got);
+const myModule = module.exports = jest.fn().mockImplementation(gotMock);
+myModule.GotError = got.GotError;
+myModule.HTTPError = got.HTTPError;
+myModule.RequestError = got.RequestError;
