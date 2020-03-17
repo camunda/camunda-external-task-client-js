@@ -175,6 +175,8 @@ client.subscribe("topicName", async function({ task, taskService }) {
   * [File Properties](https://github.com/camunda/camunda-external-task-client-js/blob/master/docs/File.md#file-properties)
 * [BasicAuthInterceptor](https://github.com/camunda/camunda-external-task-client-js/blob/master/docs/BasicAuthInterceptor.md)
   * [new BasicAuthInterceptor(options)](https://github.com/camunda/camunda-external-task-client-js/blob/master/docs/BasicAuthInterceptor.md#new-basicauthinterceptoroptions)
+* [KeycloakAuthInterceptor](https://github.com/camunda/camunda-external-task-client-js/blob/master/docs/KeycloakAuthInterceptor.md)
+  * [new KeycloakAuthInterceptor(options)](https://github.com/camunda/camunda-external-task-client-js/blob/master/docs/KeycloakAuthInterceptor.md#new-keycloakauthinterceptoroptions)
 * [logger](https://github.com/camunda/camunda-external-task-client-js/blob/master/docs/logger.md)
   * [logger.success(text)](https://github.com/camunda/camunda-external-task-client-js/blob/master/docs/logger.md#loggersuccesstext)
   * [logger.error(text)](https://github.com/camunda/camunda-external-task-client-js/blob/master/docs/logger.md#loggererrortext)

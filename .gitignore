@@ -3,5 +3,5 @@ tmp/
 docs/api/
 dist/
 .idea
-*.imls
+*.iml
 coverage/
