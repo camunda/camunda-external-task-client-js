@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "form-data": "^2.3.2",
-    "got": "7.0.0",
+    "got": "10.6.0",
     "jest": "24.8.0",
     "run-camunda": "2.1.0"
   }
