@@ -18,7 +18,7 @@
     "eslint-plugin-jest": "^21.12.2",
     "eslint-plugin-prettier": "^2.6.0",
     "form-data": "^2.3.2",
-    "jest": "22.4.2",
+    "jest": "25.1.0",
     "license-checker": "^25.0.1",
     "prettier": "^1.11.1"
   },
