@@ -75,6 +75,8 @@ The currently supported options are:
 | processVariables  | A JSON object used for filtering tasks based on process instance variable values. A property name of the object represents a process variable name, while the property value represents the process variable value to filter tasks by.         | object |          |                                                       |
 | tenantIdIn | A value which allows to filter tasks based on tenant ids         | string |          |                                                       |
 | withoutTenantId | A value which allows to filter tasks without tenant id                              | boolean |         |                                                       |
+| localVariables | A value which allow to fetch only local variables     | boolean |          |                                                       |
+
 
 
 ### About topic subscriptions
