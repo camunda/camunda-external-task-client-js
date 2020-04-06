@@ -27,6 +27,7 @@ Array [
     "maxTasks": 3,
     "topics": Array [
       Object {
+        "localVariables": true,
         "lockDuration": 3000,
         "processDefinitionId": "processId",
         "processDefinitionIdIn": Array [
