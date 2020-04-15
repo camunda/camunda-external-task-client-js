@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.1
+### Features
+- support localVariables when fetching Tasks
+
 ## 1.3.0
 ### Features
 - Use priority when fetching Tasks
