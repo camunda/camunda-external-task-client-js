@@ -6,7 +6,7 @@
 Implement your [BPMN Service Task](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) in
 NodeJS.
 
-> NodeJS >= v8.9.4 is required
+> NodeJS >= v10 is required
 
 ## Installing
 
