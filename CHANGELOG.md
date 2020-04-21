@@ -4,6 +4,10 @@
 ### Features
 - support localVariables when fetching Tasks
 
+### Changes to the logging behavior
+- Not every Action will be logged by default. For example, polling will no longer be logged if it is successful. 
+You can define the log level as described in the [docs](https://github.com/camunda/camunda-external-task-client-js/blob/master/docs/logger.md#loggerlevelloglevel). To emulate >=1.3.0 bahaviour, use `logger.level('debug')`
+
 ## 1.3.0
 ### Features
 - Use priority when fetching Tasks
