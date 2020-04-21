@@ -25,7 +25,8 @@ const ALLOWED_LICENSES = [
   'BSD-2-Clause',
   'BSD-3-Clause',
   'Apache-2.0',
-  'Apache-2.0 WITH LLVM-exception'
+  'Apache-2.0 WITH LLVM-exception',
+  '(MIT OR CC0-1.0)'
 ];
 
 console.log(
