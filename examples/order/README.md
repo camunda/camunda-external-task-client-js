@@ -1,5 +1,5 @@
 # Example
-> NodeJS >= v8.9.4 is required
+> NodeJS >= v10 is required
 
 <img alt="A Workflow for Handling Orders" src="assets/order.svg" />
 
