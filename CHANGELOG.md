@@ -1,10 +1,10 @@
 # Changelog
 
 ## 2.0.0
-## Features
+### Features
 - Support for Keycloak auth secured rest API
 
-## Deprecations
+### Deprecations
 - Removed support for Node v8 and v9. Please use node version 10 or higher.
 
 ## 1.3.1
