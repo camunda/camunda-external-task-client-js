@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.0
+## Features
+- Support for Keycloak auth secured rest API
+
+## Deprecations
+- Removed support for Node v8 and v9. Please use node version 10 or higher.
+
 ## 1.3.1
 ### Features
 - support localVariables when fetching Tasks
