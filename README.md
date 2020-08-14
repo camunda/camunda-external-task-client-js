@@ -183,7 +183,7 @@ client.subscribe("topicName", async function({ task, taskService }) {
 
 ## Contributing
 
-You are __more than welcome__ to take part on the development of this project!
+Have a look at our [contribution guide](https://github.com/camunda/camunda-bpm-platform/blob/master/CONTRIBUTING.md) for how to contribute to this repository.
 
 ### Issues
 
