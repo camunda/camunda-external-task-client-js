@@ -23,7 +23,7 @@
     "prettier": "^1.11.1"
   },
   "dependencies": {
-    "chalk": "^2.3.2",
+    "chalk": "^4.1.0",
     "got": "^10.6.0"
   },
   "description": "Implement your [BPMN Service Task](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) in NodeJS.",
