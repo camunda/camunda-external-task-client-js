@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.0
+### Features
+- Allow manual locking of a Task
+
 ## 2.0.0
 ### Features
 - Support for Keycloak auth secured rest API
