@@ -133,3 +133,5 @@ Stops polling.
 * `client.on("extendLock:error", function(task, error) {})`
 * `client.on("unlock:success", function(task) {})`
 * `client.on("unlock:error", function(task, error) {})`
+* `client.on("lock:success", function(task) {})`
+* `client.on("lock:error", function(task, error) {})`

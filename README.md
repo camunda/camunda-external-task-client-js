@@ -127,6 +127,18 @@ client.subscribe("topicName", async function({ task, taskService }) {
 });
 ```
 
+### [Lock](https://docs.camunda.org/manual/latest/reference/rest/external-task/post-lock/)
+```js
+// Susbscribe to the topic: 'topicName'
+client.subscribe("topicName", async function({ task, taskService }) {
+  // Task is locked by default
+  // Put your business logic, unlock the task or let the lock expire
+
+  // Lock a task again
+  await taskService.lock(task, 5000);
+});
+```
+
 ### Exchange Process & Local Task Variables
 
 ```js

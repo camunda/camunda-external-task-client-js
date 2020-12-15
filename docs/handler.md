@@ -145,3 +145,26 @@ client.subscribe("topicName", async function({ task, taskService }) {
   await taskService.unlock(task);
 });
 ```
+
+## `taskService.lock(task, newDuration)`
+
+| Parameter   | Description                                                                                      | Type             | Required |
+|-------------|--------------------------------------------------------------------------------------------------|------------------|----------|
+| task        | task or id of the task to extend lock duration                                                   | object or string | ✓        |
+| duration    | An amount of time (in milliseconds). This is the lock duration starting from the current moment. | number           | ✓        |
+
+```js
+// Susbscribe to the topic: 'topicName'
+client.subscribe("topicName", async function({ task, taskService }) {
+  // Task is locked by default
+  // Put your business logic, unlock the task or let the lock expire
+
+  // Lock a task again
+  try {
+    await taskService.lock(task, 5000);
+    console.log("I locked the task successfully!");
+  } catch (e) {
+    console.error(`Failed to lock the task, ${e}`);
+  }
+});
+```

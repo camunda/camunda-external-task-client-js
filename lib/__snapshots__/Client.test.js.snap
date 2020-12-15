@@ -11,6 +11,7 @@ Array [
       "get": [Function],
       "handleFailure": [Function],
       "interceptors": undefined,
+      "lock": [Function],
       "post": [Function],
       "request": [Function],
       "workerId": "foobarId",
