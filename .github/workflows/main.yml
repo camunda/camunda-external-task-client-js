@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Bump versions
-        uses: camunda/bump-versions-action@v1.2
+        uses: camunda/bump-versions-action@v1.3
         with:
           path: "/examples"
           oldVersion: ${{ github.event.inputs.oldVersion }}
