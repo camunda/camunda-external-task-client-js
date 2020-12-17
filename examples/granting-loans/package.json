@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "example.js",
   "author": "Camunda Services GmbH",
-  "license": "Apache License 2.0",
+  "license": "Apache License 2.1",
   "dependencies": {
-    "camunda-external-task-client-js": "2.0.0"
+    "camunda-external-task-client-js": "2.1.0"
   }
 }
