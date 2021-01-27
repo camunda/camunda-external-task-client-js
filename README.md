@@ -24,7 +24,7 @@ yarn add camunda-external-task-client-js
 
 1.  Make sure to have [Camunda](https://camunda.com/download/) running.
 2.  Create a simple process model with an External Service Task and define the topic as 'topicName'.
-3.  Deploy the process to the Camunda BPM engine.
+3.  Deploy the process to the Camunda Platform engine.
 4.  In your NodeJS script:
 
 ```js
