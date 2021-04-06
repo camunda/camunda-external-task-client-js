@@ -1,7 +1,7 @@
 # Example
 > NodeJS >= v10 is required
 
-<img alt="A Workflow for Handling Orders" src="assets/order.svg" />
+<img alt="A Process for Handling Orders" src="assets/order.svg" />
 
 ## Running the example
 

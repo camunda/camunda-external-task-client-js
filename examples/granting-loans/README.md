@@ -1,7 +1,7 @@
 # Example
 > NodeJS >= v10 is required
 
-<img alt="A Workflow for Granting Loans" src="assets/loan-process.svg" />
+<img alt="A Process for Granting Loans" src="assets/loan-process.svg" />
 
 ## Running the example
 
