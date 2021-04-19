@@ -18,14 +18,14 @@
 const got = jest.requireActual('got');
 
 const handleRequest = (url, { testResult }) => {
+  if (testResult instanceof Error) {
+     return Promise.reject(testResult);
+  }
   return {
-    json: () => {
-      if (testResult instanceof Error) {
-        return Promise.reject(testResult);
-      }
-
-      return Promise.resolve(testResult);
-    }
+    body: testResult instanceof Object ? JSON.stringify(testResult) : testResult,
+    headers : { "content-type": testResult instanceof Object
+      ? "application/json" : "application/octet-stream"},
+    headers: {}
   }
 };
 
