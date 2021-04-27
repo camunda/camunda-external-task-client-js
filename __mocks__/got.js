@@ -22,7 +22,7 @@ const handleRequest = (url, { testResult }) => {
      return Promise.reject(testResult);
   }
   return {
-    body: testResult instanceof Object ? JSON.stringify(testResult) : testResult,
+    body: testResult instanceof Object ? JSON.stringify(testResult) : Buffer.from(testResult || "", "utf-8"),
     headers : { "content-type": testResult instanceof Object
       ? "application/json" : "application/octet-stream"},
     headers: {}
