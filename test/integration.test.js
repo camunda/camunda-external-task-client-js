@@ -15,10 +15,11 @@
  * limitations under the License.
  */
 
-const { Client, logger, Variables } = require("../index");
+const fs = require("fs");
+const { Client, logger, Variables, File } = require("../index");
 
 describe("integration", () => {
-  let client, expectedScore, expectedUser;
+  let client, expectedScore, expectedUser, expectedTextFile, expectedBinaryFile;
 
   beforeAll(() => {
     const config = {
@@ -28,6 +29,8 @@ describe("integration", () => {
 
     expectedScore = 6;
     expectedUser = { name: "Jean Pierre", balance: "$2000" };
+    expectedTextFile = fs.readFileSync("./test-file.txt").toString("utf-8");
+    expectedBinaryFile = fs.readFileSync("./test-file.png");
     // create a Client instance with custom configuration
     client = new Client(config);
   });
@@ -40,9 +43,21 @@ describe("integration", () => {
         taskService
       }) {
         try {
+          const textAttachment = await new File({
+             localPath: "./test-file.txt",
+             encoding: "utf-8",
+             mimetype: "text/plain",
+          }).load();
+          const binaryAttachment = await new File({
+             localPath: "./test-file.png",
+             encoding: "utf-8",
+             mimetype: "image/png",
+          }).load();
           const processVariables = new Variables()
             .set("score", expectedScore)
-            .set("user", expectedUser);
+            .set("user", expectedUser)
+            .set("textAttachment", textAttachment)
+            .set("binaryAttachment", binaryAttachment);
           await taskService.complete(task, processVariables);
           resolve();
         } catch (e) {
@@ -57,9 +72,11 @@ describe("integration", () => {
     return new Promise((resolve, reject) => {
       client.subscribe("loanGranter", async function({ task, taskService }) {
         try {
-          const { score, user } = task.variables.getAll();
+          const { score, user, textAttachment, binaryAttachment } = task.variables.getAll();
           expect(score).toBe(expectedScore);
           expect(user).toEqual(expectedUser);
+          expect((await textAttachment.load()).content.toString("utf-8")).toEqual(expectedTextFile);
+          expect((await binaryAttachment.load()).content).toEqual(expectedBinaryFile);
           await taskService.handleFailure(task, {
             errorMessage: "something failed"
           });
