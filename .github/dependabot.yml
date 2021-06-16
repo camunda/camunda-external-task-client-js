@@ -1,0 +1,30 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    timezone: Europe/Berlin
+  ignore:
+  - dependency-name: chalk
+    versions:
+    - 4.1.0
+- package-ecosystem: npm
+  directory: "/test"
+  schedule:
+    interval: daily
+    timezone: Europe/Berlin
+  ignore:
+  - dependency-name: y18n
+    versions:
+    - 4.0.1
+    - 4.0.2
+  - dependency-name: run-camunda
+    versions:
+    - 5.0.0
+  - dependency-name: got
+    versions:
+    - 11.8.1
+  - dependency-name: form-data
+    versions:
+    - 3.0.0
