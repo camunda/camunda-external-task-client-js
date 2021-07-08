@@ -1,33 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`logger events should log complete:error 1`] = `"[31m✖[39m [31mcouldn't complete task some task id, some error[39m"`;
+exports[`logger events should log complete:error 1`] = `"✖ couldn't complete task some task id, some error"`;
 
-exports[`logger events should log complete:success 1`] = `"[32m✓[39m [32mcompleted task some task id[39m"`;
+exports[`logger events should log complete:success 1`] = `"✓ completed task some task id"`;
 
-exports[`logger events should log extendLock:error 1`] = `"[31m✖[39m [31mcouldn't handle extend lock of task some task id, some error[39m"`;
+exports[`logger events should log extendLock:error 1`] = `"✖ couldn't handle extend lock of task some task id, some error"`;
 
-exports[`logger events should log extendLock:success 1`] = `"[32m✓[39m [32mhandled extend lock of task some task id[39m"`;
+exports[`logger events should log extendLock:success 1`] = `"✓ handled extend lock of task some task id"`;
 
-exports[`logger events should log handleBpmnError:error 1`] = `"[31m✖[39m [31mcouldn't handle BPMN error of task some task id, some error[39m"`;
+exports[`logger events should log handleBpmnError:error 1`] = `"✖ couldn't handle BPMN error of task some task id, some error"`;
 
-exports[`logger events should log handleBpmnError:success 1`] = `"[32m✓[39m [32mhandled BPMN error of task some task id[39m"`;
+exports[`logger events should log handleBpmnError:success 1`] = `"✓ handled BPMN error of task some task id"`;
 
-exports[`logger events should log handleFailure:error 1`] = `"[31m✖[39m [31mcouldn't handle failure of task some task id, some error[39m"`;
+exports[`logger events should log handleFailure:error 1`] = `"✖ couldn't handle failure of task some task id, some error"`;
 
-exports[`logger events should log handleFailure:success 1`] = `"[32m✓[39m [32mhandled failure of task some task id[39m"`;
+exports[`logger events should log handleFailure:success 1`] = `"✓ handled failure of task some task id"`;
 
-exports[`logger events should log poll:error event 1`] = `"[31m✖[39m [31mpolling failed with undefined[39m"`;
+exports[`logger events should log poll:error event 1`] = `"✖ polling failed with undefined"`;
 
 exports[`logger events should log poll:start event 1`] = `"polling"`;
 
-exports[`logger events should log poll:stop event 1`] = `"[31m✖[39m [31mpolling stopped[39m"`;
+exports[`logger events should log poll:stop event 1`] = `"✖ polling stopped"`;
 
-exports[`logger events should log poll:success event 1`] = `"[32m✓[39m [32mpolled 2 tasks[39m"`;
+exports[`logger events should log poll:success event 1`] = `"✓ polled 2 tasks"`;
 
-exports[`logger events should log subscribe event 1`] = `"[32m✓[39m [32msubscribed to topic some topic[39m"`;
+exports[`logger events should log subscribe event 1`] = `"✓ subscribed to topic some topic"`;
 
-exports[`logger events should log unlock:error 1`] = `"[31m✖[39m [31mcouldn't unlock task some task id, some error[39m"`;
+exports[`logger events should log unlock:error 1`] = `"✖ couldn't unlock task some task id, some error"`;
 
-exports[`logger events should log unlock:success 1`] = `"[32m✓[39m [32munlocked task some task id[39m"`;
+exports[`logger events should log unlock:success 1`] = `"✓ unlocked task some task id"`;
 
-exports[`logger events should log unsubscribe event 1`] = `"[32m✓[39m [32munsubscribed from topic some topic[39m"`;
+exports[`logger events should log unsubscribe event 1`] = `"✓ unsubscribed from topic some topic"`;
