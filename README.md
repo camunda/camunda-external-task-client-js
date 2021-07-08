@@ -1,7 +1,7 @@
 # camunda-external-task-client
 
 [![npm version](https://badge.fury.io/js/camunda-external-task-client-js.svg)](https://badge.fury.io/js/camunda-external-task-client-js)
-[![Build Status](https://travis-ci.org/camunda/camunda-external-task-client-js.svg?branch=master)](https://travis-ci.org/camunda/camunda-external-task-client-js)
+![CI](https://github.com/camunda/camunda-external-task-client-js/actions/workflows/CI.yml/badge.svg)
 
 Implement your [BPMN Service Task](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) in
 NodeJS.

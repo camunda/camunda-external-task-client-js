@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "pretest": "node_modules/.bin/eslint  lib/ examples/ index.js",
-    "test": "jest lib --verbose --coverage && node test/license-check.js",
+    "test": "jest lib --verbose --coverage --no-color && node test/license-check.js",
     "test:watch": "jest lib --watch --verbose --coverage"
   },
   "devDependencies": {
