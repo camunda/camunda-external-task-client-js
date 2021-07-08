@@ -28,7 +28,10 @@ jobs:
             ${{ runner.OS }}-
       - name: Install dependencies
         run: npm ci
-        working-directory: ${{ matrix.test-dir }}
+      - name: Install test dependencies
+        if: matrix.test-dir == './test'
+        run: npm ci
+        working-directory: ./test
       - name: Build
         run: npm run test
         working-directory: ${{ matrix.test-dir }}
