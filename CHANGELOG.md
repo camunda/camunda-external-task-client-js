@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.1.1
+### Bug Fixes
+- Fix loading file variables ([#208](https://github.com/camunda/camunda-external-task-client-js/pull/208))
+
+### Dependency Updates
+- Bump lodash to version 4.17.21
+- Bump ws to 5.2.3
+- Bump normalize-url to 4.5.1
+- Bump y18n to 3.2.2
+
 ## 2.1.0
 ### Features
 - Allow manual locking of a Task
