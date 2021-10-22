@@ -130,6 +130,27 @@ Output:
 }
 ```
 
+## `variables.setTransient(variableName, value)`
+
+Sets a value for the variable with key _variableName_, also sets transient flag true to variable.
+
+> **Note:** The variable type is determined automatically.
+
+```js
+variables.setTransient("fullName", { first: "John", last: "Doe" });
+console.log(variables.getTyped("fullName"));
+```
+
+Output:
+
+```js
+{
+      value: { first: "John", last: "Doe" },
+      type:  "json",
+      valueInfo: {transient: true}
+}
+```
+
 ## `variables.setTyped(variableName, typedValue)`
 
 Sets a typed value for the variable with key _variableName_

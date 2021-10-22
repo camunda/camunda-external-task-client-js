@@ -115,6 +115,7 @@ Array [
   "getDirtyVariables",
   "setTyped",
   "set",
+  "setTransient",
   "setAll",
   "setAllTyped",
 ]
@@ -150,6 +151,34 @@ Object {
     "type": "string",
     "value": "fooValue",
     "valueInfo": Object {},
+  },
+}
+`;
+
+exports[`Variables setters setTransient("fooTransient", "fooValueTransient")) should set variable with key "fooTransient" and value "fooValueTransient" and transient "true": dirty variables 1`] = `Object {}`;
+
+exports[`Variables setters setTransient("fooTransient", "fooValueTransient")) should set variable with key "fooTransient" and value "fooValueTransient" and transient "true": dirty variables 2`] = `
+Object {
+  "fooTransient": Object {
+    "type": "string",
+    "value": "fooValueTransient",
+    "valueInfo": Object {
+      "transient": true,
+    },
+  },
+}
+`;
+
+exports[`Variables setters setTransient("fooTransient", "fooValueTransient")) should set variable with key "fooTransient" and value "fooValueTransient" and transient "true": variables 1`] = `Object {}`;
+
+exports[`Variables setters setTransient("fooTransient", "fooValueTransient")) should set variable with key "fooTransient" and value "fooValueTransient" and transient "true": variables 2`] = `
+Object {
+  "fooTransient": Object {
+    "type": "string",
+    "value": "fooValueTransient",
+    "valueInfo": Object {
+      "transient": true,
+    },
   },
 }
 `;
