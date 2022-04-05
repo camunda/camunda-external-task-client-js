@@ -1,5 +1,5 @@
 {
-  "version": "2.2.0",
+  "version": "2.2.1-SNAPSHOT",
   "name": "camunda-external-task-client-js",
   "main": "index.js",
   "repository": "https://github.com/camunda/camunda-external-task-client-js.git",
