@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.0
+### Features
+- Support setting transient variables via API ([#244](https://github.com/camunda/camunda-external-task-client-js/pull/244))
+
 ## 2.1.1
 ### Bug Fixes
 - Fix loading file variables ([#208](https://github.com/camunda/camunda-external-task-client-js/pull/208))
