@@ -1,6 +1,6 @@
 # Variables
 ```js
-const { Variables } = require("camunda-external-task-handler-js");
+const { Variables } = require("camunda-external-task-client-js");
 
 // ... somewhere in the handler function
 const variables = new Variables().setAll({ foo: "some foo value" });
