@@ -135,3 +135,17 @@ Stops polling.
 * `client.on("unlock:error", function(task, error) {})`
 * `client.on("lock:success", function(task) {})`
 * `client.on("lock:error", function(task, error) {})`
+
+### Error
+
+The error object exposes the response body of the REST API request and has the following properties:
+
+| Property       | Description                                                                                                                        | Type   |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------|--------|
+| message        | A summary of the error, e.g., `Response code 400 (Bad Request); Error: my engine error; Type: ProcessEngineException; Code: 33333` | string |
+| httpStatusCode | The HTTP status code returned by the REST API, e.g., `400`                                                                         | number |
+| engineMsg      | The engine error message, e.g., `my engine error`                                                                                  | string |
+| type           | The class name of the exception, e.g., `ProcessEngineException`                                                                    | string |
+| code           | A numeric exception error code, e.g., `33333`.                                                                                     | number |
+
+You can find more information about the exception error code feature in the [Camunda Platform 7 Documentation](https://docs.camunda.org/manual/latest/user-guide/process-engine/error-handling/#exception-codes).
