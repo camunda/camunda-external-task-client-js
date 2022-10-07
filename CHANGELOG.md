@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.0
+### Features
+- Expose exception error code ([#257](https://github.com/camunda/camunda-external-task-client-js/pull/257))
+
 ## 2.2.0
 ### Features
 - Support setting transient variables via API ([#244](https://github.com/camunda/camunda-external-task-client-js/pull/244))
