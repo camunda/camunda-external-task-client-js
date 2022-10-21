@@ -76,7 +76,7 @@ The currently supported options are:
 | tenantIdIn | A value which allows to filter tasks based on tenant ids         | string |          |                                                       |
 | withoutTenantId | A value which allows to filter tasks without tenant id                              | boolean |         |                                                       |
 | localVariables | A value which allow to fetch only local variables     | boolean |          |                                                       |
-
+| includeExtensionProperties  | A value which allow to fetch `extensionProperties`     | boolean |          |                                                       |
 
 
 ### About topic subscriptions
