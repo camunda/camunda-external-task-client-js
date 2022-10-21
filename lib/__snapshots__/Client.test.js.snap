@@ -28,6 +28,7 @@ Array [
     "maxTasks": 3,
     "topics": Array [
       Object {
+        "includeExtensionProperties": true,
         "localVariables": true,
         "lockDuration": 3000,
         "processDefinitionId": "processId",
