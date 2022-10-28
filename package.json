@@ -20,7 +20,6 @@
     "form-data": "^4.0.0",
     "jest": "^27.5.1",
     "license-checker": "^25.0.1",
-    "minimist": "^1.2.7",
     "prettier": "^2.7.1"
   },
   "dependencies": {
