@@ -41,7 +41,7 @@ const startProcess = async definitionKey => {
   try {
     await got.post(
       `http://localhost:8080/engine-rest/process-definition/key/${definitionKey}/start`,
-      { body: {}, json: true }
+      { json: {} }
     );
   } catch (e) {
     throw e.response ? e.response.body : e;

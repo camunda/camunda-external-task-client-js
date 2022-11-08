@@ -9,9 +9,9 @@
     "posttest": "node scripts/clearSetup"
   },
   "devDependencies": {
-    "form-data": "^2.3.2",
-    "got": "7.0.0",
-    "jest": "24.8.0",
-    "run-camunda": "2.1.0"
+    "form-data": "^4.0.0",
+    "got": "^11.8.5",
+    "jest": "^27.5.1",
+    "run-camunda": "^7.0.0"
   }
 }

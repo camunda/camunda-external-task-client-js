@@ -35,6 +35,10 @@ describe("integration", () => {
     client = new Client(config);
   });
 
+  afterAll(() => {
+    client.stop();
+  });
+
   test("should subscribe client and complete with process variables", () => {
     // susbscribe to the topic: 'creditScoreChecker'
     return new Promise((resolve, reject) => {
