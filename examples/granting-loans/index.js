@@ -18,7 +18,7 @@
 const {
   Client,
   logger,
-  Variables
+  Variables,
 } = require("camunda-external-task-client-js");
 
 // configuration for the Client:
@@ -26,7 +26,7 @@ const {
 //  - 'logger': utility to automatically log important events
 const config = {
   baseUrl: "http://localhost:8080/engine-rest",
-  use: logger
+  use: logger,
 };
 
 // create a Client instance with custom configuration
