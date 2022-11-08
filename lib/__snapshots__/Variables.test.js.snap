@@ -3,9 +3,9 @@
 exports[`Variables getters get('foo') should return value of key foo 1`] = `"FooValue"`;
 
 exports[`Variables getters getAll() should return values of all variables 1`] = `
-Object {
+{
   "bar": 2,
-  "baz": Object {
+  "baz": {
     "name": "baz",
   },
   "blax": File {
@@ -32,20 +32,20 @@ Object {
 `;
 
 exports[`Variables getters getAllTyped() should return all variables 1`] = `
-Object {
-  "bar": Object {
+{
+  "bar": {
     "type": "integer",
     "value": 2,
-    "valueInfo": Object {},
+    "valueInfo": {},
   },
-  "baz": Object {
+  "baz": {
     "type": "json",
-    "value": Object {
+    "value": {
       "name": "baz",
     },
-    "valueInfo": Object {},
+    "valueInfo": {},
   },
-  "blax": Object {
+  "blax": {
     "type": "file",
     "value": File {
       "__readFile": [Function],
@@ -56,21 +56,21 @@ Object {
       "load": [Function],
       "remotePath": "/execution/undefined/localVariables/blax/data",
     },
-    "valueInfo": Object {
+    "valueInfo": {
       "filename": "path",
     },
   },
-  "foo": Object {
+  "foo": {
     "type": "string",
     "value": "FooValue",
-    "valueInfo": Object {},
+    "valueInfo": {},
   },
-  "qux": Object {
+  "qux": {
     "type": "date",
     "value": 2018-01-23T12:42:45.435Z,
-    "valueInfo": Object {},
+    "valueInfo": {},
   },
-  "zex": Object {
+  "zex": {
     "type": "file",
     "value": File {
       "__readFile": [Function],
@@ -81,17 +81,17 @@ Object {
       "load": [Function],
       "remotePath": "/execution/undefined/localVariables/zex/data",
     },
-    "valueInfo": Object {},
+    "valueInfo": {},
   },
 }
 `;
 
 exports[`Variables getters getDirtyVariables() should return all dirty variables 1`] = `
-Object {
-  "blax": Object {
+{
+  "blax": {
     "type": "file",
     "value": "c29tZSBjb250ZW50",
-    "valueInfo": Object {
+    "valueInfo": {
       "filename": "path",
     },
   },
@@ -99,15 +99,15 @@ Object {
 `;
 
 exports[`Variables getters getTyped('foo') should return the typed value of key foo 1`] = `
-Object {
+{
   "type": "string",
   "value": "FooValue",
-  "valueInfo": Object {},
+  "valueInfo": {},
 }
 `;
 
 exports[`Variables read-only should have getters and setters if readOnly is not true 1`] = `
-Array [
+[
   "getTyped",
   "get",
   "getAll",
@@ -122,7 +122,7 @@ Array [
 `;
 
 exports[`Variables read-only should only have getters if readOnly is true 1`] = `
-Array [
+[
   "getTyped",
   "get",
   "getAll",
@@ -131,148 +131,148 @@ Array [
 ]
 `;
 
-exports[`Variables setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": dirty variables 1`] = `Object {}`;
+exports[`Variables setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": dirty variables 1`] = `{}`;
 
 exports[`Variables setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": dirty variables 2`] = `
-Object {
-  "foo": Object {
+{
+  "foo": {
     "type": "string",
     "value": "fooValue",
-    "valueInfo": Object {},
+    "valueInfo": {},
   },
 }
 `;
 
-exports[`Variables setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": variables 1`] = `Object {}`;
+exports[`Variables setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": variables 1`] = `{}`;
 
 exports[`Variables setters set("foo", "fooValue")) should set variable with key "foo" and value "fooValue": variables 2`] = `
-Object {
-  "foo": Object {
+{
+  "foo": {
     "type": "string",
     "value": "fooValue",
-    "valueInfo": Object {},
+    "valueInfo": {},
   },
 }
 `;
 
-exports[`Variables setters setTransient("fooTransient", "fooValueTransient")) should set variable with key "fooTransient" and value "fooValueTransient" and transient "true": dirty variables 1`] = `Object {}`;
-
-exports[`Variables setters setTransient("fooTransient", "fooValueTransient")) should set variable with key "fooTransient" and value "fooValueTransient" and transient "true": dirty variables 2`] = `
-Object {
-  "fooTransient": Object {
-    "type": "string",
-    "value": "fooValueTransient",
-    "valueInfo": Object {
-      "transient": true,
-    },
-  },
-}
-`;
-
-exports[`Variables setters setTransient("fooTransient", "fooValueTransient")) should set variable with key "fooTransient" and value "fooValueTransient" and transient "true": variables 1`] = `Object {}`;
-
-exports[`Variables setters setTransient("fooTransient", "fooValueTransient")) should set variable with key "fooTransient" and value "fooValueTransient" and transient "true": variables 2`] = `
-Object {
-  "fooTransient": Object {
-    "type": "string",
-    "value": "fooValueTransient",
-    "valueInfo": Object {
-      "transient": true,
-    },
-  },
-}
-`;
-
-exports[`Variables setters setAll(someValues)  should add someValues to variables: dirty variables 1`] = `Object {}`;
+exports[`Variables setters setAll(someValues)  should add someValues to variables: dirty variables 1`] = `{}`;
 
 exports[`Variables setters setAll(someValues)  should add someValues to variables: dirty variables 2`] = `
-Object {
-  "bar": Object {
+{
+  "bar": {
     "type": "integer",
     "value": 2,
-    "valueInfo": Object {},
+    "valueInfo": {},
   },
-  "foo": Object {
+  "foo": {
     "type": "string",
     "value": "FooValue",
-    "valueInfo": Object {},
+    "valueInfo": {},
   },
 }
 `;
 
-exports[`Variables setters setAll(someValues)  should add someValues to variables: variables 1`] = `Object {}`;
+exports[`Variables setters setAll(someValues)  should add someValues to variables: variables 1`] = `{}`;
 
 exports[`Variables setters setAll(someValues)  should add someValues to variables: variables 2`] = `
-Object {
-  "bar": Object {
+{
+  "bar": {
     "type": "integer",
     "value": 2,
-    "valueInfo": Object {},
+    "valueInfo": {},
   },
-  "foo": Object {
+  "foo": {
     "type": "string",
     "value": "FooValue",
-    "valueInfo": Object {},
+    "valueInfo": {},
   },
 }
 `;
 
-exports[`Variables setters setAllTyped(someTypedValues) should add someTypedValues to variables: dirty variables 1`] = `Object {}`;
+exports[`Variables setters setAllTyped(someTypedValues) should add someTypedValues to variables: dirty variables 1`] = `{}`;
 
 exports[`Variables setters setAllTyped(someTypedValues) should add someTypedValues to variables: dirty variables 2`] = `
-Object {
-  "bar": Object {
+{
+  "bar": {
     "type": "string",
     "value": "barValue",
-    "valueInfo": Object {},
+    "valueInfo": {},
   },
-  "foo": Object {
+  "foo": {
     "type": "string",
     "value": "fooValue",
-    "valueInfo": Object {},
+    "valueInfo": {},
   },
 }
 `;
 
-exports[`Variables setters setAllTyped(someTypedValues) should add someTypedValues to variables: variables 1`] = `Object {}`;
+exports[`Variables setters setAllTyped(someTypedValues) should add someTypedValues to variables: variables 1`] = `{}`;
 
 exports[`Variables setters setAllTyped(someTypedValues) should add someTypedValues to variables: variables 2`] = `
-Object {
-  "bar": Object {
+{
+  "bar": {
     "type": "string",
     "value": "barValue",
-    "valueInfo": Object {},
+    "valueInfo": {},
   },
-  "foo": Object {
+  "foo": {
     "type": "string",
     "value": "fooValue",
-    "valueInfo": Object {},
+    "valueInfo": {},
   },
 }
 `;
 
-exports[`Variables setters setTyped("baz",someTypeValue) should set typed value with key "baz": dirty variables 1`] = `Object {}`;
+exports[`Variables setters setTransient("fooTransient", "fooValueTransient")) should set variable with key "fooTransient" and value "fooValueTransient" and transient "true": dirty variables 1`] = `{}`;
+
+exports[`Variables setters setTransient("fooTransient", "fooValueTransient")) should set variable with key "fooTransient" and value "fooValueTransient" and transient "true": dirty variables 2`] = `
+{
+  "fooTransient": {
+    "type": "string",
+    "value": "fooValueTransient",
+    "valueInfo": {
+      "transient": true,
+    },
+  },
+}
+`;
+
+exports[`Variables setters setTransient("fooTransient", "fooValueTransient")) should set variable with key "fooTransient" and value "fooValueTransient" and transient "true": variables 1`] = `{}`;
+
+exports[`Variables setters setTransient("fooTransient", "fooValueTransient")) should set variable with key "fooTransient" and value "fooValueTransient" and transient "true": variables 2`] = `
+{
+  "fooTransient": {
+    "type": "string",
+    "value": "fooValueTransient",
+    "valueInfo": {
+      "transient": true,
+    },
+  },
+}
+`;
+
+exports[`Variables setters setTyped("baz",someTypeValue) should set typed value with key "baz": dirty variables 1`] = `{}`;
 
 exports[`Variables setters setTyped("baz",someTypeValue) should set typed value with key "baz": dirty variables 2`] = `
-Object {
-  "baz": Object {
+{
+  "baz": {
     "type": "json",
-    "value": "{\\"name\\":\\"bazname\\"}",
-    "valueInfo": Object {},
+    "value": "{"name":"bazname"}",
+    "valueInfo": {},
   },
 }
 `;
 
-exports[`Variables setters setTyped("baz",someTypeValue) should set typed value with key "baz": variables 1`] = `Object {}`;
+exports[`Variables setters setTyped("baz",someTypeValue) should set typed value with key "baz": variables 1`] = `{}`;
 
 exports[`Variables setters setTyped("baz",someTypeValue) should set typed value with key "baz": variables 2`] = `
-Object {
-  "baz": Object {
+{
+  "baz": {
     "type": "json",
-    "value": Object {
+    "value": {
       "name": "bazname",
     },
-    "valueInfo": Object {},
+    "valueInfo": {},
   },
 }
 `;

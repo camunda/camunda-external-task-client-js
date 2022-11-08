@@ -1,6 +1,6 @@
 {
   "extends": [
-    "plugin:bpmn-io/es6",
+    "plugin:bpmn-io/node",
     "plugin:prettier/recommended",
     "plugin:camunda-licensed/apache"
   ],

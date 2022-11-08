@@ -15,18 +15,10 @@
  * limitations under the License.
  */
 
-import Client from "./lib/Client.js";
-import logger from "./lib/logger.js";
-import BasicAuthInterceptor from "./lib/BasicAuthInterceptor.js";
-import KeycloakAuthInterceptor from "./lib/KeycloakAuthInterceptor.js";
-import Variables from "./lib/Variables.js";
-import File from "./lib/File.js";
-
-export {
-  Client,
-  logger,
-  BasicAuthInterceptor,
-  KeycloakAuthInterceptor,
-  Variables,
-  File,
+module.exports = {
+  env: {
+    test: {
+      plugins: ["@babel/plugin-transform-modules-commonjs"],
+    },
+  },
 };

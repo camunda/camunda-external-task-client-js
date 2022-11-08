@@ -15,8 +15,8 @@
  * limitations under the License.
  */
 
-const fs = require("fs");
-const { Client, logger, Variables, File } = require("../index");
+import fs from "fs";
+import { Client, logger, Variables, File } from "../index.js";
 
 describe("integration", () => {
   let client, expectedScore, expectedUser, expectedTextFile, expectedBinaryFile;
@@ -33,6 +33,10 @@ describe("integration", () => {
     expectedBinaryFile = fs.readFileSync("./test-file.png");
     // create a Client instance with custom configuration
     client = new Client(config);
+  });
+
+  afterAll(() => {
+    client.stop();
   });
 
   test("should subscribe client and complete with process variables", () => {

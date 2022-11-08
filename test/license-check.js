@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-var checker = require('license-checker');
+import checker from 'license-checker';
 
 const ALLOWED_LICENSES = [
   'MIT',
@@ -46,7 +46,7 @@ checker.init(
       const entries = Object.entries(packages);
       let licenseWarning = '';
 
-      for (const [package, info] of entries) {
+      for (const [p, info] of entries) {
         const licenses =
           typeof info.licenses === 'object'
             ? info.licenses
@@ -54,7 +54,7 @@ checker.init(
 
         licenses.forEach(license => {
           if (!ALLOWED_LICENSES.includes(license)) {
-            licenseWarning += `${package} uses ${license}\n`;
+            licenseWarning += `${p} uses ${license}\n`;
           }
         });
       }
