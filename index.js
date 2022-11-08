@@ -21,5 +21,5 @@ module.exports = {
   BasicAuthInterceptor: require("./lib/BasicAuthInterceptor"),
   KeycloakAuthInterceptor: require("./lib/KeycloakAuthInterceptor"),
   Variables: require("./lib/Variables"),
-  File: require("./lib/File")
+  File: require("./lib/File"),
 };
