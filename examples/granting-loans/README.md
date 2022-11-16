@@ -1,5 +1,5 @@
 # Example
-> NodeJS >= v10 is required
+> NodeJS >= v18 is required
 
 <img alt="A Process for Granting Loans" src="assets/loan-process.svg" />
 

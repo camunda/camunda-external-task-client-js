@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Client executeTask should call handler with task and taskService 1`] = `
-Array [
-  Object {},
-  Object {
+[
+  {},
+  {
     "engineService": EngineService {
       "baseUrl": "http://localhost:XXXX/engine-rest",
       "complete": [Function],
@@ -23,30 +23,30 @@ Array [
 `;
 
 exports[`Client subscribe should call the API with the custom configs 1`] = `
-Array [
-  Object {
+[
+  {
     "maxTasks": 3,
-    "topics": Array [
-      Object {
+    "topics": [
+      {
         "includeExtensionProperties": true,
         "localVariables": true,
         "lockDuration": 3000,
         "processDefinitionId": "processId",
-        "processDefinitionIdIn": Array [
+        "processDefinitionIdIn": [
           "processId",
           "processId2",
         ],
         "processDefinitionKey": "processKey",
-        "processDefinitionKeyIn": Array [
+        "processDefinitionKeyIn": [
           "processKey",
           "processKey2",
         ],
         "processDefinitionVersionTag": "versionTag",
-        "tenantIdIn": Array [
+        "tenantIdIn": [
           "tenantId",
         ],
         "topicName": "foo",
-        "variables": Array [
+        "variables": [
           "fooVariable",
           "barVariable",
         ],

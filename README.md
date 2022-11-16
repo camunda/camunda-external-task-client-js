@@ -6,7 +6,7 @@
 Implement your [BPMN Service Task](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) in
 NodeJS.
 
-> NodeJS >= v10 is required
+> NodeJS >= v18 is required
 
 ## Installing
 
@@ -28,7 +28,7 @@ yarn add camunda-external-task-client-js
 4.  In your NodeJS script:
 
 ```js
-const { Client, logger } = require("camunda-external-task-client-js");
+import { Client, logger } from "camunda-external-task-client-js";
 
 // configuration for the Client:
 //  - 'baseUrl': url to the Process Engine
@@ -142,7 +142,7 @@ client.subscribe("topicName", async function({ task, taskService }) {
 ### Exchange Process & Local Task Variables
 
 ```js
-const { Variables } = require("camunda-external-task-client-js");
+import { Variables } from "camunda-external-task-client-js";
 
 client.subscribe("topicName", async function({ task, taskService }) {
   // get the process variable 'score'

@@ -2,6 +2,8 @@
   "name": "order",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
+  "author": "Camunda Services GmbH",
   "license": "MIT",
   "dependencies": {
     "camunda-external-task-client-js": "2.3.0"

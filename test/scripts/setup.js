@@ -15,11 +15,11 @@
  * limitations under the License.
  */
 
-const fs = require("fs");
-const path = require("path");
-const got = require("got");
-const FormData = require("form-data");
-const { startCamunda } = require("run-camunda/camunda");
+import fs from "fs";
+import path from "path";
+import got from "got";
+import FormData from "form-data";
+import { startCamunda } from "run-camunda/camunda.js";
 
 const deploy = async filePath => {
   // constants
@@ -41,7 +41,7 @@ const startProcess = async definitionKey => {
   try {
     await got.post(
       `http://localhost:8080/engine-rest/process-definition/key/${definitionKey}/start`,
-      { body: {}, json: true }
+      { json: {} }
     );
   } catch (e) {
     throw e.response ? e.response.body : e;

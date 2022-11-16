@@ -15,18 +15,14 @@
  * limitations under the License.
  */
 
-const {
-  Client,
-  logger,
-  Variables
-} = require("camunda-external-task-client-js");
+import { Client, logger, Variables } from "camunda-external-task-client-js";
 
 // configuration for the Client:
 //  - 'baseUrl': url to the Process Engine
 //  - 'logger': utility to automatically log important events
 const config = {
   baseUrl: "http://localhost:8080/engine-rest",
-  use: logger
+  use: logger,
 };
 
 // create a Client instance with custom configuration

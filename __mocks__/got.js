@@ -15,24 +15,40 @@
  * limitations under the License.
  */
 
-const got = jest.requireActual('got');
+import { jest } from "@jest/globals";
+// There is no alternative of `requireActual` for esm as of now
+// See `jest.importActual` progress in https://github.com/facebook/jest/pull/10976.
+// const got = jest.requireActual("got");
+// const got = jest.createMockFromModule("got");
 
 const handleRequest = (url, { testResult }) => {
   if (testResult instanceof Error) {
-     return Promise.reject(testResult);
+    return Promise.reject(testResult);
   }
   return {
-    body: testResult instanceof Object ? JSON.stringify(testResult) : Buffer.from(testResult || "", "utf-8"),
-    headers : { "content-type": testResult instanceof Object
-      ? "application/json" : "application/octet-stream"},
-    headers: {}
-  }
+    body:
+      testResult instanceof Object
+        ? JSON.stringify(testResult)
+        : Buffer.from(testResult || "", "utf-8"),
+    headers: {
+      "content-type":
+        testResult instanceof Object
+          ? "application/json"
+          : "application/octet-stream",
+    },
+    // headers: {},
+  };
 };
 
 const gotMock = handleRequest;
 gotMock.json = () => {};
 
-const myModule = module.exports = jest.fn().mockImplementation(gotMock);
-myModule.GotError = got.GotError;
-myModule.HTTPError = got.HTTPError;
-myModule.RequestError = got.RequestError;
+const myModule = jest.fn().mockImplementation(gotMock);
+
+class HTTPError extends Error {}
+class RequestError extends Error {}
+myModule.HTTPError = HTTPError;
+myModule.RequestError = RequestError;
+
+export default myModule;
+export { myModule as got, HTTPError, RequestError };

@@ -15,6 +15,6 @@
  * limitations under the License.
  */
 
-const { stopCamunda } = require("run-camunda/camunda");
+import { stopCamunda } from "run-camunda/camunda.js";
 
 stopCamunda();
