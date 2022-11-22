@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.1
+### Features
+- Bump multiple dependencies in JS external task client ([#2801](https://github.com/camunda/camunda-bpm-platform/issues/2801))
+
 ## 2.3.0
 ### Features
 - Expose exception error code ([#257](https://github.com/camunda/camunda-external-task-client-js/pull/257))
