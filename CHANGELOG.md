@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.1
+### Features
+- Bump multiple dependencies in JS external task client ([#2801](https://github.com/camunda/camunda-bpm-platform/issues/2801))
+
 ## 2.2.0
 ### Features
 - Support setting transient variables via API ([#244](https://github.com/camunda/camunda-external-task-client-js/pull/244))
