@@ -6,6 +6,8 @@
 Implement your [BPMN Service Task](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) in
 NodeJS.
 
+> This package is an [ECMAScript module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) (ESM) and provides no CommonJS exports.
+
 > NodeJS >= v18 is required
 
 ## Installing
