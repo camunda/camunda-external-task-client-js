@@ -6,6 +6,6 @@
   "author": "Camunda Services GmbH",
   "license": "MIT",
   "dependencies": {
-    "camunda-external-task-client-js": "2.3.0"
+    "camunda-external-task-client-js": "3.0.0-alpha1"
   }
 }

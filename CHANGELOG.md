@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0-alpha1
+### Features
+- Add extension property support ([#264](https://github.com/camunda/camunda-external-task-client-js/pull/264))
+- Update dependencies to latest version & update project to ECMAScript modules ([#265](https://github.com/camunda/camunda-external-task-client-js/pull/265))
+- Update path-parse dependency ([#268](https://github.com/camunda/camunda-external-task-client-js/pull/268))
+
 ## 2.3.0
 ### Features
 - Expose exception error code ([#257](https://github.com/camunda/camunda-external-task-client-js/pull/257))
