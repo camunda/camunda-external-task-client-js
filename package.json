@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-alpha1",
+  "version": "3.0.0-SNAPSHOT",
   "name": "camunda-external-task-client-js",
   "exports": "./index.js",
   "type": "module",
