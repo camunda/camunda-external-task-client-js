@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.0
+### Features
+- Bump json5 from 2.2.1 to 2.2.3 ([#3091](https://github.com/camunda/camunda-bpm-platform/issues/3091))
+
 ## 3.0.0-alpha1
 ### Features
 - Add extension property support ([#264](https://github.com/camunda/camunda-external-task-client-js/pull/264))
