@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "chalk": "^5.1.2",
-    "got": "^12.5.2"
+    "got": "^12.6.1"
   },
   "description": "Implement your [BPMN Service Task](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) in NodeJS.",
   "bugs": {
