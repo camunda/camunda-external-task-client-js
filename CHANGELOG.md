@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.1
+### Features
+- Update got package ([#3135](https://github.com/camunda/camunda-bpm-platform/issues/3135))
+- Rethrow errors when calling TaskService api ([#3222](https://github.com/camunda/camunda-bpm-platform/issues/3222))
+
 ## 3.0.0
 ### Features
 - Bump json5 from 2.2.1 to 2.2.3 ([#3091](https://github.com/camunda/camunda-bpm-platform/issues/3091))
