@@ -32,6 +32,14 @@ Here"s a list of the available options:
 | usePriority | If false, task will be fetched arbitrarily instead of based on its priority. | boolean |  | true |
 | interceptors | Function(s) that will be called before a request is sent. Interceptors receive the configuration of the request and return a new configuration. | function or [function] |  |  |
 | use | Function(s) that have access to the client instance as soon as it is created and before any polling happens.  Check out [logger](/lib/logger.js) for a better understanding of the usage of middlewares. | function or [function] |  |  |
+| sorting | Defines the sorting of the fetched tasks. It can be used together with `usePriority`, but the sorting will be based on priority first. | Array of `Sorting` objects |  |  |
+
+`Sorting` object properties:
+
+|  Option   |                                Description                                | Type   | Required | Default |
+|:---------:|:-------------------------------------------------------------------------:|--------|:--------:|:-------:|
+|  sortBy   | Specifies the sorting by property. [Possible values.](/lib/Client.js#L67) | string |    ✓     |         |
+| sortOrder |  Specifies the sorting direction. [Possible values.](/lib/Client.js#L71)  | string |    ✓     |         |
 
 ### About interceptors
 

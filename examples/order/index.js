@@ -28,6 +28,13 @@ import {
 const config = {
   baseUrl: "http://localhost:8080/engine-rest",
   use: logger,
+  usePriority: false,
+  sorting: [
+    {
+      sortBy: Client.SortBy.CreateTime,
+      sortOrder: Client.SortOrder.DESC,
+    },
+  ],
 };
 
 // create a Client instance with custom configuration

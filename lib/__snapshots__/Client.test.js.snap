@@ -26,6 +26,12 @@ exports[`Client subscribe should call the API with the custom configs 1`] = `
 [
   {
     "maxTasks": 3,
+    "sorting": [
+      {
+        "sortBy": "createTime",
+        "sortOrder": "ASC",
+      },
+    ],
     "topics": [
       {
         "includeExtensionProperties": true,
