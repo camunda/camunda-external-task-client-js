@@ -29,7 +29,7 @@ exports[`Client subscribe should call the API with the custom configs 1`] = `
     "sorting": [
       {
         "sortBy": "createTime",
-        "sortOrder": "ASC",
+        "sortOrder": "asc",
       },
     ],
     "topics": [
