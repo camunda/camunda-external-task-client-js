@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.1.0
+### Features
+
+- Update dependencies ([#3698](https://github.com/camunda/camunda-bpm-platform/issues/3698),[#3906](https://github.com/camunda/camunda-bpm-platform/issues/3906))
+- Add sort by create time capability ([#3928](https://github.com/camunda/camunda-bpm-platform/issues/3928))
+
 ## 3.0.1
 ### Features
 - Update got package ([#3135](https://github.com/camunda/camunda-bpm-platform/issues/3135))
