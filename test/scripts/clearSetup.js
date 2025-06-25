@@ -15,6 +15,6 @@
  * limitations under the License.
  */
 
-import { stopCamunda } from "run-camunda/camunda.js";
+import { stopCamunda } from "run-camunda";
 
 stopCamunda();

@@ -19,7 +19,7 @@ import fs from "fs";
 import path from "path";
 import got from "got";
 import FormData from "form-data";
-import { startCamunda } from "run-camunda/camunda.js";
+import { startCamunda } from "run-camunda";
 
 const deploy = async filePath => {
   // constants
