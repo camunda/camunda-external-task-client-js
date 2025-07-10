@@ -40,7 +40,7 @@ const config = { baseUrl: "http://localhost:8080/engine-rest", use: logger };
 // create a Client instance with custom configuration
 const client = new Client(config);
 
-// susbscribe to the topic: 'creditScoreChecker'
+// subscribe to the topic: 'creditScoreChecker'
 client.subscribe("creditScoreChecker", async function({ task, taskService }) {
   // Put your business logic
   // complete the task
@@ -67,7 +67,7 @@ Done through [polling](/docs/Client.md#about-polling).
 ### [Complete](https://docs.camunda.org/manual/latest/reference/rest/external-task/post-complete/)
 
 ```js
-// Susbscribe to the topic: 'topicName'
+// Subscribe to the topic: 'topicName'
 client.subscribe("topicName", async function({ task, taskService }) {
   // Put your business logic
   // Complete the task
@@ -78,7 +78,7 @@ client.subscribe("topicName", async function({ task, taskService }) {
 ### [Handle Failure](https://docs.camunda.org/manual/latest/reference/rest/external-task/post-failure/)
 
 ```js
-// Susbscribe to the topic: 'topicName'
+// Subscribe to the topic: 'topicName'
 client.subscribe("topicName", async function({ task, taskService }) {
   // Put your business logic
   // Handle a Failure
@@ -95,7 +95,7 @@ client.subscribe("topicName", async function({ task, taskService }) {
 ### [Handle BPMN Error](https://docs.camunda.org/manual/latest/reference/rest/external-task/post-bpmn-error/)
 
 ```js
-// Susbscribe to the topic: 'topicName'
+// Subscribe to the topic: 'topicName'
 client.subscribe("topicName", async function({ task, taskService }) {
   // Put your business logic
 
@@ -110,7 +110,7 @@ client.subscribe("topicName", async function({ task, taskService }) {
 ### [Extend Lock](https://docs.camunda.org/manual/latest/reference/rest/external-task/post-extend-lock/)
 
 ```js
-// Susbscribe to the topic: 'topicName'
+// Subscribe to the topic: 'topicName'
 client.subscribe("topicName", async function({ task, taskService }) {
   // Put your business logic
   // Extend the lock time
@@ -121,7 +121,7 @@ client.subscribe("topicName", async function({ task, taskService }) {
 ### [Unlock](https://docs.camunda.org/manual/latest/reference/rest/external-task/post-unlock/)
 
 ```js
-// Susbscribe to the topic: 'topicName'
+// Subscribe to the topic: 'topicName'
 client.subscribe("topicName", async function({ task, taskService }) {
   // Put your business logic
   // Unlock the task
@@ -131,7 +131,7 @@ client.subscribe("topicName", async function({ task, taskService }) {
 
 ### [Lock](https://docs.camunda.org/manual/latest/reference/rest/external-task/post-lock/)
 ```js
-// Susbscribe to the topic: 'topicName'
+// Subscribe to the topic: 'topicName'
 client.subscribe("topicName", async function({ task, taskService }) {
   // Task is locked by default
   // Put your business logic, unlock the task or let the lock expire
