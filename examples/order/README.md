@@ -5,7 +5,7 @@
 
 ## Running the example
 
-1. First, make sure to have [Camunda](https://camunda.com/download/) running.
+1. First, make sure to have [Camunda](https://docs.camunda.org/manual/latest/installation/) running.
 
 2. Download the following [model](assets/order.bpmn) and deploy it using the Camunda Modeler.
 
